@@ -1,0 +1,10 @@
+*.json
+*.sqlite
+*.yaml
+reload.js
+fairiesstory.js
+fs.js
+music.js
+shoot.js
+client.js
+message.js
