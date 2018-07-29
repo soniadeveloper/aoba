@@ -1,6 +1,8 @@
 exports.run = (client, msg, args) => {
   var cry = args.join(" ");
-  console.log(cry);
+  if (args.length === 0) {
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please give a phrase!")).then(msg => {msg.delete(2000)});
+  }
   var crying = {
     text: cry,
     comma: function (i) {
@@ -36,12 +38,55 @@ exports.run = (client, msg, args) => {
         this.text = `${first}${txt.charAt(i-1)}${second}`;
       }
     },
-    slash: function (i) {
+    symbol: function (i) {
       var txt = this.text
       var len = txt.length;
       var first = txt.slice(0,i);
       var second = txt.slice(i, len);
-      this.text = `${first}${"/"}${second}`;
+      var rand = Math.floor(Math.random() * 5);
+      var symbol;
+      switch (rand) {
+        case 0:
+          symbol = "/";
+          break;
+        case 1:
+          symbol = ">";
+          break;
+        case 2:
+          symbol = "<";
+          break;
+        case 3: 
+          symbol = "-";
+          break;
+        case 4: 
+          symbol = ")";
+          break;
+        case 5:
+          symbol = "(";
+          break;
+        case 6:
+          symbol = "\\";
+          break;
+        case 7: 
+          symbol = "[";
+          break;
+        case 8:
+          symbol = "]";
+          break;
+        case 9: 
+          symbol = ":";
+          break;
+        case 10: 
+          symbol = "0";
+          break;
+        case 11:
+          symbol = "=";
+          break;
+        case 12: 
+          symbol = "-";
+          break;
+      }
+      this.text = `${first}${symbol}${second}`;
     },
     upper: function (i) {
       var txt = this.text
@@ -81,7 +126,7 @@ exports.run = (client, msg, args) => {
           crying.upper(i);
           break;
         case 5:
-          crying.slash(i);
+          crying.symbol(i);
           break;
         case 6:
           crying.random(i);
