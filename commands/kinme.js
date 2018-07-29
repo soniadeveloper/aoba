@@ -16,7 +16,9 @@ exports.run = (client, msg) => {
                      "**Yurio Plisetsky** from **Yuri!!! on Ice**", 
                      "**Jon Arbuckle** from **Garfield**", 
                      "**Hisoka** from **Hunter X Hunter**", 
-                     "**Aoba Seragaki** from Dramatical Murder**"];
+                     "**Aoba Seragaki** from **Dramatical Murder**",
+                    "**Junko Enoshima** from **Danganronpa**",
+                    "**Pearl** from **Steven Universe**"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
@@ -33,7 +35,9 @@ exports.run = (client, msg) => {
                 "https://i.ytimg.com/vi/Fu7Tnt6RtRc/maxresdefault.jpg",
                 "https://upload.wikimedia.org/wikipedia/en/thumb/6/63/Jon_arbuckle.svg/1200px-Jon_arbuckle.svg.png",
                 "https://i.pinimg.com/originals/a6/6f/e5/a66fe5b0a550fc759b63eca652cae83e.jpg",
-                "https://vignette.wikia.nocookie.net/dramaticalmurder/images/5/59/Aobaanime.png/revision/latest?cb=20140909005406",]
+                "https://vignette.wikia.nocookie.net/dramaticalmurder/images/5/59/Aobaanime.png/revision/latest?cb=20140909005406",
+                "https://i.ytimg.com/vi/myD1U91wyjs/maxresdefault.jpg",
+                "https://nyoobserver.files.wordpress.com/2017/03/steven-universe-s01e28-space-race-720p-web-dl-aac2-0-h-264-rainbowcrash-mkv_snapshot_04-42_-2014-11-17_16-19-43.png"]
 
       var len = options.length;
       var val = 0;
