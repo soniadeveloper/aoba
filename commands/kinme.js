@@ -18,7 +18,11 @@ exports.run = (client, msg) => {
                      "**Hisoka** from **Hunter X Hunter**", 
                      "**Aoba Seragaki** from **Dramatical Murder**",
                     "**Junko Enoshima** from **Danganronpa**",
-                    "**Pearl** from **Steven Universe**"];
+                    "**Pearl** from **Steven Universe**",
+                    "**Umaru Doma** from **Himouto! Umaru-chan**",
+                    "**Twilight Sparkle** from **My Little Pony**",
+                    "**Yuno Gasai** from **Future Diary**",
+                    "**Mari Ohara** from **Love Live**"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
@@ -37,7 +41,11 @@ exports.run = (client, msg) => {
                 "https://i.pinimg.com/originals/a6/6f/e5/a66fe5b0a550fc759b63eca652cae83e.jpg",
                 "https://vignette.wikia.nocookie.net/dramaticalmurder/images/5/59/Aobaanime.png/revision/latest?cb=20140909005406",
                 "https://i.ytimg.com/vi/myD1U91wyjs/maxresdefault.jpg",
-                "https://nyoobserver.files.wordpress.com/2017/03/steven-universe-s01e28-space-race-720p-web-dl-aac2-0-h-264-rainbowcrash-mkv_snapshot_04-42_-2014-11-17_16-19-43.png"]
+                "https://nyoobserver.files.wordpress.com/2017/03/steven-universe-s01e28-space-race-720p-web-dl-aac2-0-h-264-rainbowcrash-mkv_snapshot_04-42_-2014-11-17_16-19-43.png",
+                "http://www.anime-evo.net/wp-content/uploads/2015/07/Himouto-Umaru-chan-05.jpeg",
+                "https://vignette.wikia.nocookie.net/the-princess/images/e/e5/Mlp_fim_twilight_sparkle_happy_vector_3_by_luckreza8-db4ql0m.png/revision/latest?cb=20180411192543",
+                "https://vignette.wikia.nocookie.net/futurediary/images/a/a5/YunoYandereFace.jpg/revision/latest?cb=20120128011750",
+                "https://i.ytimg.com/vi/DM1g_tCFnec/maxresdefault.jpg"]
 
       var len = options.length;
       var val = 0;
