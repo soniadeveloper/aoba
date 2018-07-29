@@ -1,7 +1,7 @@
 /* styles */
 /* called by your view template */
-
-background-color: #ffd0ed;
+      body {
+        background-color: #ffd0ed;
         background-image: url('https://image.ibb.co/cVzobo/aoba_drink_transparent.png');
         background-position: right bottom;
         background-repeat: no-repeat;
