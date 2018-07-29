@@ -22,11 +22,11 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Moderation",
-        value: "`autorole` `ban ` `blacklist` `channel` `emoji` `kick` `prefix` `prune` `server` `unban`"
+        value: "`autorole` `ban ` `blacklist` `channel` `emoji` `kick` `prefix` `prune` `selfrole` `server` `unban`"
       },
       {
         name: "Utility",
-        value: "`flipcoin` `invite` `notes` `parrot/parrotd` `selfrole`"
+        value: "`flipcoin` `invite` `join` `leave` `notes` `parrot/parrotd`"
       },
       {
         name: "Fairies Story (`fairiesstory or fs`)",
@@ -157,7 +157,7 @@ exports.run = (client, msg, args) => {
         genText("add \"[note]\" (optional), delete [number or \"all\"] (optional)", `Allows you to view, create, and delete notes.\nExamples: \`${prefix}notes add "buy groceries"\`\n\`${prefix}notes delete 1\``);
         break;
       case "selfrole":
-        genText("add [role] (optional), delte [role], role name", `Lets you view a list of self-assignable roles as well as assign yourself a role.\nUse \`${prefix}selfrole [role name]\` to assign yourself a listed role.\nUse \`${prefix}selfrole add\delete [role name]\` to add or delete a role from the selfrole list. (Requires the **Manage roles** permission)\nExamples: \`${prefix}selfrole add User\`\n\`${prefix}selfrole User\``);
+        genText("add [role] (optional), delte [role], role name", `Lets you view a list of self-assignable roles as well as assign yourself a role.\nUse \`${prefix}selfrole [role name]\` to assign yourself a listed role.\nUse \`${prefix}selfrole add\\delete [role name]\` to add or delete a role from the selfrole list. (Requires the **Manage roles** permission)\nExamples: \`${prefix}selfrole add User\`\n\`${prefix}selfrole User\``);
         break;
       case "lenny":
         genText("None", "( ͡° ͜ʖ ͡°)");
@@ -167,6 +167,12 @@ exports.run = (client, msg, args) => {
         break;
       case "prefix":
         genText("desired prefix", `Change Aoba's prefix in your server.\nThis command requires **Administrator** privileges.\nExample: \`${prefix}prefix a!\``);
+        break;
+      case "join":
+        genText("none", "Causes Aoba to join the voice channel you are in. You must be in a voice channel in order to use this command.");
+        break;
+      case "leave":
+        genText("none", "Causes Aoba to leave the voice channel you are in.");
         break;
     }
   }
