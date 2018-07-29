@@ -42,7 +42,7 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Action",
-        value:"`bite` `hug` `kiss` `pat` `slap`"
+        value:"`bite` `blush` `hug` `kiss` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -189,6 +189,9 @@ exports.run = (client, msg, args) => {
         break;
       case "slap":
         genText("name (mention)", "Slap someone!");
+        break;
+      case "blush":
+        genText("None", "Show that you are blushing.");
         break;
     }
   }
