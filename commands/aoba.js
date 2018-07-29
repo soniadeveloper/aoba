@@ -4,6 +4,6 @@ exports.run = (client, msg, args) => {
   "https://78.media.tumblr.com/45442d8e9118853dd79333e928216563/tumblr_oboqf1agAE1rw3w54o1_540.gif", "https://78.media.tumblr.com/83db8e35acd79f717d7a754b60f5c9a9/tumblr_om9llwCUyu1tw58h4o1_540.gif", "https://78.media.tumblr.com/71f328a2d8377186e36a8a90e0bc6277/tumblr_oxo4omHSVy1t0lt8go2_540.gif", "https://78.media.tumblr.com/e55e12c2dce47b1a9efbf1ebacaaf3ca/tumblr_oww9ggRBSW1t0lt8go1_540.gif"];
   var len = options.length;
   var choice = Math.floor(Math.random() * options.length);
-  var embed = new client.discord.RichEmbed().setColor(client.color).setDescription("Aoba here~ 💖").setImage(options[choice]);
+  var embed = new client.discord.RichEmbed().setColor(client.color).setDescription(`Aoba here~ 💖${client.emojis.get("472564534356344834")}`).setImage(options[choice]);
   msg.channel.send(embed);
 }

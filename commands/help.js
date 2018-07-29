@@ -38,7 +38,11 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `cookie` `f` `futchscale` `hug` `kinme` `kmk` `love` `lenny` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `cookie` `f` `futchscale` `kinme` `kmk` `love` `lenny` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+      },
+      {
+        name: "Action",
+        value:"`bite` `hug` `kiss` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -173,6 +177,18 @@ exports.run = (client, msg, args) => {
         break;
       case "leave":
         genText("none", "Causes Aoba to leave the voice channel you are in.");
+        break;
+      case "bite":
+        genText("name (mention)", "Bite someone!");
+        break;
+      case "kiss":
+        genText("name (mention)", "Give a user a kiss!");
+        break;
+      case "pat":
+        genText("name (mention)", "Give a user a pat on the head!");
+        break;
+      case "slap":
+        genText("name (mention)", "Slap someone!");
         break;
     }
   }
