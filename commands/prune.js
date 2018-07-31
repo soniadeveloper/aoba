@@ -8,7 +8,7 @@ exports.run = (client, msg, args) => {
       description: "❗️ You don't have the permissions to use this command!"
     }}).then(msg => {
         msg.delete(4000);
-      });
+      }).catch(err => {console.error(err)});
   }
   
   //if bot doesn't have permissions
@@ -18,7 +18,7 @@ exports.run = (client, msg, args) => {
       description: "❗️ This bot doesn't have the permissions to use this command! Please give the **Aoba** role permission to **Manage messages**."
     }}).then(msg => {
         msg.delete(4000);
-      });
+      }).catch(err => {console.error(err)});
   }
   
   //if both bot and user have permissions
@@ -32,7 +32,7 @@ exports.run = (client, msg, args) => {
           description: "❗️ Please specify number of messages to prune."
         }}).then(msg => {
         msg.delete(4000);
-      });
+      }).catch(err => {console.error(err)});
     }
     else if (args.length > 1) {
       //delete from a specific user
@@ -46,7 +46,7 @@ exports.run = (client, msg, args) => {
             description: "❗️ Too many arguments!"
           }}).then(msg => {
         msg.delete(4000);
-      });
+      }).catch(err => {console.error(err)});
       }
     }
     //deletes general messages
@@ -58,7 +58,7 @@ exports.run = (client, msg, args) => {
             description: "❗️ Please enter a number less than 100!"
           }}).then(msg => {
         msg.delete(4000);
-      });
+      }).catch(err => {console.error(err)});
       }
       else {
       msg.channel.fetchMessages({limit: (limit+1)}).then(msgs => msg.channel.bulkDelete(msgs)).catch(console.error);

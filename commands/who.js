@@ -7,5 +7,5 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: `⁉️\nThe answer is **${member.displayName}**.`
-    }});
+    }}).catch(err => {console.error(err)});
 }

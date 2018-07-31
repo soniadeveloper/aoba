@@ -19,14 +19,14 @@ exports.run = async (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Please enter a voice channel first!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else if (!vc.speakable || !canSpeak) {
     //console.log(vc.speakable, canSpeak);
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Aoba does not have permission to speak in this voice channel!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     switch (args[0]) {
@@ -39,7 +39,7 @@ exports.run = async (client, msg, args) => {
           msg.channel.send({embed: {
             color: client.color,
             description: "❗️ Please enter a valid YouTube url!"
-          }}).then(msg => {msg.delete(2000)});
+          }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
         }
         else {
           try {
@@ -52,7 +52,7 @@ exports.run = async (client, msg, args) => {
             }
             catch (err) {
               console.error(err);
-              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find video!"));
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find video!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
           }
           //const songinfo = await client.yt.getInfo(url);
@@ -87,7 +87,7 @@ exports.run = async (client, msg, args) => {
               msg.channel.send({embed: {
                 color: client.color,
                 description: "❗️ There was an error connecting to the voice channel."
-              }}).then(msg => {msg.delete(2000)});
+              }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
           }
           else {
@@ -128,7 +128,7 @@ exports.run = async (client, msg, args) => {
       case "volume":
         if (!sq)
         return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ There is nothing playing!"))
-        .then(msg => {msg.delete(2000)});
+        .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
         else {
           if (args[1] === undefined) {
             return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`🔈 The current volume is \`${sq.volume}\``));
@@ -136,10 +136,10 @@ exports.run = async (client, msg, args) => {
           else {
             if (isNaN(args[1])) {
               return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Please enter a valid number!"))
-                .then(msg => {msg.delete(2000)});
+                .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else if (parseInt(args[1]) > 10) {
-              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Please enter number less than 10!")).then(msg => {msg.delete(2000)});
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Please enter number less than 10!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else {
               sq.volume = args[1]
@@ -239,7 +239,7 @@ exports.run = async (client, msg, args) => {
           msg.channel.send({embed: {
             color: client.color,
             description: "❗️ There was an error playing the video."
-          }}).then(msg => {msg.delete(2000)});
+          }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
         });
         dispatcher.setVolumeLogarithmic(5 / 5);
       return msg.channel.send({embed: {

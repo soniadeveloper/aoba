@@ -1,7 +1,7 @@
 exports.run = (client, msg, args) => {
   var owo = args.join(" ").toLowerCase();
   if (args.length === 0) {
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Pwease give a phwase! owo")).then(msg => {msg.delete(2000)});
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Pwease give a phwase! owo")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   var i = 0;
   while (i < owo.length) {
@@ -36,5 +36,5 @@ exports.run = (client, msg, args) => {
       i += 1;
     }
   }
-  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`${owo} owo`));
+  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`${owo} owo`)).catch(err => {console.error(err)});
 }

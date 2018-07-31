@@ -12,14 +12,14 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
         color: client.color,
         description: "**ERROR**: You don't have permission to kick members!"
-    }}).then(msg => {msg.delete(5000)});
+    }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
   }
   else {
     if (args.length < 1 || msg.mentions.members == null) {
       msg.channel.send({embed: {
           color: client.color,
           description: "**ERROR**: Please give a member to kick!"
-      }}).then(msg => {msg.delete(5000)});
+      }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
     }
     else {
       var member = msg.mentions.members.first();
@@ -44,7 +44,7 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
             color: client.color,
             description: "**ERROR**: This bot doesn't have permission to kick this member. Please grant higher permissions to the **Aoba** role."
-        }}).then(msg => {msg.delete(5000)});
+        }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
     }
   }
 }

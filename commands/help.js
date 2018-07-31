@@ -35,11 +35,11 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `cookie` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
       },
       {
         name: "Action",
-        value:"`bite` `blush` `glomp` `hug` `kiss` `lick` `pat` `slap`"
+        value:"`bite` `blush` `cookie` `glomp` `hug` `kiss` `lick` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -213,6 +213,6 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️Too many arguments!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
 }

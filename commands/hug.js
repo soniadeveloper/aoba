@@ -4,14 +4,14 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "Please list a user to hug!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   if (list.first().user.bot) return;
   else if (list.firstKey() === msg.author.id) {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't hug yourself!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     var sender = msg.author.id;

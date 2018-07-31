@@ -31,7 +31,7 @@ module.exports = (client, msg) => {
             msg.channel.send({embed: {
               color: client.color,
               description: `‼️**COOLDOWN** Please wait ${Number((now - 100000), 2)} seconds`}})
-          .then(() => {msg.delete(2000)});
+          .then(() => {msg.delete(2000)}).catch(err => {console.error(err)});
         }
       }  
     }
@@ -47,7 +47,7 @@ module.exports = (client, msg) => {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `‼️ **Blacklisted word detected:** ${wordsArray[j]}`
-            }});
+            }}).catch(err => {console.error(err)});
           }
         }
       }
@@ -63,20 +63,20 @@ module.exports = (client, msg) => {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-            }});
+            }}).catch(err => {console.error(err)});
           }
           else {
             var channel = msg.guild.channel.get(r.channel);
             channel.send({embed: {
               color: client.color,
               description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-            }});
+            }}).catch(err => {console.error(err)});
           }
         }).catch(() => {
           msg.channel.send({embed: {
               color: client.color,
               description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-          }});
+          }}).catch(err => {console.error(err)});
         });
       }
       else if (chanceItem == 8) {
@@ -95,20 +95,20 @@ module.exports = (client, msg) => {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-            }});
+            }}).catch(err => {console.error(err)});
           }
           else {
             var channel = msg.guild.channel.get(r.channel);
             channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-            }});
+            }}).catch(err => {console.error(err)});
           }
         }).catch(() => {
           msg.channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-          }});
+          }}).catch(err => {console.error(err)});
         });
       }
       else return;
@@ -137,7 +137,7 @@ module.exports = (client, msg) => {
         msg.channel.send({embed: {
           color: client.color,
           description: `‼️**COOLDOWN** Please wait ${Number((now - 100000), 2)} seconds`}})
-      .then(() => {msg.delete(2000)});
+      .then(() => {msg.delete(2000)}).catch(err => {console.error(err)});
       }
     }
   }

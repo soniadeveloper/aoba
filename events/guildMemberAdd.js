@@ -10,7 +10,7 @@ module.exports = (client, member) => {
     if (!row) return;
     if (row.onoroff == 1) {
       var role = member.guild.roles.find(r => r.name === row.role);
-      member.addRole(role.id).then(console.log("Role has been added!"));
+      member.addRole(role.id).then(console.log("Role has been added!")).catch(err => {console.error(err)});
     }
     else return;
   }).catch(error => {console.error;});
