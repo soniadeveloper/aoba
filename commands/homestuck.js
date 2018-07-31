@@ -2,7 +2,7 @@ exports.run = (client, msg, args) => {
   var stuff = args.join(" ");
   var stufff = (stuff.includes("\"")) ? stuff.split("\"") : stuff.split("“");
   var troll = stufff[0];
-  var say = (stufff[1].includes("”")) ? stufff[1].slice(0, stufff[1].length - 1) : stufff[1];
+  var say = ((stufff[1] !== undefined) && stufff[1].includes("”")) ? stufff[1].slice(0, stufff[1].length - 1) : stufff[1];
   var trollify = {
     text: say,
     colors: ["#a10000", "#a15000", "#a1a100", "#626262", "#416600", "#008141", "#008282", "#005682", "#000056", "#2b0057", "#6a006a", "#77003c"],

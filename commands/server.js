@@ -19,11 +19,12 @@ exports.run = (client, msg, args) => {
       .setColor(client.color)
       .setTitle(`${guild.name} Info`)
       .setThumbnail(guild.iconURL)
+      .addField("Aoba Prefix", client.prefixes.get(guild.id))
       .addField("ID", guild.id)
       .addField("Owner", guild.owner.user.tag)
       .addField("Date created", guild.createdAt, true)
       .addField("# of members", notBots(guild), true)
-      .addField("# of Roles", `${guild.roles.array().length} (view roles using \`>server roles\`)`, true)
+      .addField("# of Roles", `${guild.roles.array().length} (view roles using \`${client.prefixes.get(guild.id)}server roles\`)`, true)
       .addField("# of Channels", guild.channels.array().length, true)
       .addField("Region", guild.region, true);
       msg.channel.send(embed).catch(err => {console.error(err)});
@@ -41,7 +42,7 @@ exports.run = (client, msg, args) => {
               return msg;
             }
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setTitle(`${guild.name} Roles`).
-                             setDescription(`${listRoles(roles)}\nTo view a specific role use \`>server roles [role name]\``)).catch(err => {console.error(err)});
+                             setDescription(`${listRoles(roles)}\nTo view a specific role use \`${client.prefixes.get(guild.id)}server roles [role name]\``)).catch(err => {console.error(err)});
           }
           else {
             args.shift()
@@ -55,7 +56,7 @@ exports.run = (client, msg, args) => {
                 var arr = role.members.array();
                 var list = ""
                 for (var i = 0; i < arr.length; i++) {
-                  list += `‣ ${[i].displayName}\n`;
+                  list += `‣ ${arr[i].displayName}\n`;
                 }
                 if (list === "") {
                   return "None";
@@ -79,7 +80,7 @@ exports.run = (client, msg, args) => {
           break;
         case "name":
           if (args[1] === undefined) {
-            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`The server name is currently **${guild.name}**. Please use \`>server name [name]\` to change the name of the server`)).catch(err => {console.error(err)});
+            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`The server name is currently **${guild.name}**. Please use \`${client.prefixes.get(guild.id)}server name [name]\` to change the name of the server`)).catch(err => {console.error(err)});
           }
           else {
             args.shift();

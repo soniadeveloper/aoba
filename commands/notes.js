@@ -31,7 +31,6 @@ exports.run = (client, msg, args) => {
     if (args[0] === "add") {
       args.shift();
       var note = args.join(" ");
-      console.log(`Note to add: ${note}`);
       if (notes === undefined || notes === null) {
         client.notes.set(id, [note]);
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Note has been added!")).catch(err => {console.error(err)});
@@ -59,7 +58,6 @@ exports.run = (client, msg, args) => {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That is not a valid number!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
       }
       else {
-        console.log(notes);
         if (args[1] === "all") {
           client.notes.set(id, []);
           msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Notes have been purged!"));

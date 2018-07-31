@@ -61,7 +61,6 @@ exports.run = (client, msg, args) => {
                 index = i;
               }
             }
-            console.log(index);
             if (!index) {
               //if the role can't be found in the server
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find the given role!"))
@@ -83,7 +82,6 @@ exports.run = (client, msg, args) => {
                     exists += 1;
                   }
                 }
-                console.log(exists);
                 if (exists > 0) {
                   msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Role already exists in list of self-assignable roles!"))
                   .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
@@ -112,21 +110,17 @@ exports.run = (client, msg, args) => {
         }
         else {
           var selfroles = row.roles.split("`");
-          console.log(selfroles);
           args.shift()
           var role = args.join(" ");
-          console.log(role);
           var index;
           for (var i = 0; i < selfroles.length; i++) {
             if (role === selfroles[i]) {
               index = i;
             }
           }
-          console.log(index);
           if (!(index === undefined)) {
             selfroles.splice(index, 1);
             var newRoles = selfroles;
-            console.log(newRoles);
             client.sql.run(`UPDATE selfrole SET roles = '${newRoles}' WHERE guildID = ${msg.guild.id}`).then(() => {
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Role has been removed from list of self-assignable roles.`));
             }).catch(err => {console.error(err)});
@@ -141,7 +135,6 @@ exports.run = (client, msg, args) => {
         if (canRole) {
           //if aoba has permission
           var selfroles = row.roles.split("`");
-          console.log(selfroles);
           var role = args.join(" ");
           var index;
           for (var i = 0; i < selfroles.length; i++) {
@@ -149,7 +142,6 @@ exports.run = (client, msg, args) => {
               index = i;
             }
           }
-          console.log(index);
           if (!(index === undefined)) {
             //if the role is in the list of self-assignable roles
             var wanted = selfroles[index];

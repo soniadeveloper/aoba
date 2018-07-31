@@ -1,7 +1,6 @@
 exports.run = async (client, msg, args) => {
   var vc = msg.member.voiceChannel;
   const sq = client.q.get(msg.guild.id);
-  //console.log(sq);
   var canSpeak = msg.guild.me.hasPermission("SPEAK");
   if (args[0] === "help") {
     var embed = new client.discord.RichEmbed().setColor(client.color).setTitle("Music Help")
@@ -22,7 +21,6 @@ exports.run = async (client, msg, args) => {
     }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else if (!vc.speakable || !canSpeak) {
-    //console.log(vc.speakable, canSpeak);
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Aoba does not have permission to speak in this voice channel!"
@@ -62,7 +60,6 @@ exports.run = async (client, msg, args) => {
             url: `https://www.youtube.com/watch?v=${vid.id}`
           };
           if (sq === undefined) {
-            //console.log("creating queue...");
             const qconstruct = {
               txt: msg.channel,
               voice: vc,
@@ -73,9 +70,7 @@ exports.run = async (client, msg, args) => {
             };
             client.q.set(msg.guild.id, qconstruct);
             qconstruct.songs.push(song);
-            //console.log("song has been pushed into queue");
             try {
-              //console.log("connecting....");
               var connect = await vc.join();
               qconstruct.connection = connect;
               play(msg.guild, qconstruct.songs[0]);
@@ -91,7 +86,6 @@ exports.run = async (client, msg, args) => {
             }
           }
           else {
-            //console.log("queue already exists, pushing song into queue...");
             sq.songs.push(song);
             return msg.channel.send({embed: {
               color: client.color,
@@ -220,9 +214,7 @@ exports.run = async (client, msg, args) => {
     }
 
     function play(guild, song) {
-      //console.log("playing song...");
         const sq = client.q.get(guild.id);
-      //console.log(sq.songs);
         if (!song) {
           vc.leave();
           client.q.delete(guild.id);
@@ -230,7 +222,6 @@ exports.run = async (client, msg, args) => {
         }
         const dispatcher = sq.connection.playStream(client.yt(song.url)) 
         .on("end", () => {
-          //console.log("Song is over.");
           sq.songs.shift();
           play(guild, sq.songs[0]);
         })

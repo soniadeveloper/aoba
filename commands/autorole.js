@@ -12,7 +12,6 @@ exports.run = (client, msg, args) => {
       var roleToGet = msg.guild.roles.find(r => r.name === role);
       var canRole = msg.guild.me.hasPermission("MANAGE_ROLES");
       if (canRole) {
-        //console.log("Aoba has permission");
         client.sql.get(`SELECT * FROM auto WHERE guildId = '${msg.guild.id}'`).then(row => {
           if (!row) { // if guild has never used this command before
             if (args.length == 0 || role === undefined) {
@@ -80,7 +79,6 @@ exports.run = (client, msg, args) => {
           }
         }).catch(() => {
           console.error;
-          //console.log("some sorta wack error occured");
           client.sql.run("CREATE TABLE IF NOT EXISTS auto (guildId TEXT, role TEXT, onoroff INTEGER)").then(() => {
             client.sql.run("INSERT INTO auto (guildId, role, onoroff) VALUES (?, ?, ?)", [msg.guild.id, role, 1]);
             msg.channel.send({embed: {

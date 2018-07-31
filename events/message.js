@@ -12,7 +12,6 @@ module.exports = (client, msg) => {
     if (msg.mentions.members.first() === msg.guild.me) {
       var cooldown = false;
     const now = Date.now();
-      console.log(msg.mentions.members.first());
       const args = msg.content.slice(`<@${msg.mentions.members.firstKey()}> `.length).trim().split(/ +/g);
       const command = args.shift().toLowerCase();
       const cmd = client.commands.get(command);

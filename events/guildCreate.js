@@ -1,5 +1,6 @@
 module.exports = (client, guild) => {
   if(guild.available){
+    client.prefixes.set(guild.id, process.env.PREFIX);
     let channelList = guild.channels.findAll("type", "text");
     var defaultChannel;
     var i = 0;

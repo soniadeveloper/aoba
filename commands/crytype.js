@@ -4,23 +4,24 @@ exports.run = (client, msg, args) => {
   if (args.length === 0) {
     return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Plea;se giv,ee a pHrase!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
+  const AMT = 2;
   var crying = {
     text: cry,
     comma: function (i) {
       var txt = this.text;
-      var repeat = Math.ceil(Math.random() * 1);
+      var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0,",".repeat(repeat));
       this.text = txt;
     },
     semicolon: function (i) {
       var txt = this.text;
-      var repeat = Math.ceil(Math.random() * 1);
+      var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0,";".repeat(repeat));
       this.text = txt;
     },
     space: function (i) {
       var txt = this.text;
-      var repeat = Math.ceil(Math.random() * 1);
+      var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0," ".repeat(repeat));
       this.text = txt;
     },
