@@ -4,14 +4,14 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "Please list a user to pat!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   if (list.first().user.bot) return;
   else if (list.firstKey() === msg.author.id) {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't pat yourself!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     var urls = ["https://media1.tenor.com/images/116fe7ede5b7976920fac3bf8067d42b/tenor.gif?itemid=9200932", 
@@ -29,6 +29,6 @@ exports.run = (client, msg, args) => {
     var sender = msg.author.id;
     var receiver = list.firstKey(1);
     console.log(sender, receiver);
-    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`🐱 <@${sender}> has given <@${receiver}> a pat!\n(^・ω・^ )`));
+    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`🐱 <@${sender}> has given <@${receiver}> a pat!\n(^・ω・^ )`)).catch(err => {console.error(err)});
   }
 }

@@ -4,20 +4,20 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Please enter a voice channel first!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     if (vc.full) {
       msg.channel.send({embed: {
         color: client.color,
         description: "❗️ This voice channel is full!"
-      }}).then(msg => {msg.delete(2000)});
+      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
     }
     else if (!vc.joinable) {
       msg.channel.send({embed: {
         color: client.color,
         description: "❗️ Aoba doesn't have permission to enter this voice channel!"
-      }}).then(msg => {msg.delete(2000)});
+      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
     }
     else {
       vc.join().then(connection => {
@@ -30,7 +30,7 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
           color: client.color,
           description: "❗️ There was an error entering the voice channel!"
-        }}).then(msg => {msg.delete(2000)});
+        }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
       });
     }
   }

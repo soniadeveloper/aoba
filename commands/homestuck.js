@@ -270,7 +270,7 @@ exports.run = (client, msg, args) => {
   }
   
   if (troll === undefined || say === undefined) {
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Missing arguments!")).then(msg => {msg.delete(2000)});
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Missing arguments!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   
   switch (troll) {
@@ -311,7 +311,7 @@ exports.run = (client, msg, args) => {
       trollify.feferi();
       break;
     default:
-      return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid troll name!")).then(msg => {msg.delete(2000)});
+      return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid troll name!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
       break;
   }
 }

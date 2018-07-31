@@ -5,7 +5,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "Please list a user to give a cookie to!"
-    }}).then(msg => {msg.delete(5000)});
+    }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
   }
   else {
     var sender = msg.author.id;

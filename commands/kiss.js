@@ -4,14 +4,14 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "Please list a user to kiss!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   if (list.first().user.bot) return;
   else if (list.firstKey() === msg.author.id) {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't kiss yourself!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     var urls = ["https://media1.tenor.com/images/e858678426357728038c277598871d6d/tenor.gif?itemid=9903014",

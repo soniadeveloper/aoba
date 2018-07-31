@@ -1,11 +1,8 @@
 exports.run = (client, msg, args) => {
-  let prefixes = JSON.parse(client.fs.readFileSync("./prefixes.json", "utf8"));
-  if (!prefixes[msg.guild.id]) {
-    prefixes[msg.guild.id] = {
-      prefixes: process.env.PREFIX
-    };
+  if (client.prefixes.get(msg.guild.id) === undefined) {
+    client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
-  let prefix = prefixes[msg.guild.id].prefixes;
+  let prefix = client.prefixes.get(msg.guild.id);
   function genText(arg, desc) {
       var embed = new client.discord.RichEmbed().setColor(client.color).setTitle(`❔Help: ${args[0]} ${client.emojis.get("472556462363770900")}`).addField("Arguments", arg).addField("Description", desc);
       return msg.channel.send(embed);
@@ -38,11 +35,11 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `cookie` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
       },
       {
         name: "Action",
-        value:"`bite` `blush` `glomp` `hug` `kiss` `lick` `pat` `slap`"
+        value:"`bite` `blush` `cookie` `glomp` `hug` `kiss` `lick` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -216,6 +213,6 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️Too many arguments!"
-    }}).then(msg => {msg.delete(2000)});
+    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
 }

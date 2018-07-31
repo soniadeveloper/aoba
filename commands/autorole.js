@@ -4,7 +4,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ You don't have permission to use this command!"
-    }}).then (msg => {msg.delete(2000)});
+    }}).then (msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
   else {
     //if member does have permission
@@ -25,7 +25,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
                 color: client.color,
                 description: "**ERROR:** This role doesn't exist"
-              }}).then(msg => {msg.delete(2000)});
+              }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else {
               client.sql.run("INSERT INTO auto (guildId, role, on) VALUES (?, ?, ?)", [msg.guild.id, role, 1]);
@@ -68,7 +68,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
                 color: client.color,
                 description: "**ERROR:** This role doesn't exist"
-              }});
+              }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else {
               client.sql.run(`UPDATE auto SET role = '${role}' WHERE guildId = ${msg.guild.id}`);
@@ -94,7 +94,7 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
           color: client.color,
           description: "**ERROR:** Aoba doesn't have permission to manage roles! Please grant the **Aoba** role the **Manage roles** permission."
-        }}).then(msg => {msg.delete(2000)});
+        }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
       }
   }
 }

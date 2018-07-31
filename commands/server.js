@@ -1,7 +1,7 @@
 exports.run = (client, msg, args) => {
   var guild = msg.guild;
   if (!guild.available) {
-    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ The guild is not available right now"));
+    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ The guild is not available right now")).catch(err => {console.error(err)});
   }
   else {
     if (args.length == 0) {
@@ -26,7 +26,7 @@ exports.run = (client, msg, args) => {
       .addField("# of Roles", `${guild.roles.array().length} (view roles using \`>server roles\`)`, true)
       .addField("# of Channels", guild.channels.array().length, true)
       .addField("Region", guild.region, true);
-      msg.channel.send(embed);
+      msg.channel.send(embed).catch(err => {console.error(err)});
     }
     else {
       switch (args[0]) {
@@ -41,13 +41,13 @@ exports.run = (client, msg, args) => {
               return msg;
             }
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setTitle(`${guild.name} Roles`).
-                             setDescription(`${listRoles(roles)}\nTo view a specific role use \`>server roles [role name]\``));
+                             setDescription(`${listRoles(roles)}\nTo view a specific role use \`>server roles [role name]\``)).catch(err => {console.error(err)});
           }
           else {
             args.shift()
             var name = args.join(" ");
             if (guild.roles.find("name", name) === null) {
-               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Role could not be found!"));
+               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Role could not be found!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else {
               var role = guild.roles.find("name", name);
@@ -79,23 +79,23 @@ exports.run = (client, msg, args) => {
           break;
         case "name":
           if (args[1] === undefined) {
-            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`The server name is currently **${guild.name}**. Please use \`>server name [name]\` to change the name of the server`));
+            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`The server name is currently **${guild.name}**. Please use \`>server name [name]\` to change the name of the server`)).catch(err => {console.error(err)});
           }
           else {
             args.shift();
             var name = args.join(" ");
             if (!msg.member.hasPermission("MANAGE_GUILD")) {
-              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to use this command!"));
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to use this command!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             }
             else if (!guild.me.hasPermission("MANAGE_GUILD")) {
-              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Aoba doesn't have permission to use this command. Please grant the Aoba role the **Manage server** permission."));
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Aoba doesn't have permission to use this command. Please grant the Aoba role the **Manage server** permission.")).then(msg => {msg.delete(4000)}).catch(err => {console.error(err)});
             }
             else {
               guild.setName(name).then(g => {
                 msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Name has been changed to ${name}`));
               }).catch(error => {
                 console.error(error);
-                msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There was an error changing the name of the server."));
+                msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There was an error changing the name of the server.")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
               })
             }
           }
@@ -105,22 +105,22 @@ exports.run = (client, msg, args) => {
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("Current server icon:").setImage(guild.iconURL));
           }
           else if (!msg.member.hasPermission("MANAGE_GUILD")) {
-            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to use this command!"));
+            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to use this command!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
           }
           else if (!guild.me.hasPermission("MANAGE_GUILD")) {
-            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Aoba doesn't have permission to use this command. Please grant the Aoba role the **Manage server** permission."));
+            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Aoba doesn't have permission to use this command. Please grant the Aoba role the **Manage server** permission.")).then(msg => {msg.delete(4000)}).catch(err => {console.error(err)});
           }
           else {
             guild.setIcon(args[1]).then(() => {
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Icon has been changed`));
             }).catch(error => {
               console.error(error);
-                msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There was an error changing the icon of the server."));
+                msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There was an error changing the icon of the server.")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
             });
           }
           break;
         default:
-          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Too many arguments!"));
+          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Too many arguments!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
           break;
       }
     }
