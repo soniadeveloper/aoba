@@ -1,140 +1,115 @@
 exports.run = (client, msg, args) => {
-  var cry = args.join(" ");
+  var arg = args.join(" ");
+  var cry = client.splitter.splitGraphemes(arg);
   if (args.length === 0) {
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please give a phrase!")).then(msg => {msg.delete(2000)});
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Plea;se giv,ee a pHrase!")).then(msg => {msg.delete(2000)});
   }
   var crying = {
     text: cry,
     comma: function (i) {
       var txt = this.text;
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
       var repeat = Math.ceil(Math.random() * 1);
-      this.text = `${first}${",".repeat(repeat)}${second}`;
+      txt.splice(i,0,",".repeat(repeat));
+      this.text = txt;
     },
     semicolon: function (i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
+      var txt = this.text;
       var repeat = Math.ceil(Math.random() * 1);
-      this.text = `${first}${";".repeat(repeat)}${second}`;
+      txt.splice(i,0,";".repeat(repeat));
+      this.text = txt;
     },
     space: function (i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
+      var txt = this.text;
       var repeat = Math.ceil(Math.random() * 1);
-      this.text = `${first}${" ".repeat(repeat)}${second}`;
+      txt.splice(i,0," ".repeat(repeat));
+      this.text = txt;
     },
     repeat: function (i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
+      var txt = this.text;
       if (i > 0) {
-        this.text = `${first}${txt.charAt(i-1)}${second}`;
+       txt.splice(i,0,txt[i-1]);
+       this.text = txt;
       }
     },
     symbol: function (i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
-      var rand = Math.floor(Math.random() * 5);
+      var txt = this.text;
+      var rand = Math.floor(Math.random() * 9);
       var symbol;
       switch (rand) {
         case 0:
           symbol = "/";
           break;
         case 1:
-          symbol = ">";
+          symbol = ".";
           break;
         case 2:
-          symbol = "<";
+          symbol = "'";
           break;
         case 3: 
           symbol = "-";
           break;
-        case 4: 
-          symbol = ")";
-          break;
-        case 5:
-          symbol = "(";
-          break;
-        case 6:
+        case 4:
           symbol = "\\";
           break;
-        case 7: 
+        case 5: 
           symbol = "[";
           break;
-        case 8:
+        case 6:
           symbol = "]";
           break;
-        case 9: 
-          symbol = ":";
-          break;
-        case 10: 
+        case 7: 
           symbol = "0";
           break;
-        case 11:
+        case 8:
           symbol = "=";
           break;
-        case 12: 
-          symbol = "-";
-          break;
       }
-      this.text = `${first}${symbol}${second}`;
+      txt.splice(i,0,symbol);
+      this.text = txt;
     },
     upper: function (i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i-1);
-      var second = txt.slice(i+1, len);
-      this.text = `${first}${txt.charAt(i).toUpperCase()}${second}`;
+      var txt = this.text;
+      txt.splice(i,1,txt[i].toUpperCase());
+      this.text = txt;
     },
     random: function(i) {
-      var txt = this.text
-      var len = txt.length;
-      var first = txt.slice(0,i);
-      var second = txt.slice(i, len);
+      var txt = this.text;
       var rand = Math.floor(Math.random() * 26) + 97;
-      this.text = `${first}${String.fromCharCode(rand)}${second}`;
+      txt.splice(i,0,String.fromCharCode(rand));
+      this.text = txt;
     }
   };
-  var i = 1;
+  var i = 0;
   while (i < crying.text.length) {
     var chanceOf = Math.floor(Math.random() * 4);
     var qChance = Math.floor(Math.random() * 7);
-    if (chanceOf == 0) {
-      switch (qChance) {
-        case 0:
-          crying.comma(i);
-          break;
-        case 1:
-          crying.semicolon(i);
-          break;
-        case 2:
-          crying.space(i);
-          break;
-        case 3:
-          crying.repeat(i);
-          break;
-        case 4:
-          crying.upper(i);
-          break;
-        case 5:
-          crying.symbol(i);
-          break;
-        case 6:
-          crying.random(i);
-          break;
+      if (chanceOf == 0) {
+        switch (qChance) {
+          case 0:
+            crying.comma(i);
+            break;
+          case 1:
+            crying.semicolon(i);
+            break;
+          case 2:
+            crying.space(i);
+            break;
+          case 3:
+            crying.repeat(i);
+            break;
+          case 4:
+            crying.upper(i);
+            break;
+          case 5:
+            crying.symbol(i);
+            break;
+          case 6:
+            crying.random(i);
+            break;
+        }
       }
-    }
     i += 1;
   }
-  
-  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(crying.text));
+  var final = crying.text.join("");
+  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(final));
 }
