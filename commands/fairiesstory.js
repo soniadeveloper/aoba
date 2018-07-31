@@ -1,12 +1,9 @@
 exports.run = (client, msg, args) => {
   var id = msg.author.id;
-  let prefixes = JSON.parse(client.fs.readFileSync("./prefixes.json", "utf8"));
-  if (!prefixes[msg.guild.id]) {
-    prefixes[msg.guild.id] = {
-      prefixes: process.env.PREFIX
-    };
+  if (client.prefixes.get(msg.guild.id) === undefined) {
+    client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
-  let prefix = prefixes[msg.guild.id].prefixes;
+  let prefix = client.prefixes.get(msg.guild.id);
   client.sql.get(`SELECT * FROM fsd WHERE userId = '${id}'`).then(row => {
     if (!row) {
       if (args[0] === "start") {
