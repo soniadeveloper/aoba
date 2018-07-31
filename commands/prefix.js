@@ -5,8 +5,7 @@ exports.run = (client, msg, args) => {
   }
   else {
     if (args.length === 0) {
-      msg.channel.send(new client.discord.RichEmbed().setColor(client.color)
-                     .setDescription("❗️Please provide a prefix!")).then(msg => { msg.delete(3000)}).catch(err => {console.error(err)});
+      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Prefix is currently set to ${client.prefixes.get(msg.guild.id)}. Use \`${client.prefixes.get(msg.guild.id)}prefix [desired prefix]\` to chage the prefix`));
     }
     else {
       client.prefixes.set(msg.guild.id, args.join(" "));
