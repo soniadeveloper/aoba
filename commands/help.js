@@ -38,11 +38,11 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `cookie` `f` `futchscale` `kinme` `kmk` `love` `lenny` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `cookie` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
       },
       {
         name: "Action",
-        value:"`bite` `blush` `hug` `kiss` `pat` `slap`"
+        value:"`bite` `blush` `glomp` `hug` `kiss` `lick` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -192,6 +192,23 @@ exports.run = (client, msg, args) => {
         break;
       case "blush":
         genText("None", "Show that you are blushing.");
+        break;
+      case "lick":
+        genText("None", "Lick someone!");
+        break;
+      case "crytype":
+        genText("text", "i'm so soRy;, i,; adidd,n' t d mean t crea;f o,,,;te ,a crytypibng comman;d.");
+        break;
+      case "owo":
+        genText("text", "owo-ify text!");
+        break;
+      case "homestuck":
+        genText("troll name, text", `Give a Homestuck troll and a phrase and Aoba will re-write that phrase in the troll's quirk!\n**Available trolls:** Aradia, Tavros, Sollux, Karkat, Nepeta, Kanaya, Terezi, Vriska, Equius, Eridan, Feferi\nExample: \`${prefix}homestuck aradia "aradia is my patron troll"\``);
+        break;
+      case "glomp":
+        genText("None", "Glomp someone!");
+        break;
+      default:
         break;
     }
   }

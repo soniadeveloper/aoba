@@ -4,7 +4,7 @@ module.exports = (client, guild) => {
     var defaultChannel;
     var i = 0;
     while (defaultChannel === undefined) {
-      if (channelList[i].permissionsFor(guild.me).hasPermission("SEND_MESSAGES")) {
+      if (channelList[i].permissionsFor(guild.me).has("SEND_MESSAGES")) {
         defaultChannel = channelList[i];
       }
       i += 1;

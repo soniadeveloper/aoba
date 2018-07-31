@@ -40,7 +40,7 @@ exports.run = (client, msg, args) => {
   "https://www.youtube.com/watch?v=688OPQ9WFpA", "https://www.youtube.com/watch?v=_neSA7J92dw", "https://www.youtube.com/watch?v=psxBizrPIxg",
   "https://www.youtube.com/watch?v=tdyybvuacVc", "https://www.youtube.com/watch?v=7f3DHfYNqwc", "https://www.youtube.com/watch?v=mJFcSNOzKdM",
   "https://www.youtube.com/watch?v=ggKeB9OOkRY", "https://www.youtube.com/watch?v=PsasZkQfskw", "https://www.youtube.com/watch?v=NJJZAshRF6A",
-  "https://www.youtube.com/watch?v=OoogkKSFES0", "https://www.youtube.com/watch?v=zsUBRCdEDYY"];
+  "https://www.youtube.com/watch?v=OoogkKSFES0", "https://www.youtube.com/watch?v=zsUBRCdEDYY", "https://www.youtube.com/watch?v=NfbQTiW7kDY"];
   var len = options.length;
   var choice = Math.floor(Math.random() * options.length);
   msg.channel.send(`LOL\n${options[choice]}`)
