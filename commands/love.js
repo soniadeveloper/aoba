@@ -25,8 +25,6 @@ exports.run = (client, msg, args) => {
     else if (second.charAt(0) === '<' && second.charAt(1) === '@') {
       second = second.substring(3, second.length-1);
     }
-  
-    //console.log(`${first}, ${second}`);
     function calcSum(str) {
       var sum = 0;
       for (var i = 0; i < str.length; i++) {
@@ -36,7 +34,6 @@ exports.run = (client, msg, args) => {
     }
     var firstSum = calcSum(first);
     var secondSum = calcSum(second);
-    //console.log(firstSum, secondSum);
     if (args.join(" ") === "grace milktea") {
       var pct = 100;
     }

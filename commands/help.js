@@ -52,10 +52,8 @@ exports.run = (client, msg, args) => {
   }});
  }
   else if (args.length == 1) {
-    console.log("show specific commands");
     switch (args[0]) {
       case "info":
-        console.log("info");
         genText("None", "Sends information about the bot");
         break;
       case "autorole":
@@ -137,7 +135,7 @@ exports.run = (client, msg, args) => {
         genText("name (optional)", "Check where you fall on the Twunk Scale™");
         break;
       case "unban":
-        genText("user (mention), \"reason (optional)\"", `Unbans the given user from the server\n\nThis command requires the **Ban members** permission\n\nExample: \`${prefix}unban @urmom "she's ok i guess"\``);
+        genText("username, \"reason (optional)\"", `Unbans the given user from the server\n\nThis command requires the **Ban members** permission\n\nExample: \`${prefix}unban @urmom "she's ok i guess"\``);
         break;
       case "vine":
         genText("None", "Randomly generates a Vine.");

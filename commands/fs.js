@@ -57,7 +57,6 @@ exports.run = (client, msg, args) => {
             }});
       }
       else {
-        //console.log("player does not have profile");
         msg.channel.send({embed: {
           color: client.color,
           description: `⚠️ You don't have a Fairies Story profile! Use \`${prefix}fairiesstory start\` or \`${prefix}fs start\` in order to create a profile!`
@@ -65,22 +64,16 @@ exports.run = (client, msg, args) => {
       }
     }
     else {
-      //console.log("player has profile");
-      //console.log(args);
-      
       //form inventory list
       function formList() {
           var arr = row.items.split(","); //makes string into an array of words
-          //console.log(arr);
           var final = "";
           var len = client.items.length;
-          //console.log(len);
           var amtEach = [];
           //forms amount of each item array
           for (var i = 0; i < len; i++) {
             amtEach.push(0);
           }
-          //console.log(amtEach);
           for (var i = 0; i < arr.length; i++) { //for each item that you own
             for (var j = 0; j < len; j++) { //for each item
               if (arr[i] === client.items[j]) {
@@ -88,7 +81,6 @@ exports.run = (client, msg, args) => {
               }
             }
           }
-          //console.log(amtEach);
           for (var i = 0; i < amtEach.length; i++) {
             if (amtEach[i] > 0) {
               final += `${client.items[i]} x${amtEach[i]}\n`;
@@ -142,8 +134,6 @@ exports.run = (client, msg, args) => {
       
       if (args === undefined || args.length == 0) {
         //get user profile
-        //console.log("no argument given, show profile");
-        //console.log(row.userId, row.species, row.level, row.points, row.money, row.rep, row.items, row.stats);
         let profile = new client.discord.RichEmbed().setTitle(`**${msg.author.username}'s Profile**`).setColor(client.color)
         .setDescription("Fairies Story 🧚‍")
         .setThumbnail(msg.author.avatarURL)
@@ -228,7 +218,6 @@ exports.run = (client, msg, args) => {
                 //give money
                 var user = msg.mentions.members.firstKey(1);
                 var money = parseInt(args[2]);
-                console.log(money);
                 if (isNaN(args[2])) {
                   msg.channel.send({embed: {
                     color: client.color,
@@ -323,21 +312,16 @@ exports.run = (client, msg, args) => {
                 }).catch(err => {console.error(err)});
               }
               else {
-                //console.log("an item is being sold");
                 var arr = args.slice(2).join(" ");
-                console.log(arr);
                 var name = args.slice(2).join(" ").split(" x")[0];
                 console.log(name);
                 var num = args.slice(2).join(" ").split(" x")[1];
                 console.log(num);
-                //console.log(`Other arguments: args.slice(2)`);
-                //console.log(`Name of item: ${name}`);
                 var sell = name.toLowerCase();
                 var av = [];
                 for (var i = 0; i < client.items.length; i++) {
                   av.push(client.items[i].substring(3, client.items[i].length).toLowerCase());
                 }
-                //console.log(`Items available to sell: ${av}`);
                 //check if item is valid
                 var isEqual = 0;
                 for (var i = 0; i < av.length; i++) {
@@ -362,7 +346,6 @@ exports.run = (client, msg, args) => {
                     for (var i = 0; i < list.length; i++) {
                       list[i] = list[i].substring(3, list[i].length).toLowerCase();
                     }
-                    //console.log(`Items I have: ${list}`);
                     for (var i = 0; i < list.length; i++) {
                       if (list[i] === sell) {
                         has += 1;
@@ -371,9 +354,7 @@ exports.run = (client, msg, args) => {
                         }
                       }
                     }
-                    console.log(`Index: ${index}`);
                     if (has < 1 || index < 0) {
-                      //console.log("user doesn't have this item");
                       msg.channel.send({embed: {
                         color: client.color,
                         description: "❗️ You don't have this item!"
@@ -382,8 +363,6 @@ exports.run = (client, msg, args) => {
                       }).catch(err => {console.error(err)});
                     }
                     else {
-                      //console.log("user does have this item");
-                    //console.log(`Index: ${index}`);
                       var gain;
                       switch (sell) {
                         case "yummy food":
@@ -453,16 +432,10 @@ exports.run = (client, msg, args) => {
                           gain = 13;
                           break;
                       }
-                      //console.log(`Money to earn: ${gain}`);
                       var items = row.items.split(",");
-                      //console.log(`Items currently owned: ${items}`);
-                      //console.log(`Index: ${index}`);
                       var newArray = items.splice(index, 1);
-                      //console.log(`Items with sold item cut out: ${newArray}`);
                       var newItems = items.join(",");
-                      //console.log(`New items: ${newItems}`);
                       client.sql.run(`UPDATE fsd SET money = ${row.money + gain}, items = '${newItems}' WHERE userId = ${id}`);
-                      //console.log(`Money now: ${row.money}, Items now: ${row.items}`);
                       msg.channel.send({embed: {
                         color: client.color,
                         title: "💰Gnome Market",
@@ -475,7 +448,6 @@ exports.run = (client, msg, args) => {
                     var index;
                     var list = row.items.split(",").sort();
                     for (var i = 0; i < list.length; i++) {
-                      console.log(list[i].substring(2).toLowerCase());
                       if (list[i].substring(3).toLowerCase() === sell) {
                         has += 1;
                         if (index === undefined) {
@@ -483,8 +455,6 @@ exports.run = (client, msg, args) => {
                         }
                       }
                     }
-                    console.log(has);
-                    console.log(index);
                     if (has < num || index === undefined) {
                       msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You don't have enough of that item to sell!"))
                                        .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
@@ -558,17 +528,10 @@ exports.run = (client, msg, args) => {
                           gain = 13;
                           break;
                       }
-                      //console.log(`Money to earn: ${gain}`);
                       var items = row.items.split(",").sort();
-                      //console.log(`Items currently owned: ${items}`);
-                      //console.log(`Index: ${index}`);
                       var newArray = items.splice(index, num);
-                      console.log(newArray);
-                      //console.log(`Items with sold item cut out: ${newArray}`);
                       var newItems = items.join(",");
-                      //console.log(`New items: ${newItems}`);
                       client.sql.run(`UPDATE fsd SET money = ${row.money + (gain*num)}, items = '${newItems}' WHERE userId = ${id}`);
-                      //console.log(`Money now: ${row.money}, Items now: ${row.items}`);
                       msg.channel.send({embed: {
                         color: client.color,
                         title: "💰Gnome Market",
@@ -640,7 +603,6 @@ exports.run = (client, msg, args) => {
                     const DAY = 86400000;
                     client.sql.run(`ALTER TABLE fsd ADD COLUMN time INTEGER default ${time}`).then(() => {
                       //column does not exist
-                      console.log("column created");
                       time = Date.now();
                       client.sql.run(`UPDATE fsd SET rep = ${row.rep + 1} WHERE userId = ${list.firstKey(1)}`);
                       client.sql.run(`UPDATE fsd SET money = ${oldAmt + 100} WHERE userId = ${id}`);
@@ -649,14 +611,10 @@ exports.run = (client, msg, args) => {
                         description: `✨ <@${msg.author.id}> has given <@${list.firstKey(1)}> a reputation point! You got 100 FP for your good deed!`
                       }});
                       client.sql.run(`UDPATE fsd SET time = ${time+DAY} WHERE userId = ${id}`);
-                      console.log(row.reptime);
                     }).catch(() => {
                       //column does exist
                         time = Date.now();
-                        console.log("updating column");
-                        console.log(row.time);
                         if (row.time !== null && time <= row.time) { 
-                          console.log(row.time);
                           var remaining = row.time - time;
                           var hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
                           var minutes = Math.floor((remaining / (1000 * 60)) % 60);
@@ -680,7 +638,6 @@ exports.run = (client, msg, args) => {
                         else {
                           client.sql.run(`UPDATE fsd SET time = ${time + DAY} WHERE userId = ${id}`);
                         }
-                        console.log(row.time);
                       }
                     });
                   }
@@ -927,7 +884,6 @@ exports.run = (client, msg, args) => {
   }).catch(() => {
     console.error;
     client.sql.run("CREATE TABLE IF NOT EXISTS fsd (userId TEXT, species TEXT, level INTEGER, points INTEGER, money INTEGER, rep INTEGER, items TEXT, att INTEGER, def INTEGER, mag, INTEGER, spd INTEGER)").then(() => {
-      //console.log("Table fsd created");
       msg.channel.send({embed: {
               color: client.color,
               description: "⚠️ An unknown error occured!"

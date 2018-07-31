@@ -6,7 +6,10 @@ exports.run = (client, msg, args) => {
             description: "❗️ Please list a user to lick!"
     }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
-  if (list.first().user.bot) return;
+ 
+  else if (list.first().user.bot) {
+    return;
+  }
   else if (list.firstKey() === msg.author.id) {
     msg.channel.send({embed: {
             color: client.color,

@@ -3,10 +3,13 @@ exports.run = (client, msg, args) => {
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {
             color: client.color,
-            description: "Please list a user to kiss!"
+            description: "❗️ Please list a user to kiss!"
     }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
   }
-  if (list.first().user.bot) return;
+  
+  else if (list.first().user.bot) {
+    return;
+  }
   else if (list.firstKey() === msg.author.id) {
     msg.channel.send({embed: {
             color: client.color,
@@ -22,7 +25,6 @@ exports.run = (client, msg, args) => {
     var choice = Math.floor(Math.random() * urls.length);
     var sender = msg.author.id;
     var receiver = list.firstKey(1);
-    console.log(sender, receiver);
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`💕 <@${sender}> has kissed <@${receiver}>!\n( ˘ ³˘)♥`));
   }
 }

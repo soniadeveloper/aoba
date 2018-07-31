@@ -3,7 +3,6 @@ exports.run = (client, msg, args) => {
   const guildId = msg.guild.id;
   var canManage = msg.member.hasPermission("MANAGE_SERVER");
   if (canManage == false) {
-    //console.log("can't manage");
     msg.channel.send({embed: {
             color: client.color,
             description: "🚫 You don't have permission to access the blacklist!"
@@ -11,7 +10,6 @@ exports.run = (client, msg, args) => {
   }
   //if no arg is given
   else if (args.length == 0) {
-    //console.log("Zero arguments");
     //view list of blacklisted words
     var list = `**${msg.guild.name}'s blacklist:**`;
       client.sql.get(`SELECT * FROM blacklist WHERE guildId = "${msg.guild.id}"`).then(row => {
@@ -25,7 +23,6 @@ exports.run = (client, msg, args) => {
          }
          //if row does exist, print array as a formatted list
          else {
-          //console.log("Row exists.", row.words, row.guildId);
           if(row.words === "") {
             msg.channel.send({embed: {
               color: client.color,
@@ -33,7 +30,6 @@ exports.run = (client, msg, args) => {
             }});
           }
           else {
-            //console.log(row.words);
             var wordsArray = row.words.split(" ");
             for (var i = 0; i < wordsArray.length; i++) {
               list += `\n❌  **${wordsArray[i]}**`;
@@ -117,7 +113,6 @@ exports.run = (client, msg, args) => {
       }
       else {
         if (row.words !== "") {
-          //console.log("array is not null");
           var wordArray = row.words.split(" ");
           var inArray;
           for (var i = 0; i < wordArray.length; i++) {
@@ -131,9 +126,7 @@ exports.run = (client, msg, args) => {
           }
           var newList = row.words + " " + args[0];
           if (inArray !== true) {
-            //console.log(row.words);
             client.sql.run(`UPDATE blacklist SET words = '${newList}' WHERE guildId = '${msg.guild.id}'`);
-            //console.log(row.words);
             msg.channel.send({embed: {
               color: client.color,
               description: `The word **${args[0]}** has been blacklisted!`
@@ -142,9 +135,7 @@ exports.run = (client, msg, args) => {
           else return;
         }
         else {
-          //console.log("array is null");
           client.sql.run(`UPDATE blacklist SET words = '${args[0]}' WHERE guildId = '${msg.guild.id}'`);
-          //console.log("word has been added", row.words);
           msg.channel.send({embed: {
             color: client.color,
             description: `The word **${args[0]}** has been blacklisted!`

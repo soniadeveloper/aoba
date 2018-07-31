@@ -23,9 +23,7 @@ exports.run = (client, msg, args) => {
   
   //if both bot and user have permissions
   else {
-    console.log(msg.mentions.members)
     //delete general messages
-    console.log(parseInt(args[0]));
     if (args.length < 1 || (args.length >= 1 && isNaN(parseInt(args[0])))) {
         msg.channel.send({embed: {
           color: client.color,

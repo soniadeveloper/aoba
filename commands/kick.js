@@ -1,12 +1,8 @@
 exports.run = (client, msg, args) => {
-  console.log(args);
   var joined = args.join(" ");
-  var arg = joined.split('"');
-  console.log(`Arguments: ${arg}`);
+  var arg = (joined.includes("\"")) ? joined.split("\"") : joined.split("“");
   var name = arg[0];
-  console.log(`Name given: ${name}`);
-  var reason = arg[1];
-  console.log(`Reason given: ${reason}`);
+  var reason = ((arg[1] !== undefined) && arg[1].includes("”")) ? arg[1].slice(0, arg[1].length - 1) : arg[1];
   var canKick = msg.member.hasPermission("KICK_MEMBERS");
   if (canKick == false) {
     msg.channel.send({embed: {
@@ -26,18 +22,18 @@ exports.run = (client, msg, args) => {
       var name = member.user.username;
       if(msg.guild.me.hasPermission("KICK_MEMBERS") && member.kickable) {
         if (reason !== undefined) {
-          member.kick(reason);
+          member.kick(reason).then(() => {
           msg.channel.send({embed: {
               color: client.color,
               description:  `**${name}** has been kicked! 👋\n**Reason:** ${reason}`
-          }});
+          }})}).catch(console.error);
         }
         else  {
-          member.kick();
+          member.kick().then(() => {
           msg.channel.send({embed: {
               color: client.color,
               description:  `**${name}** has been kicked! 👋`
-          }});
+          }})}).catch(console.error);
         }
       }
     else {
