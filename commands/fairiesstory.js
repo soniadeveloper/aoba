@@ -1,6 +1,6 @@
 exports.run = (client, msg, args) => {
   var id = msg.author.id;
-  if (client.prefixes.get(msg.guild.id) === undefined) {
+  if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
   let prefix = client.prefixes.get(msg.guild.id);

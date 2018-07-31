@@ -2,11 +2,11 @@ module.exports = (client, msg) => {
   let lastCommand;
   if (msg.author.bot) return; //ignore bot's messages
   //ignore messages not starting with prefix
-  if (client.prefixes.get(msg.guild.id) === undefined) {
+  if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
   
-  let prefix = client.prefixes.get(msg.guild.id);
+  let prefix = (client.prefixes.get(msg.guild.id) !== null) ? client.prefixes.get(msg.guild.id) : process.env.PREFIX ;
   
   if (msg.content.indexOf(prefix) !== 0) {
     if (msg.mentions.members.first() === msg.guild.me) {

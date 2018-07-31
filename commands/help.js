@@ -1,5 +1,5 @@
 exports.run = (client, msg, args) => {
-  if (client.prefixes.get(msg.guild.id) === undefined) {
+  if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
   let prefix = client.prefixes.get(msg.guild.id);
@@ -35,7 +35,7 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `gottem` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
       },
       {
         name: "Action",
@@ -204,6 +204,9 @@ exports.run = (client, msg, args) => {
         break;
       case "glomp":
         genText("None", "Glomp someone!");
+        break;
+      case "gottem":
+        genText("User mention (optional)", "Hah, got 'em.");
         break;
       default:
         break;
