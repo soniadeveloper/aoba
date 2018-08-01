@@ -13,6 +13,7 @@ const Grapheme = require("grapheme-splitter");
 const app = express();
 app.get("/", (request, response) => {
   response.sendStatus(200);
+  response.end();
 });
 app.listen(process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: true }));

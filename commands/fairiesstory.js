@@ -51,7 +51,7 @@ exports.run = (client, msg, args) => {
                 },
                 {
                   name: "`set [channel-name]`",
-                  value: "Sets the channel to send level up and item notifications to. This command requires the **Manage server** permissions"
+                  value: `Sets the channel to send level up and item notifications to.\nUse \`${client.prefixes.get(msg.guild.id)}fs set any\` to have it send to any channel. This command requires the **Manage server** permissions`
                 }
               ]
             }});
@@ -716,7 +716,7 @@ exports.run = (client, msg, args) => {
             client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
               if (!row) {
                 if (args[1] === undefined) { //if no argument was given
-                  client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any channel"]).then(() => {
+                  client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]).then(() => {
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`Notifications are set to send to **${r.channel}**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel`));
@@ -732,10 +732,18 @@ exports.run = (client, msg, args) => {
                   else { //if user does have permission
                     var name = args.join("-");
                     if (msg.guild.channels.find("name", name) === undefined) { //if channel can't be found
-                      msg.channel.send(new client.discord.RichEmbed()
-                                 .setColor(client.color)
-                                 .setDescription(`❗️ A channel with that name could not be found!`))
-                    .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      if (name === "any") {
+                        msg.channel.send(new client.discord.RichEmbed()
+                                   .setColor(client.color)
+                                   .setDescription(`✅ Notifications will be sent to **any channel**!`))
+                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      }
+                      else {
+                        msg.channel.send(new client.discord.RichEmbed()
+                                   .setColor(client.color)
+                                   .setDescription(`❗️ A channel with that name could not be found!`))
+                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      }
                     }
                     else {
                       client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, msg.guild.channels.find("name", name).id]).then(() => {
@@ -855,7 +863,7 @@ exports.run = (client, msg, args) => {
                 },
                 {
                   name: "`set [channel-name]`",
-                  value: "Sets the channel to send level up and item notifications to. This command requires the **Manage server** permissions"
+                  value: `Sets the channel to send level up and item notifications to.\nUse \`${client.prefixes.get(msg.guild.id)}fs set any\` to have it send to any channel. This command requires the **Manage server** permissions`
                 }
               ]
             }});

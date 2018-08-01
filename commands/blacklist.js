@@ -6,7 +6,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "🚫 You don't have permission to access the blacklist!"
-    }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(5000)}).catch(console.error);
   }
   //if no arg is given
   else if (args.length == 0) {
@@ -60,7 +60,7 @@ exports.run = (client, msg, args) => {
           msg.channel.send({embed: {
             color: client.color,
             description: "**ERROR:** This server does not have any words to delete."
-          }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+          }}).then(msg => {msg.delete(5000)}).catch(console.error);
         }
         else {
           var wordsArray = row.words.split(" ");
@@ -74,7 +74,7 @@ exports.run = (client, msg, args) => {
             msg.channel.send({embed: {
               color: client.color,
               description: "**ERROR**: Word doesn't exist inside of blacklist."
-            }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+            }}).then(msg => {msg.delete(5000)}).catch(console.error);
           }
           else {
             wordsArray.splice(index, 1);
@@ -91,14 +91,14 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
               color: client.color,
               description: "**ERROR**: This server doesn't have a blacklist to delete anything from."
-        }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+        }}).then(msg => {msg.delete(5000)}).catch(console.error);
       });
     }
     else {
       msg.channel.send({embed: {
         color: client.color,
         description: "❗️ Too many arguments!"
-      }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+      }}).then(msg => {msg.delete(5000)}).catch(console.error);
     }
   }
 
@@ -120,7 +120,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
                   color: client.color,
                   description: `The word **${args[0]}** is already blacklisted!`
-              }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+              }}).then(msg => {msg.delete(5000)}).catch(console.error);
               inArray = true;
             }
           }

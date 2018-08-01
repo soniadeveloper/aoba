@@ -59,13 +59,10 @@ exports.run = (client, msg, args) => {
       }).catch(err => {console.error(err)});
       }
       else {
-      msg.channel.fetchMessages({limit: (limit+1)}).then(msgs => msg.channel.bulkDelete(msgs)).catch(console.error);
-        msg.channel.send({embed: {
-          color: client.color,
-          description: `🗑 Deleted **${args[0]}** message(s) from ${msg.channel.name}`
-        }}).then(msg => {
-        msg.delete(4000);
-      }).catch(console.error);
+      msg.channel.fetchMessages({limit: (limit)})
+        .then(msgs => msg.channel.bulkDelete(msgs)
+              .then(msgs => { msg.channel.send({embed: {color: client.color,description: `🗑 Deleted **${msgs.size}** message(s) from ${msg.channel.name}`}})
+                .then(msg => {msg.delete(4000);}).catch(console.error)}).catch(console.error)).catch(console.error);
       }
     }
   }

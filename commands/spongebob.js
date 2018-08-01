@@ -20,5 +20,5 @@ exports.run = (client, msg, args) => {
   msg.channel.send({embed: {
       color: client.color,
       description: `${spongebob} **Spongebob Quote Generator**\n\n${quotes[chance]}`
-  }}).catch(err => {console.error(err)});
+  }});
 }

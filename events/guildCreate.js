@@ -14,7 +14,7 @@ module.exports = (client, guild) => {
     console.log(`**New guild joined:** ${guild.name}`);
     var url = "https://78.media.tumblr.com/6a3861b9589ec3670c516466b8f0fed6/tumblr_olfus8py1U1twgfw0o1_540.gif";
     var embed = new client.discord.RichEmbed().setColor(0xffa3e7).setDescription("Hello~! I am **Aoba**, your local game designing bot! Say `>help` or `@Aoba help` to get a list of commands!").setImage(url);
-    defaultChannel.send(embed).catch(err => {console.error(err);});
+    defaultChannel.send(embed);
     console.log(`In channel ${defaultChannel.name}`);
   }  
 }

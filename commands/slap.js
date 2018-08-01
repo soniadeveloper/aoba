@@ -27,6 +27,6 @@ exports.run = (client, msg, args) => {
     var choice = Math.floor(Math.random() * urls.length);
     var sender = msg.author.id;
     var receiver = list.firstKey(1);
-    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`💢 <@${sender}> has slapped <@${receiver}>!\n(*｀Ω´*)`)).catch(err => {console.error(err)});
+    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`💢 <@${sender}> has slapped <@${receiver}>!\n(*｀Ω´*)`));
   }
 }

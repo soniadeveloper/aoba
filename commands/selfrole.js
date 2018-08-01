@@ -9,7 +9,7 @@ exports.run = (client, msg, args) => {
         //if the row could not be found
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color)
                          .setTitle(`➡️ ${msg.guild.name}'s Self-Assignable Roles`)
-                         .setDescription("This server doesn't have any self-assignable roles available!")).catch(err => {console.error(err)});
+                         .setDescription("This server doesn't have any self-assignable roles available!"));
       }
       else {
         //if the guild has used this command before
@@ -31,7 +31,7 @@ exports.run = (client, msg, args) => {
         }
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color)
                          .setTitle(`➡️ ${msg.guild.name}'s Self-Assignable Roles`).
-                         setDescription(list)).catch(err => {console.error(err)});
+                         setDescription(list));
       }
     }
     else {
@@ -89,12 +89,12 @@ exports.run = (client, msg, args) => {
                 else {
                   if (row.roles === "") {
                     client.sql.run(`UPDATE selfrole SET roles = '${role}' WHERE guildID = ${msg.guild.id}`).then(() => {
-                      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Self-assignable role added: ${serverRoles[index]}`)).catch(err => {console.error(err)});
+                      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Self-assignable role added: ${serverRoles[index]}`));
                     });
                   }
                   else {
                     client.sql.run(`UPDATE selfrole SET roles = '${row.roles + "`" + role}' WHERE guildID = ${msg.guild.id}`).then(() => {
-                      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Self-assignable role added: ${serverRoles[index]}`)).catch(err => {console.error(err)});
+                      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Self-assignable role added: ${serverRoles[index]}`));
                     });
                   }
                 }
