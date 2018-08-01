@@ -25,7 +25,14 @@ exports.run = (client, msg) => {
                     "**Mari Ohara** from **Love Live**",
                     "**Guy Fieri** from **The Food Network**",
                     "**Kanna Kamui** from **Miss Kobayashi's Dragon Maid**",
-                    "**Todd Howard** from **Skyrim**"];
+                    "**Todd Howard** from **Skyrim**",
+                    "**Peter Griffin** from **Family Guy**",
+                    "**Ray William Johnson** from **=3**",
+                    "**Italy** from **Hetalia**",
+                    "**Barack Obama**",
+                    "**Sasuke Uchiha** from **Naruto**",
+                    "**Levi Ackerman** from **Attack on Titan**",
+                    "**Len Kagamine** from **VOCALOID**"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
@@ -51,7 +58,14 @@ exports.run = (client, msg) => {
                 "https://i.ytimg.com/vi/DM1g_tCFnec/maxresdefault.jpg",
                 "https://3apq7g38q3kw2yn3fx4bojii-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/482774787_Guy-Fieri.jpg",
                 "http://goboiano.com/wp-content/uploads/2017/02/Kanna-Kamui-Miss-Kobayashis-Dragon-Maid-1-1.jpg",
-                "https://i.kym-cdn.com/entries/icons/original/000/017/752/286.jpg"]
+                "https://i.kym-cdn.com/entries/icons/original/000/017/752/286.jpg",
+                "https://static3.srcdn.com/wordpress/wp-content/uploads/peter-griffin-family-guy.jpg",
+                "https://i.ytimg.com/vi/M1LAiU0KYuI/maxresdefault.jpg",
+                "http://hetalia.kitawiki.net/images/a/af/Italy_TBW.jpg",
+                "https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg",
+                "https://vignette.wikia.nocookie.net/naruto/images/2/21/Sasuke_Part_1.png/revision/latest/scale-to-width-down/300?cb=20170716092103",
+                "https://vignette.wikia.nocookie.net/romancingsaga/images/0/00/Levi.jpg/revision/latest?cb=20171122124739",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdwQjMz5S_jKGoJca_qmOpU9eUfp1bdNSMUf1DOephZD9_Km-n"];
 
       var len = options.length;
       var val = 0;

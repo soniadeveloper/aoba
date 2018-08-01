@@ -11,6 +11,6 @@ exports.run = (client, msg, args) => {
   .addField("Support Server", "[Aoba Support](http://discord.gg/H8u4HTn)", true)
   .addField("Discordbots.org", "[Aoba on Discordbots.org](https://discordbots.org/bot/465934252949897216)", true)
   .addField("Become a Patreon!", "[Patreon](https://www.patreon.com/aobabot)", true)
-  .addField("Created at", client.user.createdAt, true);
+  .addField("Created on", client.user.createdAt, true);
   msg.channel.send(embed);
 }
