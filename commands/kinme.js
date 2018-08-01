@@ -22,7 +22,10 @@ exports.run = (client, msg) => {
                     "**Umaru Doma** from **Himouto! Umaru-chan**",
                     "**Twilight Sparkle** from **My Little Pony**",
                     "**Yuno Gasai** from **Future Diary**",
-                    "**Mari Ohara** from **Love Live**"];
+                    "**Mari Ohara** from **Love Live**",
+                    "**Guy Fieri** from **The Food Network**",
+                    "**Kanna Kamui** from **Miss Kobayashi's Dragon Maid**",
+                    "**Todd Howard** from **Skyrim**"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
@@ -45,7 +48,10 @@ exports.run = (client, msg) => {
                 "http://www.anime-evo.net/wp-content/uploads/2015/07/Himouto-Umaru-chan-05.jpeg",
                 "https://vignette.wikia.nocookie.net/the-princess/images/e/e5/Mlp_fim_twilight_sparkle_happy_vector_3_by_luckreza8-db4ql0m.png/revision/latest?cb=20180411192543",
                 "https://vignette.wikia.nocookie.net/futurediary/images/a/a5/YunoYandereFace.jpg/revision/latest?cb=20120128011750",
-                "https://i.ytimg.com/vi/DM1g_tCFnec/maxresdefault.jpg"]
+                "https://i.ytimg.com/vi/DM1g_tCFnec/maxresdefault.jpg",
+                "https://3apq7g38q3kw2yn3fx4bojii-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/482774787_Guy-Fieri.jpg",
+                "http://goboiano.com/wp-content/uploads/2017/02/Kanna-Kamui-Miss-Kobayashis-Dragon-Maid-1-1.jpg",
+                "https://i.kym-cdn.com/entries/icons/original/000/017/752/286.jpg"]
 
       var len = options.length;
       var val = 0;
