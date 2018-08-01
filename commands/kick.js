@@ -1,4 +1,10 @@
 exports.run = (client, msg, args) => {
+  if (args.length === 0) {
+    return msg.channel.send({embed: {
+          color: 0xffa3e7,
+          description: "❗️Missing arguments!"
+      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+  }
   var joined = args.join(" ");
   var arg = (joined.includes("\"")) ? joined.split("\"") : joined.split("“");
   var name = arg[0];

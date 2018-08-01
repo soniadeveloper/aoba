@@ -5,35 +5,17 @@ module.exports = (client, msg) => {
   if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
-  
-  let prefix = (client.prefixes.get(msg.guild.id) !== null) ? client.prefixes.get(msg.guild.id) : process.env.PREFIX ;
+
+  let prefix = (client.prefixes.get(msg.guild.id) !== null) ? client.prefixes.get(msg.guild.id) : process.env.PREFIX;
   
   if (msg.content.indexOf(prefix) !== 0) {
     if (msg.mentions.members.first() === msg.guild.me) {
-      var cooldown = false;
-    const now = Date.now();
       const args = msg.content.slice(`<@${msg.mentions.members.firstKey()}> `.length).trim().split(/ +/g);
       const command = args.shift().toLowerCase();
       const cmd = client.commands.get(command);
       if (!cmd) return;
-      else {
-        if (cooldown == false) {
-          cooldown = true;
-          cmd.run(client, msg, args);
-          //console.log(cooldown);
-        }
-        else {
-          console.log("timing out");
-          setTimeout(function () {
-            cooldown = false;
-          }, 10000)
-            msg.channel.send({embed: {
-              color: client.color,
-              description: `‼️**COOLDOWN** Please wait ${Number((now - 100000), 2)} seconds`}})
-          .then(() => {msg.delete(2000)}).catch(err => {console.error(err)});
-        }
-      }  
-    }
+      cmd.run(client, msg, args);
+    }  
     else {
     client.sql.get(`SELECT * FROM blacklist WHERE guildId = "${msg.guild.id}"`).then(row => {
       if (!row) return;
@@ -46,7 +28,7 @@ module.exports = (client, msg) => {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `‼️ **Blacklisted word detected:** ${wordsArray[j]}`
-            }}).catch(err => {console.error(err)});
+            }});
           }
         }
       }
@@ -58,24 +40,29 @@ module.exports = (client, msg) => {
       if (row.points == Math.pow(2, row.level)) {
         client.sql.run(`UPDATE fsd SET level = ${row.level + 1}, att = ${row.att + Math.ceil(row.level / 2)}, def = ${row.def + Math.ceil(row.level / 2)}, mag = ${row.mag + Math.ceil(row.level / 2)}, spd = ${row.spd + Math.ceil(row.level / 2)} WHERE userId = ${msg.author.id}`);
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
-          if (r.channel === "any channel") {
+          if (r.channel === "any channel" || r.channel === "any") {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-            }}).catch(err => {console.error(err)});
+            }});
           }
           else {
-            var channel = msg.guild.channel.get(r.channel);
+            var channel = msg.guild.channels.get(r.channel);
             channel.send({embed: {
               color: client.color,
               description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-            }}).catch(err => {console.error(err)});
+            }});
           }
         }).catch(() => {
-          msg.channel.send({embed: {
-              color: client.color,
-              description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-          }}).catch(err => {console.error(err)});
+          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
+            console.log("table created");
+            client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
+            console.log("inserted row");
+            msg.channel.send({embed: {
+                  color: client.color,
+                  description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
+            }});
+            });
         });
       }
       else if (chanceItem == 8) {
@@ -90,54 +77,41 @@ module.exports = (client, msg) => {
           client.sql.run(`UPDATE fsd SET items = '${row.items + "," + acquired}' WHERE userId = ${msg.author.id}`);
         }
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
-          if (r.channel !== "any channel") {
+          console.log(r.channel);
+          if (r.channel === "any channel" || r.channel === "any") {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-            }}).catch(err => {console.error(err)});
+            }});
           }
           else {
-            var channel = msg.guild.channel.get(r.channel);
+            var channel = msg.guild.channels.get(r.channel);
             channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-            }}).catch(err => {console.error(err)});
+            }});
           }
         }).catch(() => {
-          msg.channel.send({embed: {
-                color: client.color,
-                description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-          }}).catch(err => {console.error(err)});
+          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
+            console.log("table created");
+            client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
+            console.log("insert row");
+            msg.channel.send({embed: {
+                  color: client.color,
+                  description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
+            }});
+            });
         });
       }
       else return;
     });
   }
-  }
+}
   else {
-    //if cooldown is reached
-    var cooldown = false;
-    const now = Date.now();
       const args = msg.content.slice(prefix.length).trim().split(/ +/g);
       const command = args.shift().toLowerCase();
       const cmd = client.commands.get(command);
       if (!cmd) return;
-      else {
-        if (cooldown == false) {
-          cooldown = true;
-          cmd.run(client, msg, args);
-          //console.log(cooldown);
-        }
-    else {
-      console.log("timing out");
-      setTimeout(function () {
-        cooldown = false;
-      }, 10000)
-        msg.channel.send({embed: {
-          color: client.color,
-          description: `‼️**COOLDOWN** Please wait ${Number((now - 100000), 2)} seconds`}})
-      .then(() => {msg.delete(2000)}).catch(err => {console.error(err)});
-      }
-    }
+      cmd.run(client, msg, args);
   }
 }

@@ -32,6 +32,6 @@ exports.run = (client, msg, args) => {
     var sender = msg.author.id;
     var receiver = list.firstKey(1);
     console.log(sender, receiver);
-    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`🐱 <@${sender}> has given <@${receiver}> a pat!\n(^・ω・^ )`)).catch(err => {console.error(err)});
+    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`🐱 <@${sender}> has given <@${receiver}> a pat!\n(^・ω・^ )`));
   }
 }

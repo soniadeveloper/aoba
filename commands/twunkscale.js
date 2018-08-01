@@ -46,6 +46,6 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: `**${name}**, you are a **${result}**!`
-    }}).catch(err => {console.error(err)});
+    }});
   }
 }

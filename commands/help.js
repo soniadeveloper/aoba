@@ -198,7 +198,7 @@ exports.run = (client, msg, args) => {
         genText("text", "owo-ify text!");
         break;
       case "homestuck":
-        genText("troll name, text", `Give a Homestuck troll and a phrase and Aoba will re-write that phrase in the troll's quirk!\n**Available trolls:** Aradia, Tavros, Sollux, Karkat, Nepeta, Kanaya, Terezi, Vriska, Equius, Eridan, Feferi\nExample: \`${prefix}homestuck aradia "aradia is my patron troll"\``);
+        genText("troll name, text", `Alias: \`hs\`\nGive a Homestuck troll and a phrase and Aoba will re-write that phrase in the troll's quirk!\n**Available trolls:** Aradia, Tavros, Sollux, Karkat, Nepeta, Kanaya, Terezi, Vriska, Equius, Eridan, Feferi\nExample: \`${prefix}homestuck aradia "aradia is my patron troll"\``);
         break;
       case "glomp":
         genText("None", "Glomp someone!");

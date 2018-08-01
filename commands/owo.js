@@ -36,5 +36,5 @@ exports.run = (client, msg, args) => {
       i += 1;
     }
   }
-  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`${owo} owo`)).catch(err => {console.error(err)});
+  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`${owo} owo`));
 }

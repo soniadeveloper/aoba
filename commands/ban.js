@@ -1,4 +1,10 @@
 exports.run = (client, msg, args) => {
+  if (args.length === 0) {
+    return msg.channel.send({embed: {
+          color: 0xffa3e7,
+          description: "❗️Missing arguments!"
+      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+  }
   console.log(args);
   var joined = args.join(" ");
   var arg = (joined.includes("\"")) ? joined.split("\"") : joined.split("“");
@@ -12,7 +18,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
         color: 0xffa3e7,
         description: "**ERROR**: You don't have permission to ban members!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000)}).catch(console.error);
   }
   else {
     //if no members are mentioned
@@ -30,20 +36,20 @@ exports.run = (client, msg, args) => {
           msg.guild.ban(member, {reason: reason}).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋\n**Reason:** ${reason}`
-          }}).then(msg => {msg.delete(10000000)}).catch(err => {console.error(err)})}).catch(console.error);
+          }}).then(msg => {msg.delete(10000000)}).catch(console.error)}).catch(console.error);
         }
         else {
           msg.guild.ban(member).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋`
-          }}).then(msg => {msg.delete(10000000)}).catch(err => {console.error(err)})}).catch(console.error);
+          }}).then(msg => {msg.delete(10000000)}).catch(console.error)}).catch(console.error);
         }
       }
       else {
           msg.channel.send({embed: {
             color: client.color,
             description: "**ERROR:** This bot doesn't have permission to ban members. Please grant the **Ban members** permission to the **Aoba** role."
-          }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+          }}).then(msg => {msg.delete(2000)}).catch(console.error);
       }
     }
   }

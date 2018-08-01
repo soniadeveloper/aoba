@@ -9,7 +9,7 @@ exports.run = (client, msg, args) => {
     }
     else {
       client.prefixes.set(msg.guild.id, args.join(" "));
-      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Prefix is set to ${client.prefixes.get(msg.guild.id)}`)).catch(err => {console.error(err)});
+      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✅ Prefix is set to ${client.prefixes.get(msg.guild.id)}`));
     }
   }
 }

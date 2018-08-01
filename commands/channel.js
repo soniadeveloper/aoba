@@ -30,33 +30,33 @@ exports.run = (client, msg, args) => {
         c.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`The name of the channel is currently **${c.name}**`));
       }
       else if (!msg.member.hasPermission("MANAGE_CHANNELS")) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to access this command!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to access this command!")).then(msg => {msg.delete(2000)}).catch(console.error);
       }
       else if (!msg.guild.me.hasPermission("MANAGE_CHANNELS")) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Aoba doesn't have permission to access this command! Please grant Aoba the **Manage channels** permission")).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Aoba doesn't have permission to access this command! Please grant Aoba the **Manage channels** permission")).then(msg => {msg.delete(5000)}).catch(console.error);
       }
       else {
-        c.setName(name).then(c => {msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Channel name has been changed!"))}).catch(error => {console.error(error)});
+        c.setName(name).then(c => {msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Channel name has been changed!"))}).catch(console.error);
       }
     }
     else if (args[0] === "topic") {
       args.shift();
       var topic = args.join(" ");
       if (args[1] === undefined) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️ Please enter an argument to change the topic to`)).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️ Please enter an argument to change the topic to`)).then(msg => {msg.delete(2000)}).catch(console.error);
       }
       else if (!msg.member.hasPermission("MANAGE_CHANNELS")) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to access this command!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to access this command!")).then(msg => {msg.delete(2000)}).catch(console.error);
       }
       else if (!msg.guild.me.hasPermission("MANAGE_CHANNELS")) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️ Aoba doesn't have permission to access this command! Please grant Aoba the **Manage channels** permission`)).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️ Aoba doesn't have permission to access this command! Please grant Aoba the **Manage channels** permission`)).then(msg => {msg.delete(5000)}).catch(console.error);
       }
       else {
-        c.setTopic(topic).then(c => {msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Topic has been changed!"))}).catch(error => {console.error(error)});
+        c.setTopic(topic).then(c => {msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Topic has been changed!"))}).catch(console.error);
       }
     }
     else {
-      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid command!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid command!")).then(msg => {msg.delete(2000)}).catch(console.error);
     }
   }
 }
