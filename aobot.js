@@ -82,7 +82,7 @@ const items = ["🐶 Annoying Dog",
               "🍎 Yummy Food",];
 client.items = items;
 const cooldown = new Map();
-const cdseconds = 3;
+const cdseconds = 5;
 client.cd = cooldown;
 client.sec = cdseconds;
 
