@@ -88,15 +88,19 @@ exports.run = (client, msg, args) => {
         switch (qChance) {
           case 0:
             crying.comma(i);
+            i += 1;
             break;
           case 1:
             crying.semicolon(i);
+            i += 1;
             break;
           case 2:
             crying.space(i);
+            i += 1;
             break;
           case 3:
             crying.repeat(i);
+            i += 1;
             break;
           case 4:
             crying.upper(i);

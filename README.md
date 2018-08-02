@@ -1,4 +1,4 @@
-AOBA BOT v.1.1.4
+AOBA BOT v.1.1.5
 ================
 
 Aoba is a lovely bot that loves to have fun! It is based off of the character **Aoba Suzukaze** from the anime **New Game!** Most of its commands are fun, although there are some moderation commands. Aoba also comes equiped with an RPG style game called Fairies Story (yes, from the anime). Aoba uses the prefix ">", but you can customize the prefix or you can just *@Aoba* with a command.

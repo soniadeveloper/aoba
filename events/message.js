@@ -1,5 +1,6 @@
 module.exports = (client, msg) => {
   let lastCommand;
+  var def = msg.channel;
   if (msg.author.bot) return; //ignore bot's messages
   //ignore messages not starting with prefix
   if (client.prefixes.get(msg.guild.id) === null) {
@@ -40,25 +41,36 @@ module.exports = (client, msg) => {
       if (row.points == Math.pow(2, row.level)) {
         client.sql.run(`UPDATE fsd SET level = ${row.level + 1}, att = ${row.att + Math.ceil(row.level / 2)}, def = ${row.def + Math.ceil(row.level / 2)}, mag = ${row.mag + Math.ceil(row.level / 2)}, spd = ${row.spd + Math.ceil(row.level / 2)} WHERE userId = ${msg.author.id}`);
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
-          if (r.channel === "any channel" || r.channel === "any") {
-            msg.channel.send({embed: {
+          if (!r) {
+            client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
+            def.send({embed: {
                 color: client.color,
                 description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
             }});
           }
           else {
-            var channel = msg.guild.channels.get(r.channel);
-            channel.send({embed: {
-              color: client.color,
-              description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-            }});
+            console.log(`${msg.guild.name}: notif sent to ${r.channel}`);
+            if (r.channel === "any" || r.channel === "any channel") {
+              console.log("send to current channel");
+              def.send({embed: {
+                  color: client.color,
+                  description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
+              }}).then(() => {console.log("message sent")}).catch(console.error);
+            }
+            else {
+              var channel = msg.guild.channels.get(r.channel);
+              channel.send({embed: {
+                color: client.color,
+                description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
+              }});
+            }
           }
         }).catch(() => {
-          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
+          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT, channel TEXT)").then(() => {
             console.log("table created");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             console.log("inserted row");
-            msg.channel.send({embed: {
+            def.send({embed: {
                   color: client.color,
                   description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
             }});
@@ -77,22 +89,31 @@ module.exports = (client, msg) => {
           client.sql.run(`UPDATE fsd SET items = '${row.items + "," + acquired}' WHERE userId = ${msg.author.id}`);
         }
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
-          console.log(r.channel);
-          if (r.channel === "any channel" || r.channel === "any") {
+          if (!r) {
+            client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             msg.channel.send({embed: {
                 color: client.color,
                 description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
             }});
           }
           else {
-            var channel = msg.guild.channels.get(r.channel);
-            channel.send({embed: {
-                color: client.color,
-                description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-            }});
+            console.log(r.channel);
+            if (r.channel === "any channel" || r.channel === "any") {
+              msg.channel.send({embed: {
+                  color: client.color,
+                  description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
+              }}).then(() => {console.log("message sent")}).catch(console.error);;
+            }
+            else {
+              var channel = msg.guild.channels.get(r.channel);
+              channel.send({embed: {
+                  color: client.color,
+                  description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
+              }});
+            }
           }
-        }).catch(() => {
-          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
+        }).catch(error => {
+          client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT, channel TEXT)").then(() => {
             console.log("table created");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             console.log("insert row");
