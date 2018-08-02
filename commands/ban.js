@@ -3,7 +3,7 @@ exports.run = (client, msg, args) => {
     return msg.channel.send({embed: {
           color: 0xffa3e7,
           description: "❗️Missing arguments!"
-      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   console.log(args);
   var joined = args.join(" ");
@@ -17,16 +17,16 @@ exports.run = (client, msg, args) => {
   if (canBan == false) {
     msg.channel.send({embed: {
         color: 0xffa3e7,
-        description: "**ERROR**: You don't have permission to ban members!"
-    }}).then(msg => {msg.delete(2000)}).catch(console.error);
+        description: "❗️ You don't have permission to ban members!"
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     //if no members are mentioned
     if (args.length < 1 || msg.mentions.members == null) {
       msg.channel.send({embed: {
           color: 0xffa3e7,
-          description: "**ERROR**: Please @ a member to ban!"
-      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+          description: "❗️ Please @ a member to ban!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
     else {
       var member = msg.mentions.members.first();
@@ -36,20 +36,20 @@ exports.run = (client, msg, args) => {
           msg.guild.ban(member, {reason: reason}).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋\n**Reason:** ${reason}`
-          }}).then(msg => {msg.delete(10000000)}).catch(console.error)}).catch(console.error);
+          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
         }
         else {
           msg.guild.ban(member).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋`
-          }}).then(msg => {msg.delete(10000000)}).catch(console.error)}).catch(console.error);
+          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
         }
       }
       else {
           msg.channel.send({embed: {
             color: client.color,
-            description: "**ERROR:** This bot doesn't have permission to ban members. Please grant the **Ban members** permission to the **Aoba** role."
-          }}).then(msg => {msg.delete(2000)}).catch(console.error);
+            description: "❗️ This bot doesn't have permission to ban members. Please grant the **Ban members** permission to the **Aoba** role."
+          }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
     }
   }

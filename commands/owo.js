@@ -1,7 +1,7 @@
 exports.run = (client, msg, args) => {
   var owo = args.join(" ").toLowerCase();
   if (args.length === 0) {
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Pwease give a phwase! owo")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Pwease give a phwase! owo")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   var i = 0;
   while (i < owo.length) {

@@ -2,7 +2,7 @@ exports.run = (client, msg, args) => {
   var arg = args.join(" ");
   var cry = client.splitter.splitGraphemes(arg);
   if (args.length === 0) {
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Plea;se giv,ee a pHrase!")).then(msg => {msg.delete(2000)}).catch(console.error);
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Plea;se giv,ee a pHrase!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   const AMT = 2;
   var crying = {

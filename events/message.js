@@ -20,7 +20,7 @@ module.exports = (client, msg) => {
       if (client.cd.has(msg.author.id)) {
         var wait = client.cd.get(msg.author.id);
         if (time < wait) {
-          msg.delete().then(() => {channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait ${(wait - time)/1000} seconds before using another command!`))});
+          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.round((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
         }
         else {
           client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
@@ -57,6 +57,7 @@ module.exports = (client, msg) => {
         client.sql.run(`UPDATE fsd SET level = ${row.level + 1}, att = ${row.att + Math.ceil(row.level / 2)}, def = ${row.def + Math.ceil(row.level / 2)}, mag = ${row.mag + Math.ceil(row.level / 2)}, spd = ${row.spd + Math.ceil(row.level / 2)} WHERE userId = ${msg.author.id}`);
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
           if (!r) {
+            console.log("row doesn't exist");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             msg.channel.send({embed: {
                 color: client.color,
@@ -65,20 +66,23 @@ module.exports = (client, msg) => {
           }
           else {
             if (r.channel === "any" || r.channel === "any channel") {
+              console.log("channel is any");
               msg.channel.send({embed: {
                   color: client.color,
                   description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
+              }});
             }
             else {
+              console.log("channel is custom");
               var channel = msg.guild.channels.get(r.channel);
-              channel.send({embed: {
-                color: client.color,
-                description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
+                channel.send({embed: {
+                  color: client.color,
+                  description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
+                }});
             }
           }
         }).catch(() => {
+          console.log("error occured");
           client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT, channel TEXT)").then(() => {
             console.log("table created");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
@@ -103,6 +107,7 @@ module.exports = (client, msg) => {
         }
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
           if (!r) {
+            console.log("row doesn't exist");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             msg.channel.send({embed: {
                 color: client.color,
@@ -110,21 +115,24 @@ module.exports = (client, msg) => {
             }});
           }
           else {
+            console.log("channel is any");
             if (r.channel === "any channel" || r.channel === "any") {
               msg.channel.send({embed: {
                   color: client.color,
                   description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
+              }});
             }
             else {
+              console.log("channel is custom");
               var channel = msg.guild.channels.get(r.channel);
-              channel.send({embed: {
-                  color: client.color,
-                  description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
+                channel.send({embed: {
+                    color: client.color,
+                    description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
+                }});
             }
           }
         }).catch(error => {
+          console.log("error occured");
           client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT, channel TEXT)").then(() => {
             console.log("table created");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
@@ -146,12 +154,11 @@ module.exports = (client, msg) => {
     const cmd = client.commands.get(command);
     if (!cmd || cmd === null) return;
     else {
-    var channel = msg.channel;
     var time = Date.now();
     if (client.cd.has(msg.author.id)) {
       var wait = client.cd.get(msg.author.id);
       if (time < wait) {
-        msg.delete().then(() => {channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.round((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000)}).catch(console.error)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.round((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
       }
       else {
         client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));

@@ -3,7 +3,7 @@ exports.run = (client, msg, args) => {
     return msg.channel.send({embed: {
           color: 0xffa3e7,
           description: "❗️Missing arguments!"
-      }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   var joined = args.join(" ");
   var arg = (joined.includes("\"")) ? joined.split("\"") : joined.split("“");
@@ -13,15 +13,15 @@ exports.run = (client, msg, args) => {
   if (canKick == false) {
     msg.channel.send({embed: {
         color: client.color,
-        description: "**ERROR**: You don't have permission to kick members!"
-    }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+        description: "❗️ You don't have permission to kick members!"
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     if (args.length < 1 || msg.mentions.members == null) {
       msg.channel.send({embed: {
           color: client.color,
-          description: "**ERROR**: Please give a member to kick!"
-      }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+          description: "❗️ Please give a member to kick!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
     else {
       var member = msg.mentions.members.first();
@@ -45,8 +45,8 @@ exports.run = (client, msg, args) => {
     else {
         msg.channel.send({embed: {
             color: client.color,
-            description: "**ERROR**: This bot doesn't have permission to kick this member. Please grant higher permissions to the **Aoba** role."
-        }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+            description: "❗️ This bot doesn't have permission to kick this member. Please grant higher permissions to the **Aoba** role."
+        }}).then(msg => {msg.delete(5000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
 }

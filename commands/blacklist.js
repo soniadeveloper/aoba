@@ -6,7 +6,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "🚫 You don't have permission to access the blacklist!"
-    }}).then(msg => {msg.delete(5000)}).catch(console.error);
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   //if no arg is given
   else if (args.length == 0) {
@@ -60,7 +60,7 @@ exports.run = (client, msg, args) => {
           msg.channel.send({embed: {
             color: client.color,
             description: "❗️ This server does not have any words to delete."
-          }}).then(msg => {msg.delete(5000)}).catch(console.error);
+          }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
         }
         else {
           var wordsArray = row.words.split(" ");
@@ -74,7 +74,7 @@ exports.run = (client, msg, args) => {
             msg.channel.send({embed: {
               color: client.color,
               description: "❗️ Word doesn't exist inside of blacklist."
-            }}).then(msg => {msg.delete(5000)}).catch(console.error);
+            }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
           }
           else {
             wordsArray.splice(index, 1);
@@ -91,14 +91,14 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
               color: client.color,
               description: "❗️ This server doesn't have a blacklist to delete anything from."
-        }}).then(msg => {msg.delete(5000)}).catch(console.error);
+        }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       });
     }
     else {
       msg.channel.send({embed: {
         color: client.color,
         description: "❗️ Too many arguments!"
-      }}).then(msg => {msg.delete(5000)}).catch(console.error);
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
 

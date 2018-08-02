@@ -10,10 +10,14 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const DBL = require("dblapi.js");
 const Grapheme = require("grapheme-splitter");
+if (process.env.NODE_ENV !== 'production'){
+  require('longjohn');
+}
 const app = express();
 app.get("/", (request, response) => {
+  console.log("sending request");
   response.sendStatus(200);
-  response.end();
+  response.end("OK");
 });
 app.listen(process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: true }));

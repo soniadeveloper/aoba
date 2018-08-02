@@ -3,8 +3,8 @@ exports.run = (client, msg, args) => {
   if (list.first() === undefined) {
     msg.channel.send({embed: {
             color: client.color,
-            description: "Please list a user to give a cookie to!"
-    }}).then(msg => {msg.delete(5000)}).catch(err => {console.error(err)});
+            description: "❗️ Please list a user to give a cookie to!"
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     var sender = msg.author.id;
