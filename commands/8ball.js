@@ -1,6 +1,8 @@
 exports.run = (client, msg, args) => {
   const id = "466608783762653184";
-  if (args === null) return;
+  if (args.length === 0){
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please ask a question")).then(msg => {msg.delete(2000)}).catch(console.error);
+  }
   let txt = args.join(" ");
   console.log(`${msg.author.username} asked: ${txt}`);
   var options = ["Yes.", "No.", "Maybe?", "Absolutely!", "Absolutely not.", "I'm too tired, try asking later", "I don't really care", `${client.emojis.get(id)}`];

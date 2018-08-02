@@ -714,16 +714,17 @@ exports.run = (client, msg, args) => {
             break;
           case "set":
             client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
-              if (!row) {
+              if (!r) {
+                console.log("row does not exist");
                 if (args[1] === undefined) { //if no argument was given
                   client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]).then(() => {
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
-                                 .setDescription(`Notifications are set to send to **${r.channel}**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel`));
+                                 .setDescription(`Notifications are set to send to **any channel**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel`));
                   });
                 }
                 else {
-                  if (!msg.member.hasPermission("MANAGE_SERVER")) { //if user doesn't have permission
+                  if (!msg.member.hasPermission("MANAGE_GUILD")) { //if user doesn't have permission
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`❗️ You don't have permission to use this command! You must have the **Manage server** permission.`))
@@ -757,12 +758,20 @@ exports.run = (client, msg, args) => {
               }
               else { //if row does exist
                 if (args[1] === undefined) { //if no argument was given
-                  msg.channel.send(new client.discord.RichEmbed()
-                                  .setColor(client.color)
-                                  .setDescription(`Notifications are set to send to **${msg.guild.channels.get(r.channel).name}**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel`));
+                  console.log("row does exist");
+                  if (r.channel === "any" || r.channel === "any channel") {
+                    msg.channel.send(new client.discord.RichEmbed()
+                                    .setColor(client.color)
+                                    .setDescription(`Notifications are set to send to **any channel**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel`));
+                  }
+                  else {
+                    msg.channel.send(new client.discord.RichEmbed()
+                                    .setColor(client.color)
+                                    .setDescription(`Notifications are set to send to **${msg.guild.channels.get(r.channel).name}**\nUse \`${prefix}fs or fairiesstory set [name]\` to change the channel or use \`${prefix}fs or fairiesstory set any\` to reset the channel.`));
+                  }
                 }
                 else {
-                  if (!msg.member.hasPermission("MANAGE_SERVER")) { //if user doesn't have permission
+                  if (!msg.member.hasPermission("MANAGE_GUILD") || !msg.member.hasPermission("ADMINISTRATOR")) { //if user doesn't have permission
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`❗️ You don't have permission to use this command! You must have the **Manage server** permission.`))
@@ -771,11 +780,20 @@ exports.run = (client, msg, args) => {
                   else { //if user does have permission
                     args.shift();
                     var name = args.join("-");
-                    if (msg.guild.channels.find("name", name) === undefined) { //if channel can't be found
-                      msg.channel.send(new client.discord.RichEmbed()
-                                 .setColor(client.color)
-                                 .setDescription(`❗️ A channel with that name could not be found!`))
-                    .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                    if (msg.guild.channels.find("name", name) === undefined || msg.guild.channels.find("name", name) === null) { //if channel can't be found
+                      if (name === "any") {
+                        client.sql.run(`UPDATE fschannels SET channel = 'any' WHERE guildId = ${msg.guild.id}`);
+                        msg.channel.send(new client.discord.RichEmbed()
+                                   .setColor(client.color)
+                                   .setDescription(`✅ Notifications will be sent to **any channel**!`))
+                        .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      }
+                      else {
+                        msg.channel.send(new client.discord.RichEmbed()
+                                   .setColor(client.color)
+                                   .setDescription(`❗️ A channel with that name could not be found!`))
+                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      }
                     }
                     else {
                       client.sql.run(`UPDATE fschannels SET channel = '${msg.guild.channels.find("name", name).id}' WHERE guildId = ${msg.guild.id}`).then(() => {
@@ -787,8 +805,11 @@ exports.run = (client, msg, args) => {
                   }
                 }
               }
-            }).catch(() => {
-              client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
+            }).catch(error => {
+              console.log("error");
+              console.error(error);
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️An error occurred: ${error}`));
+              /*client.sql.run("CREATE TABLE IF NOT EXISTS fschannels (guildId TEXT UNIQUE, channel TEXT)").then(() => {
                 if (args[1] === undefined) { //if no argument was given
                   client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any channel"]).then(r => {
                     msg.channel.send(new client.discord.RichEmbed()
@@ -797,7 +818,7 @@ exports.run = (client, msg, args) => {
                   });
                 }
                 else {
-                  if (!msg.member.hasPermission("MANAGE_SERVER")) { //if user doesn't have permission
+                  if (!msg.member.hasPermission("MANAGE_GUILD", true, true) || !msg.member.hasPermission("ADMINISTRATOR")) { //if user doesn't have permission
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`❗️ You don't have permission to use this command! You must have the **Manage server** permission.`))
@@ -820,7 +841,7 @@ exports.run = (client, msg, args) => {
                     }
                   }
                 }
-              });
+              });*/
             });
               break;
           case "help":

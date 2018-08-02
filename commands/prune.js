@@ -1,5 +1,6 @@
 exports.run = (client, msg, args) => {
   var canManage = msg.member.hasPermission("MANAGE_MESSAGES");
+  var channel = msg.channel;
   
   //if sender doesnt have permissions
   if (canManage == false) {
@@ -61,7 +62,7 @@ exports.run = (client, msg, args) => {
       else {
       msg.channel.fetchMessages({limit: (limit)})
         .then(msgs => msg.channel.bulkDelete(msgs)
-              .then(msgs => { msg.channel.send({embed: {color: client.color,description: `🗑 Deleted **${msgs.size}** message(s) from ${msg.channel.name}`}})
+              .then(msgs => { channel.send({embed: {color: client.color,description: `🗑 Deleted **${msgs.size}** message(s) from ${channel.name}`}})
                 .then(msg => {msg.delete(4000);}).catch(console.error)}).catch(console.error)).catch(console.error);
       }
     }

@@ -59,7 +59,7 @@ exports.run = (client, msg, args) => {
         if(!row) {
           msg.channel.send({embed: {
             color: client.color,
-            description: "**ERROR:** This server does not have any words to delete."
+            description: "❗️ This server does not have any words to delete."
           }}).then(msg => {msg.delete(5000)}).catch(console.error);
         }
         else {
@@ -73,7 +73,7 @@ exports.run = (client, msg, args) => {
           if (index == -1) {
             msg.channel.send({embed: {
               color: client.color,
-              description: "**ERROR**: Word doesn't exist inside of blacklist."
+              description: "❗️ Word doesn't exist inside of blacklist."
             }}).then(msg => {msg.delete(5000)}).catch(console.error);
           }
           else {
@@ -90,7 +90,7 @@ exports.run = (client, msg, args) => {
         console.error;
         msg.channel.send({embed: {
               color: client.color,
-              description: "**ERROR**: This server doesn't have a blacklist to delete anything from."
+              description: "❗️ This server doesn't have a blacklist to delete anything from."
         }}).then(msg => {msg.delete(5000)}).catch(console.error);
       });
     }
