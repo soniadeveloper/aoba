@@ -39,7 +39,7 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Action",
-        value:"`bite` `blush` `cookie` `glomp` `hug` `kiss` `lick` `pat` `slap`"
+        value:"`birthday` `bite` `blush` `cookie` `glomp` `hug` `kiss` `lick` `pat` `slap`"
       },
       {
         name: "NSFW",
@@ -208,6 +208,9 @@ exports.run = (client, msg, args) => {
         break;
       case "hifumi":
         genText("None", "Sends a gif of Hifumi Takimoto from New Game!");
+        break;
+      case "birthday":
+        genText("User mention", "Wish someone a happy birthday!");
         break;
       default:
         break;
