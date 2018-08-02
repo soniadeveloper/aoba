@@ -14,8 +14,23 @@ module.exports = (client, msg) => {
       const args = msg.content.slice(`<@${msg.mentions.members.firstKey()}> `.length).trim().split(/ +/g);
       const command = args.shift().toLowerCase();
       const cmd = client.commands.get(command);
-      if (!cmd) return;
-      cmd.run(client, msg, args);
+      if (!cmd || cmd === null) return;
+      var channel = msg.channel;
+      var time = Date.now();
+      if (client.cd.has(msg.author.id)) {
+        var wait = client.cd.get(msg.author.id);
+        if (time < wait) {
+          msg.delete().then(() => {channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait ${(wait - time)/1000} seconds before using another command!`))});
+        }
+        else {
+          client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
+          cmd.run(client, msg, args);
+        }
+      }
+      else {
+        client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
+        cmd.run(client, msg, args);
+      }
     }  
     else {
     client.sql.get(`SELECT * FROM blacklist WHERE guildId = "${msg.guild.id}"`).then(row => {
@@ -43,26 +58,24 @@ module.exports = (client, msg) => {
         client.sql.get(`SELECT * FROM fschannels WHERE guildId = '${msg.guild.id}'`).then(r => {
           if (!r) {
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
-            def.send({embed: {
+            msg.channel.send({embed: {
                 color: client.color,
                 description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
             }});
           }
           else {
-            console.log(`${msg.guild.name}: notif sent to ${r.channel}`);
             if (r.channel === "any" || r.channel === "any channel") {
-              console.log("send to current channel");
-              def.send({embed: {
+              msg.channel.send({embed: {
                   color: client.color,
                   description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-              }}).then(() => {console.log("message sent")}).catch(console.error);
+              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
             }
             else {
               var channel = msg.guild.channels.get(r.channel);
               channel.send({embed: {
                 color: client.color,
                 description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
-              }});
+              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
             }
           }
         }).catch(() => {
@@ -70,7 +83,7 @@ module.exports = (client, msg) => {
             console.log("table created");
             client.sql.run("INSERT INTO fschannels (guildId, channel) VALUES (?, ?)", [msg.guild.id, "any"]);
             console.log("inserted row");
-            def.send({embed: {
+            msg.channel.send({embed: {
                   color: client.color,
                   description: `✨⤴️ ${msg.author.username} leveled up to **Lv.${row.level+1}**!`
             }});
@@ -97,19 +110,18 @@ module.exports = (client, msg) => {
             }});
           }
           else {
-            console.log(r.channel);
             if (r.channel === "any channel" || r.channel === "any") {
               msg.channel.send({embed: {
                   color: client.color,
                   description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-              }}).then(() => {console.log("message sent")}).catch(console.error);;
+              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
             }
             else {
               var channel = msg.guild.channels.get(r.channel);
               channel.send({embed: {
                   color: client.color,
                   description: `🎁 ${msg.author.username}, you picked up the **${acquired}**!`
-              }});
+              }}).then(() => {console.log("message sent")}).catch(() => {console.log("error with sending message?")});
             }
           }
         }).catch(error => {
@@ -129,10 +141,27 @@ module.exports = (client, msg) => {
   }
 }
   else {
-      const args = msg.content.slice(prefix.length).trim().split(/ +/g);
-      const command = args.shift().toLowerCase();
-      const cmd = client.commands.get(command);
-      if (!cmd) return;
+    const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+    const cmd = client.commands.get(command);
+    if (!cmd || cmd === null) return;
+    else {
+    var channel = msg.channel;
+    var time = Date.now();
+    if (client.cd.has(msg.author.id)) {
+      var wait = client.cd.get(msg.author.id);
+      if (time < wait) {
+        msg.delete().then(() => {channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.round((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000)}).catch(console.error)});
+      }
+      else {
+        client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
+        cmd.run(client, msg, args);
+      }
+    }
+    else {
+      client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
       cmd.run(client, msg, args);
+    }
+    }
   }
 }

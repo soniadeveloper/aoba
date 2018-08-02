@@ -1,5 +1,5 @@
 exports.run = (client, msg, args) => {
-  const id = "466608783762653184";
+  const id = "474613910511812608";
   if (args.length === 0){
     return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please ask a question")).then(msg => {msg.delete(2000)}).catch(console.error);
   }
