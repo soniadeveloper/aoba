@@ -36,7 +36,7 @@ exports.run = (client, msg, args) => {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Note has been added!"));
       }
       else if (notes.length == 5) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You have too many notes! Please delete some using `>notes delete` then continue.")).then(msg => {msg.delete(4000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You have too many notes! Please delete some using `>notes delete` then continue.")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else {
         notes.push(note);
@@ -46,16 +46,16 @@ exports.run = (client, msg, args) => {
     }
     else if (args[0] === "delete") {
       if (notes === undefined) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There is nothing to delete!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There is nothing to delete!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else if (notes.length == 0) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There is nothing to delete!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There is nothing to delete!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else if (args[1] === undefined) {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setTitle(`🗒 \`${msg.author.username}'s notes:\``).setDescription(`${makeList(notes[id].notes)}\n Use \`>notes delete [number]\` to delete a specific note.`));
       }
       else if (isNaN(args[1]) && args[1] !== "all") {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That is not a valid number!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That is not a valid number!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else {
         if (args[1] === "all") {
@@ -65,7 +65,7 @@ exports.run = (client, msg, args) => {
         else {
           var index = parseInt(args[1]);
           if (index > notes.length) {
-            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That does not correspond to a valid note!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That does not correspond to a valid note!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
           }
           else {
             notes.splice(index-1, 1);
@@ -76,7 +76,7 @@ exports.run = (client, msg, args) => {
       }
     }
     else {
-      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Invalid argument!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Invalid argument!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
 }

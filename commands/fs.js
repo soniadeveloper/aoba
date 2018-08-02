@@ -144,7 +144,7 @@ exports.run = (client, msg, args) => {
         .addField("🎓 `Reputation`", `${row.rep} pts`, true)
         .addField("✍️ `Stats`", stats(row.species), true)
         .addField("🎁 `Inventory`", `${formList()}`, true);
-        msg.channel.send(profile).catch(() => {console.error; msg.channel.send("There was an error viewing your profile!").then(msg => {msg.delete(5000)})});
+        msg.channel.send(profile).catch(() => {console.error; msg.channel.send("❗️There was an error viewing your profile!").then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);});
       }
       else {
         //if an argument is given
@@ -154,7 +154,7 @@ exports.run = (client, msg, args) => {
             msg.channel.send({embed: {
               color: client.color,
               description: `❗️ ${msg.author.username}, you already have a profile.`
-            }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+            }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             break;
           case "species":
             //>species
@@ -163,7 +163,7 @@ exports.run = (client, msg, args) => {
                 msg.channel.send({embed: {
                   color: client.color,
                   description: `❗️ Use \`${prefix}fairiesstory or ${prefix}fs species change [choice]\` to change species.\nChoose between fairy/elf/orc/gnome/dragonborn/tiefling/genasi/human`
-                }}).then(msg => {msg.delete(4000)}).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(4000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
               else if (args[2] === "fairy" || "orc" || "gnome" || "elf" || "human" || "tiefling" || "dragonborn" || "genasi") {
                 var old = row.species;
@@ -171,7 +171,7 @@ exports.run = (client, msg, args) => {
                   msg.channel.send({embed: {
                   color: client.color,
                   description: `❗️ You are already a ${args[2]}!`
-                  }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else {
                   client.sql.run(`UPDATE fsd SET species = '${args[2]}' WHERE userId = ${id}`);
@@ -185,9 +185,7 @@ exports.run = (client, msg, args) => {
                 msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️ That's not a valid species name!"
-                }}).then(msg => {
-                    msg.delete(3000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
             }
             else if (args[1] === undefined) {
@@ -200,9 +198,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️ Invalid argument!"
-                }}).then(msg => {
-                    msg.delete(3000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
             break;
           case "money":
@@ -222,33 +218,25 @@ exports.run = (client, msg, args) => {
                   msg.channel.send({embed: {
                     color: client.color,
                     description: "❗️ Please give a valid number!"
-                  }}).then(msg => {
-                    msg.delete(3000);
-                  }).catch(err => {console.error(err)});
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else if (user === undefined) {
                   msg.channel.send({embed: {
                     color: client.color,
                     description: "❗️ Please mention a user!"
-                  }}).then(msg => {
-                    msg.delete(3000);
-                  }).catch(err => {console.error(err)});
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else if (user === msg.author.id) {
                   msg.channel.send({embed: {
                         color: client.color,
                         description: "❗️ You can't give yourself money!"
-                      }}).then(msg => {
-                        msg.delete(3000);
-                      }).catch(err => {console.error(err)});
+                      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else if (money > row.money) {
                   msg.channel.send({embed: {
                     color: client.color,
                     description: "❗️ You don't have that much money available!"
-                  }}).then(msg => {
-                    msg.delete(3000);
-                  }).catch(err => {console.error(err)});
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else {
                   client.sql.get(`SELECT * FROM fsd WHERE userId = '${user}'`).then(r => {
@@ -256,9 +244,7 @@ exports.run = (client, msg, args) => {
                       msg.channel.send({embed: {
                         color: client.color,
                         description: "❗️ That user doesn't have a Fairies Story profile!"
-                      }}).then(msg => {
-                        msg.delete(3000);
-                      }).catch(err => {console.error(err)});
+                      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                     }
                     else {
                       var old = row.money;
@@ -277,9 +263,7 @@ exports.run = (client, msg, args) => {
                   msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️Invalid argument!"
-                }}).then(msg => {
-                  msg.delete(3000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
             }
             break;
@@ -307,9 +291,7 @@ exports.run = (client, msg, args) => {
                   msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️Must provide an item to sell!"
-                }}).then(msg => {
-                  msg.delete(3000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
               else {
                 var arr = args.slice(2).join(" ");
@@ -333,9 +315,7 @@ exports.run = (client, msg, args) => {
                   msg.channel.send({embed: {
                     color: client.color,
                     description: "❗️ That is not a valid item!"
-                  }}).then(msg => {
-              msg.delete(3000);
-            }).catch(err => {console.error(err)});
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                 }
                 else {
                   //checks if you have this item
@@ -358,9 +338,7 @@ exports.run = (client, msg, args) => {
                       msg.channel.send({embed: {
                         color: client.color,
                         description: "❗️ You don't have this item!"
-                      }}).then(msg => {
-                        msg.delete(3000);
-                      }).catch(err => {console.error(err)});
+                      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                     }
                     else {
                       var gain;
@@ -457,7 +435,7 @@ exports.run = (client, msg, args) => {
                     }
                     if (has < num || index === undefined) {
                       msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You don't have enough of that item to sell!"))
-                                       .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                                       .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                     }
                     else {
                       switch (sell) {
@@ -548,7 +526,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
               color: client.color,
               description: "❗️You don't have enough money to use the Fairy Gacha! You need **1000 FP** in order to use the gacha machine."
-            }}).then(msg => { msg.delete(3000) }).catch(err => {console.error(err)});
+            }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
             else {
             var choices = client.items;
@@ -574,9 +552,7 @@ exports.run = (client, msg, args) => {
                 msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️Please list a user to give a reputation point to!"
-                }}).then(msg => {
-                  msg.delete(3000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
               else {
                 var time;
@@ -588,15 +564,13 @@ exports.run = (client, msg, args) => {
                     msg.channel.send({embed: {
                       color: client.color,
                       description: "🚫 This user doesn't have a Fairies Story profile!"
-                    }}).then(msg => {
-                        msg.delete(5000);
-                    }).catch(err => {console.error(err)});
+                    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                   }
                   else if (r.userId === msg.author.id) {
                     msg.channel.send({embed: {
                       color: client.color,
                       description: `❗️ You can't give yourself reputation points!`
-                    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                   }
                   else {
                     time = Date.now();
@@ -621,7 +595,7 @@ exports.run = (client, msg, args) => {
                           msg.channel.send({embed: {
                             color: client.color,
                             description: `❗️ You've already given a reputation point today! You must wait **${hours}** hours and **${minutes}** minutes.`
-                          }}).then(msg => {msg.delete(10000)}).catch(err => {console.error(err)});
+                          }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                         }
                       else {
                         time = Date.now();
@@ -651,9 +625,7 @@ exports.run = (client, msg, args) => {
               msg.channel.send({embed: {
                 color: client.color,
                 description: "❗️ Please give an amount to gamble!"
-              }}).then(msg => {
-                msg.delete(5000);
-              }).catch(err => {console.error(err)});
+              }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
             else {
               var amount = parseInt(args[1]);
@@ -661,9 +633,7 @@ exports.run = (client, msg, args) => {
                 msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️ You don't have that much money!"
-                }}).then(msg => {
-                  msg.delete(5000);
-                }).catch(err => {console.error(err)});
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
               else {
                 //gamble here
@@ -728,7 +698,7 @@ exports.run = (client, msg, args) => {
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`❗️ You don't have permission to use this command! You must have the **Manage server** permission.`))
-                    .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                    .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                   }
                   else { //if user does have permission
                     var name = args.join("-");
@@ -737,13 +707,13 @@ exports.run = (client, msg, args) => {
                         msg.channel.send(new client.discord.RichEmbed()
                                    .setColor(client.color)
                                    .setDescription(`✅ Notifications will be sent to **any channel**!`))
-                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                     .then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                       }
                       else {
                         msg.channel.send(new client.discord.RichEmbed()
                                    .setColor(client.color)
                                    .setDescription(`❗️ A channel with that name could not be found!`))
-                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      .then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                       }
                     }
                     else {
@@ -775,7 +745,7 @@ exports.run = (client, msg, args) => {
                     msg.channel.send(new client.discord.RichEmbed()
                                  .setColor(client.color)
                                  .setDescription(`❗️ You don't have permission to use this command! You must have the **Manage server** permission.`))
-                    .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                    .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                   }
                   else { //if user does have permission
                     args.shift();
@@ -792,7 +762,7 @@ exports.run = (client, msg, args) => {
                         msg.channel.send(new client.discord.RichEmbed()
                                    .setColor(client.color)
                                    .setDescription(`❗️ A channel with that name could not be found!`))
-                      .then(msg => {msg.delete(3000)}).catch(err => {console.error(err)});
+                      .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                       }
                     }
                     else {
@@ -903,9 +873,7 @@ exports.run = (client, msg, args) => {
             msg.channel.send({embed: {
                 color: client.color,
                 description: `❗️ Invalid argument!`
-            }}).then(msg => {
-              msg.delete(5000);
-            }).catch(err => {console.error(err)});
+            }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
            break; 
         }
       }
@@ -916,9 +884,7 @@ exports.run = (client, msg, args) => {
       msg.channel.send({embed: {
               color: client.color,
               description: "⚠️ An unknown error occured!"
-      }}).then(msg => {
-        msg.delete(5000);
-      }).catch(err => {console.error(err)});
+      }}).then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     });
   });
 }

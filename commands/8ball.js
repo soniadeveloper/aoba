@@ -1,7 +1,7 @@
 exports.run = (client, msg, args) => {
   const id = "474613910511812608";
   if (args.length === 0){
-    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please ask a question")).then(msg => {msg.delete(2000)}).catch(console.error);
+    return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please ask a question")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   let txt = args.join(" ");
   console.log(`${msg.author.username} asked: ${txt}`);

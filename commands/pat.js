@@ -4,7 +4,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ Please list a user to pat!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   
   else if (list.first().user.bot) {
@@ -14,7 +14,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't pat yourself!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     var urls = ["https://media1.tenor.com/images/116fe7ede5b7976920fac3bf8067d42b/tenor.gif?itemid=9200932", 

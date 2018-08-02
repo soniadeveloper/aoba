@@ -2,8 +2,8 @@ exports.run = (client, msg, args) => {
   if (args.length != 2) {
     msg.channel.send({embed: {
       color: client.color,
-      description: "Must input two arguments!"
-  }}).then(msg => {msg.delete(2000)});
+      description: "❗️ Must input two arguments!"
+  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
 }
   else { 
   var first = args[0].toLowerCase();
@@ -11,8 +11,8 @@ exports.run = (client, msg, args) => {
   if(first === second) {
     msg.channel.send({embed: {
       color: client.color,
-      description: "Don't selfship :("
-    }}).then(msg => {msg.delete(2000)});
+      description: "❗️ Don't selfship :("
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     if(first.charAt(0) === '<' && first.charAt(1) === '@' && second.charAt(0) === '<' && second.charAt(1) === '@') {

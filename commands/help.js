@@ -35,7 +35,7 @@ exports.run = (client, msg, args) => {
       },
       {
         name: "Fun",
-        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `gottem` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+        value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `gottem` `hifumi` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
       },
       {
         name: "Action",
@@ -206,6 +206,9 @@ exports.run = (client, msg, args) => {
       case "gottem":
         genText("User mention (optional)", "Hah, got 'em.");
         break;
+      case "hifumi":
+        genText("None", "Sends a gif of Hifumi Takimoto from New Game!");
+        break;
       default:
         break;
     }
@@ -214,6 +217,6 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️Too many arguments!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
 }

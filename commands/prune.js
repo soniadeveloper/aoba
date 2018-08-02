@@ -7,9 +7,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ You don't have the permissions to use this command!"
-    }}).then(msg => {
-        msg.delete(4000);
-      }).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   
   //if bot doesn't have permissions
@@ -17,9 +15,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ This bot doesn't have the permissions to use this command! Please give the **Aoba** role permission to **Manage messages**."
-    }}).then(msg => {
-        msg.delete(4000);
-      }).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   
   //if both bot and user have permissions
@@ -29,9 +25,7 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
           color: client.color,
           description: "❗️ Please specify number of messages to prune."
-        }}).then(msg => {
-        msg.delete(4000);
-      }).catch(err => {console.error(err)});
+        }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
     else if (args.length > 1) {
       //delete from a specific user
@@ -55,14 +49,12 @@ exports.run = (client, msg, args) => {
         msg.channel.send({embed: {
             color: client.color,
             description: "❗️ Please enter a number less than 100!"
-          }}).then(msg => {
-        msg.delete(4000);
-      }).catch(err => {console.error(err)});
+          }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else {
-      msg.channel.fetchMessages({limit: (limit)})
+      msg.channel.fetchMessages({limit: (limit+1)})
         .then(msgs => msg.channel.bulkDelete(msgs)
-              .then(msgs => { channel.send({embed: {color: client.color,description: `🗑 Deleted **${msgs.size}** message(s) from ${channel.name}`}})
+              .then(msgs => { channel.send({embed: {color: client.color,description: `🗑 Deleted **${msgs.size-1}** message(s) from ${channel.name}`}})
                 .then(msg => {msg.delete(4000);}).catch(console.error)}).catch(console.error)).catch(console.error);
       }
     }

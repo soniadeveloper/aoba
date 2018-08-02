@@ -4,7 +4,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ Please list a user to glomp!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else if (list.first().user.bot) {
     return;
@@ -13,7 +13,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't glomp yourself!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     var sender = msg.author.id;

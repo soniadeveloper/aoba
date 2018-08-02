@@ -1,0 +1,16 @@
+{
+  "install": {
+    "include": [
+      "^package\\.json$",
+      "^\\.env$"
+    ]
+  },
+  "restart": {
+    "include": [
+      "^.trigger-rebuild$",
+      "aobot.js",
+      "^events/"
+    ]
+  },
+  "throttle": 10000
+}

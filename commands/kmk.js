@@ -1,6 +1,6 @@
 exports.run = (client, msg, args) => {
   if (args.length != 3) {
-      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("⚠️ Must provide three names!")).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Must provide three names!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
     else {
       function shuffle(arr) {

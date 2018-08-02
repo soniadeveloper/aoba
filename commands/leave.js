@@ -3,7 +3,7 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Aoba is not in a voice channel!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
   else {
     msg.guild.me.voiceChannel.leave();
