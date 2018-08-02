@@ -81,6 +81,10 @@ const items = ["🐶 Annoying Dog",
                "🔪 Toy Knife",
               "🍎 Yummy Food",];
 client.items = items;
+const cooldown = new Map();
+const cdseconds = 3;
+client.cd = cooldown;
+client.sec = cdseconds;
 
 
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
@@ -98,7 +102,10 @@ fs.readdir("events/", (err, files) => {
 client.commands = new Enmap();
 
 fs.readdir("commands/", (err, files) => {
-  if (err) return console.error(err);
+  if (err) {
+    console.log("error reading directory");
+    return console.error(err);
+  }
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);

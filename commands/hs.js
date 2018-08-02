@@ -7,7 +7,7 @@ exports.run = (client, msg, args) => {
     text: say,
     colors: ["#a10000", "#a15000", "#a1a100", "#626262", "#416600", "#008141", "#008282", "#005682", "#000056", "#2b0057", "#6a006a", "#77003c"],
     trolls: ["aradia ", "tavros ", "sollux ", "karkat ", "nepeta ", "kanaya ", "terezi ", "vriska ", "equius ", "gamzee ", "eridan ", "feferi "],
-    emojis: [client.emojis.get("474269321779085312"), client.emojis.get("474272493885194250"), client.emojis.get("474272569131008011"), client.emojis.get("474272615566016521"), client.emojis.get("473522523053752340"), client.emojis.get("473522662086410252"), client.emojis.get("473522871797547009"), client.emojis.get("473523013829001217"), client.emojis.get("473523126542794752"), client.emojis.get("473523256775802880"), client.emojis.get("473523372739788800"), ,client.emojis.get("473521320152530952")],
+    emojis: [client.emojis.get("474269321779085312"), client.emojis.get("474272493885194250"), client.emojis.get("474272569131008011"), client.emojis.get("474272615566016521"), client.emojis.get("473522523053752340"), client.emojis.get("473522662086410252"), client.emojis.get("473522871797547009"), client.emojis.get("473523013829001217"), client.emojis.get("473523126542794752"), client.emojis.get("473523256775802880"), client.emojis.get("473523372739788800"), client.emojis.get("473521320152530952")],
     aradia: function () {
       var i = 0;
       var txt = this.text;

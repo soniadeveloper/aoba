@@ -1,5 +1,5 @@
 exports.run = (client, msg, args) => {
-  const spongebob = client.emojis.get("466399595191336971");
+  const spongebob = client.emojis.get("474617622931963922");
   var quotes = ["**Patrick:** Is mayonnaise an instrument?",
   "**Spongebob:** I'm ugly and I'm proud.",
   "**Caller:** Is this the Krusty Krab?\n**Patrick**: No, this is Patrick.",
