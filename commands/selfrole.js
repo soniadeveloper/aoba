@@ -42,14 +42,14 @@ exports.run = (client, msg, args) => {
         if (!canUserRole) {
           //if the user doesn't have permission
           msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ You don't have permission to add a self-role!"))
-          .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+          .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
         }
         else {
           //if the user does have permission
           if (args.length < 2) {
             //if a role was not given
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ Please give a role! Use `>selfrole add [role name]`."))
-            .then(msg=>{msg.delete(4000)}).catch(err => {console.error(err)});
+            .then(msg=>{msg.delete(4000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
           }
           else {
             //if a role was given
@@ -64,7 +64,7 @@ exports.run = (client, msg, args) => {
             if (!index) {
               //if the role can't be found in the server
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find the given role!"))
-              .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+              .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
             }
             else {
               if (!row) {
@@ -84,7 +84,7 @@ exports.run = (client, msg, args) => {
                 }
                 if (exists > 0) {
                   msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Role already exists in list of self-assignable roles!"))
-                  .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                  .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
                 }
                 else {
                   if (row.roles === "") {
@@ -106,7 +106,7 @@ exports.run = (client, msg, args) => {
       else if (args[0] === "delete") {
         if (args.length < 2) {
           msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Must give a role to delete!"))
-              .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+              .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
         }
         else {
           var selfroles = row.roles.split("`");
@@ -127,7 +127,7 @@ exports.run = (client, msg, args) => {
           }
           else {
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find the given role!"))
-                .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
           }
         }
       }
@@ -148,7 +148,7 @@ exports.run = (client, msg, args) => {
             var get = msg.guild.roles.find("name", wanted);
             if (msg.member.roles.exists("name", get.name)) {
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You already have this role!"))
-                .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
             }
             else {
               msg.member.addRole(get).then(() => {
@@ -156,20 +156,20 @@ exports.run = (client, msg, args) => {
               }).catch(error => {
                 console.error(error);
                 msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There was an error adding the role!"))
-                .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+                .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
               });
             }
           }
           else {
             //if the role could not be found in the list
             msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Could not find the given role!"))
-              .then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+              .then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
           }
         }
         else {
           //if aoba does not have permission
           msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Aoba does not have permission to assign you a role! Please grant the Aoba role the **Manage roles** permission!"))
-              .then(msg => {msg.delete(4000)}).catch(err => {console.error(err)});
+              .then(msg => {msg.delete(4000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
         }
       }
     }

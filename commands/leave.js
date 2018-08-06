@@ -10,6 +10,6 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
       color: client.color,
       description: `↩️ Left voice channel ${msg.guild.me.voiceChannel.name}.`
-    }}).then(msg => {msg.delete(4000)});
+    }}).then(msg => {msg.delete(4000).then(() => {console.log("sent")}).catch(console.error)}).catch(console.error);
   }
 }

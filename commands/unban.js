@@ -41,7 +41,7 @@ exports.run = (client, msg, args) => {
             msg.channel.send({embed: {
               color: client.color,
               description: message
-            }}).then(msg => {msg.delete(5000000)}).catch(err => {console.error(err)});
+            }}).then(msg => {msg.delete(5000000).then(()=>{console.log("sent")}).catch(console.error)}).catch(err => {console.error(err)});
           })
             .catch(() => {
             console.error;

@@ -3,11 +3,17 @@ module.exports = (client, msg) => {
   var def = msg.channel;
   if (msg.author.bot) return; //ignore bot's messages
   //ignore messages not starting with prefix
-  if (client.prefixes.get(msg.guild.id) === null) {
+  
+  let prefix;
+  
+  if (msg.guild !== null && client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
-
-  let prefix = (client.prefixes.get(msg.guild.id) !== null) ? client.prefixes.get(msg.guild.id) : process.env.PREFIX;
+  
+  if (msg.guild === null) {
+    return prefix = process.env.PREFIX;
+  }
+  prefix = (client.prefixes.get(msg.guild.id) !== null) ? client.prefixes.get(msg.guild.id) : process.env.PREFIX;
   
   if (msg.content.indexOf(prefix) !== 0) {
     if (msg.mentions.members.first() === msg.guild.me) {
@@ -158,7 +164,7 @@ module.exports = (client, msg) => {
     if (client.cd.has(msg.author.id)) {
       var wait = client.cd.get(msg.author.id);
       if (time < wait) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.round((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
+        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.ceil((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
       }
       else {
         client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));

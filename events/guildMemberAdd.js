@@ -13,5 +13,5 @@ module.exports = (client, member) => {
       member.addRole(role.id).then(console.log("Role has been added!")).catch(console.error);
     }
     else return;
-  }).catch(error => {console.error;});
+  }).catch(console.error);
 }
