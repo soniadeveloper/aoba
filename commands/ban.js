@@ -36,13 +36,19 @@ exports.run = (client, msg, args) => {
           msg.guild.ban(member, {reason: reason}).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋\n**Reason:** ${reason}`
-          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
+          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(() => {msg.channel.send({embed: {
+          color: client.color,
+          description: "❗️ Member could not be banned!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)})});
         }
         else {
           msg.guild.ban(member).then(() => {msg.channel.send({embed: {
                 color: client.color,
                 description: `**${name}** was banned from ${msg.guild.name}! 👋`
-          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
+          }}).then(msg => {msg.delete(10000000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(() => {msg.channel.send({embed: {
+          color: client.color,
+          description: "❗️ Member could not be banned!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)})});
         }
       }
       else {

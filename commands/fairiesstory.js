@@ -52,6 +52,10 @@ exports.run = (client, msg, args) => {
                 {
                   name: "`set [channel-name]`",
                   value: `Sets the channel to send level up and item notifications to.\nUse \`${client.prefixes.get(msg.guild.id)}fs set any\` to have it send to any channel. This command requires the **Manage server** permissions`
+                },
+                {
+                  name: "`reward [big/small] [user]`",
+                  value: `**This command can only be used by members with Administrator privileges.**\nReward a player in your server for doing a good deed.`
                 }
               ]
             }});
@@ -256,7 +260,7 @@ exports.run = (client, msg, args) => {
                       }});
                     }
 
-                  });
+                  }).catch(console.error);
                 }
               }
               else {
@@ -615,7 +619,7 @@ exports.run = (client, msg, args) => {
                       }
                     });
                   }
-                });
+                }).catch(console.error);
               }
             break;
           case "gamble":
@@ -814,6 +818,208 @@ exports.run = (client, msg, args) => {
               });*/
             });
               break;
+          case "reward":
+            function notBots(guild) {
+              var count = 0;
+              var members = guild.members;
+              for (var i = 0; i < members.array().length; i++) {
+                if (!members.array()[i].user.bot) {
+                  count++;
+                }
+              }
+              return count;
+            }
+            var current = Date.now();
+            const WEEK = 604800000;
+            if (!msg.member.hasPermission("ADMINISTRATOR")) {
+              console.log("does not have permission");
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You don't have permission to use this command! Only **administrators** can use this command."))
+              .then(msg => {msg.delete(4000)
+              .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+            }
+            else if (notBots(msg.guild) < 5) {
+              console.log("guild is too small");
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Your server is too small to use this command! Your server must have **10 or more** people."))
+              .then(msg => {msg.delete(4000)
+                           .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+            }
+            else if (current - msg.guild.createdTimestamp < WEEK) {
+              console.log("guild is too recent");
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Your server must be at least **7 days old** in order to use this command!"))
+              .then(msg => {msg.delete(4000)
+                           .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+            }
+            else {
+              if (args[1] === undefined) {
+                console.log("undefined reward size");
+                msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️Missing arguments!\nThe correct format is \`${prefix}fs reward [big/small] [user]\``))
+                .then(msg => {msg.delete(4000)
+                             .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+              }
+              else {
+                console.log(args[1] === "small");
+                if (args[1] !== "small" && args[1] !== "big") {
+                  console.log("invalid reward size");
+                  msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️Invalid argument!\nThe correct format is \`${prefix}fs reward [big/small] [user]\``))
+                .then(msg => {msg.delete(4000)
+                             .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+                }
+                else {
+                  var member = msg.mentions.members.first();
+
+                  if (member.id === msg.author.id) {
+                    console.log("cannot reward yourself");
+                    msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You can't reward yourself!"))
+                    .then(msg => {msg.delete(4000)
+                    .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+                  }
+                  else {
+                    var curr = Date.now();
+                    const HOUR = 3600000;
+                    client.sql.get(`SELECT * FROM fsd WHERE userId = '${member.id}'`).then(r => {
+                      if (!r) {
+                        console.log("receiver does not have profile");
+                        msg.channel.send({embed: {
+                          color: client.color,
+                          description: "🚫 This user doesn't have a Fairies Story profile!"
+                        }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
+                      }
+                      else {
+                        client.sql.run(`ALTER TABLE fsd ADD COLUMN rewardtime INTEGER default ${curr}`).then(() => {
+                          console.log("column does not exist");
+                          var repAmt;
+                          var moneyAmt;
+                          if (args[1] === "small") {
+                            client.sql.run(`UPDATE fsd SET rep = ${r.rep + 1} WHERE userId = ${member.id}`);
+                            client.sql.run(`UPDATE fsd SET money = ${r.money + 1000} WHERE userId = ${member.id}`);
+                            repAmt = 1;
+                            moneyAmt = 1000;
+                          }
+                          else {
+                            client.sql.run(`UPDATE fsd SET rep = ${r.rep + 3} WHERE userId = ${member.id}`);
+                            client.sql.run(`UPDATE fsd SET money = ${r.money + 5000} WHERE userId = ${member.id}`);
+                            repAmt = 3;
+                            moneyAmt = 5000;
+                          }
+                          client.sql.run(`UPDATE fsd SET rewardtime = ${curr + HOUR} WHERE userID = ${msg.author.id}`);
+                          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✨☺️ <@${member.id}>, you received **${repAmt}** reputation point(s) and **${moneyAmt}FP** for doing something your server admin considered to be commendable!`));
+                        }).catch(() => {
+                          console.log("column does exist");
+                          var curr = Date.now();
+                          const HOUR = 3600000;
+                          console.log(curr);
+                          console.log(row.rewardtime);
+                          if (curr < row.rewardtime) {
+                            console.log("wait");
+                            var remaining = row.rewardtime - curr;
+                            console.log(remaining);
+                            var minutes = Math.floor((remaining / (1000 * 60)) % 60);
+                            msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`❗️You must wait **${minutes}** minutes to use this command again!`))
+                              .then(msg => {msg.delete(4000)
+                               .then(() => console.log("sent")).catch(console.error)}).catch(console.error);
+                          }
+                          else {
+                            var repAmt;
+                            var moneyAmt;
+                            if (args[1] === "small") {
+                              console.log("give small reward");
+                              client.sql.run(`UPDATE fsd SET rep = ${r.rep + 1} WHERE userId = ${member.id}`);
+                              client.sql.run(`UPDATE fsd SET money = ${r.money + 1000} WHERE userId = ${member.id}`);
+                              repAmt = 1;
+                              moneyAmt = 1000;
+                            }
+                            else {
+                              console.log("give big reward");
+                              client.sql.run(`UPDATE fsd SET rep = ${r.rep + 3} WHERE userId = ${member.id}`);
+                              client.sql.run(`UPDATE fsd SET money = ${r.money + 5000} WHERE userId = ${member.id}`);
+                              repAmt = 3;
+                              moneyAmt = 5000;
+                            }
+                          client.sql.run(`UPDATE fsd SET rewardtime = ${curr + HOUR} WHERE userID = ${msg.author.id}`);    
+                          console.log(row.rewardtime);
+                          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`✨☺️ <@${member.id}>, you received **${repAmt}** reputation point(s) and **${moneyAmt}FP** for doing something your server admin considered to be commendable!`));
+                          }
+                        });
+                      }
+                    }).catch(console.error);
+                  }
+                }
+              }
+            }
+            break;
+          /*case "encounter":
+            //encounter an enemy
+            //enemies: lost businessman, forest rabbit, small tiger
+            var stats = [row.att, row.def, row.mag, row.spd];
+            var mod = Math.ceil(row.level / 2);
+            var subMod = Math.ceil(row.level / 4); 
+            var ss = Math.ceil(row.level/5);
+            switch (row.species) {
+              case "fairy":
+                stats = [row.att - mod, row.def, row.mag + mod, row.spd];
+                break;
+              case "orc":
+                stats = [row.att, row.def + mod, row.mag, row.spd - mod];
+                break;
+              case "elf":
+                stats = [row.att, row.def - mod, row.mag, row.spd + mod];
+                break;
+              case "gnome":
+                stats = [row.att + mod, row.def, row.mag - mod, row.spd];
+                break;
+              case "dragonborn":
+                stats = [row.att + mod, row.def, row.mag, row.spd - mod];
+                break;
+              case "tiefling":
+                stats = [row.att, row.def - mod, row.mag + subMod, row.spd];
+                break;
+              case "genasi":
+                stats = [row.att - mod, row.def + subMod, row.mag, row.spd];
+                break;
+              default:
+                stats = [row.att + ss, row.def + ss, row.mag + ss, row.spd + ss];
+                break;
+            }
+            var spawn = {
+              enemies: ["Forest Rabbit 🐇", "Lost Businessman 👨‍💼", "Small Tiger 🐯", "Gelatinous Cube ◻️", "Owlbear 🐻", "Beholder 👁"],
+              stats: {},
+              fasterBrave: function () {
+                return "You had the option to run but chose to fight anyways!";
+              },
+              fasterCoward: function() {
+                return "You decided to run away!";
+              },
+              slower: function() {
+                return "You can't run away!"
+              }
+            }
+            var enemy;
+            var enemyStats;
+            var num = 0;
+            for (var i = spawn.enemies.length; i > 0; i--) {
+              num += i;
+            }
+            var rand = Math.floor(Math.random() * num) + 1;
+            if (rand < 6 && rand >= 1) {
+              enemy = spawn.enemies[0];
+              
+            }
+            else if (rand >= 6 && rand < 11) {
+              enemy = spawn.enemies[1];
+            }
+            else if (rand >= 11 && rand < 15) {
+              enemy =spawn.enemies[2];
+            }
+            else if(rand >= 15 && rand < 18) {
+              enemy = spawn.enemies[3];
+            }
+            else if(rand >= 18 && rand < 20) {
+              enemy = spawn.enemies[4];
+            }
+            else {
+              enemy = spawn.enemies[5];
+            }
+            break;*/
           case "help":
             msg.channel.send({embed: {
               color: client.color,
@@ -855,6 +1061,10 @@ exports.run = (client, msg, args) => {
                 {
                   name: "`set [channel-name]`",
                   value: `Sets the channel to send level up and item notifications to.\nUse \`${client.prefixes.get(msg.guild.id)}fs set any\` to have it send to any channel. This command requires the **Manage server** permissions`
+                },
+                {
+                  name: "`reward [big/small] [user]`",
+                  value: `**This command can only be used by members with Administrator privileges.**\nReward a player in your server for doing a good deed.`
                 }
               ]
             }});
@@ -878,8 +1088,8 @@ exports.run = (client, msg, args) => {
         }
       }
     }
-  }).catch(() => {
-    console.error;
+  }).catch(error => {
+    console.error(error);
     client.sql.run("CREATE TABLE IF NOT EXISTS fsd (userId TEXT, species TEXT, level INTEGER, points INTEGER, money INTEGER, rep INTEGER, items TEXT, att INTEGER, def INTEGER, mag, INTEGER, spd INTEGER)").then(() => {
       msg.channel.send({embed: {
               color: client.color,

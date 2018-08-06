@@ -35,7 +35,11 @@ exports.run = (client, msg) => {
                     "**Len Kagamine** from **VOCALOID**",
                     "**Midousuji Akira** from **Yowamushi Pedal**",
                     "**Toudou Jinpachi** from **Yowamushi Pedal**",
-                    "**Rin Matsuoka** from **Free!**"];
+                    "**Rin Matsuoka** from **Free!**",
+                    "**707** from **Mystic Messenger**",
+                    "**Sebastian Michaelis** from **Black Butler**",
+                    "**Darkiplier**",
+                    "**Pewdiepie**", "God"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
@@ -71,7 +75,12 @@ exports.run = (client, msg) => {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdwQjMz5S_jKGoJca_qmOpU9eUfp1bdNSMUf1DOephZD9_Km-n",
                 "http://pa1.narvii.com/5675/d8c63bc341ab5be7723d407103448b7414faff14_00.gif",
                 "https://78.media.tumblr.com/721a5868b944f7102f33b4c26abe4815/tumblr_nomgfalexA1sldn55o1_500.gif",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4aZSzDX63B8FuopbYPOqmwO8xD6NVngglbyoK9WHVFuRzojWdzw"];
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4aZSzDX63B8FuopbYPOqmwO8xD6NVngglbyoK9WHVFuRzojWdzw",
+                "https://vignette.wikia.nocookie.net/mystic-messenger/images/b/b9/707_home.jpg/revision/latest?cb=20160816092130",
+                "https://vignette.wikia.nocookie.net/kuroshitsuji/images/a/a8/BoM_Sebastian.png/revision/latest?cb=20180312142754",
+                "https://vignette.wikia.nocookie.net/markiplier/images/f/fc/Dark.jpg/revision/latest?cb=20170707033543",
+                "http://beta.ems.ladbiblegroup.com/s3/content/808x455/f23865b85b23431a6eae968cacbb8cf5.png",
+                "https://s3.envato.com/files/244789123/preview_image.jpg"];
 
       var len = options.length;
       var val = 0;

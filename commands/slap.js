@@ -4,7 +4,11 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ Please list a user to slap!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {
+      msg.delete(2000).then(() => {
+        console.log("sent");
+      }).catch(console.error)
+    }).catch(err => {console.error(err)});
   }
   
   else if (list.first().user.bot) {
@@ -14,7 +18,9 @@ exports.run = (client, msg, args) => {
     msg.channel.send({embed: {
             color: client.color,
             description: "❗️ You can't slap yourself!"
-    }}).then(msg => {msg.delete(2000)}).catch(err => {console.error(err)});
+    }}).then(msg => {msg.delete(2000).then(() => {
+        console.log("sent");
+      }).catch(console.error)}).catch(err => {console.error(err)});
   }
   else {
     var urls = ["https://media1.tenor.com/images/0a3e109296e16977a61ed28c1e5bf7bf/tenor.gif?itemid=5122897",

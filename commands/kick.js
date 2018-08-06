@@ -32,14 +32,20 @@ exports.run = (client, msg, args) => {
           msg.channel.send({embed: {
               color: client.color,
               description:  `**${name}** has been kicked! 👋\n**Reason:** ${reason}`
-          }})}).catch(console.error);
+          }})}).catch(() => {msg.channel.send({embed: {
+          color: client.color,
+          description: "❗️ Member could not be kicked!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
         }
         else  {
           member.kick().then(() => {
           msg.channel.send({embed: {
               color: client.color,
               description:  `**${name}** has been kicked! 👋`
-          }})}).catch(console.error);
+          }})}).catch(() => {msg.channel.send({embed: {
+          color: client.color,
+          description: "❗️ Member could not be kicked!"
+      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error)});
         }
       }
     else {

@@ -43,5 +43,5 @@ exports.run = (client, msg, args) => {
   "https://www.youtube.com/watch?v=OoogkKSFES0", "https://www.youtube.com/watch?v=zsUBRCdEDYY", "https://www.youtube.com/watch?v=NfbQTiW7kDY"];
   var len = options.length;
   var choice = Math.floor(Math.random() * options.length);
-  msg.channel.send(`LOL\n${options[choice]}`).catch(err => {console.error(err)});
+  msg.channel.send(`LOL\n${options[choice]}`);
   }
