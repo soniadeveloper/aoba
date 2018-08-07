@@ -1036,7 +1036,7 @@ exports.run = (client, msg, args) => {
                 },
                 {
                   name: "`fp`",
-                  value: `View how much money you have. Give some money to another user by using \`${prefix}fairiesstory/fs money give [number] @[user]\``
+                  value: `View how much money you have. Give some money to another user by using \`${prefix}fairiesstory/fs fp give [number] @[user]\``
                 },
                 {
                   name: "`stats`",
