@@ -4,7 +4,7 @@ exports.run = (client, msg, args) => {
   .setTitle("About Aoba")
   .setThumbnail(msg.guild.me.user.avatarURL)
   .addField("Creator", client.users.get(process.env.OWNER_ID).tag, true)
-  .addField("Version", "1.3.0", true)
+  .addField("Version", "1.3.1", true)
   .addField("Currently in", `${client.guilds.array().length} servers`, true)
   .addField("Language", "Discord.js (Node.js) + SQLite", true)
   .addField("Twitter", "[Aoba4Discord](http://twitter.com/Aoba4Discord)", true)

@@ -49,7 +49,7 @@ module.exports = (client, msg) => {
           if (msgWords[i] === wordsArray[j].toLowerCase()) {
             msg.channel.send({embed: {
                 color: client.color,
-                description: `‼️ **Blacklisted word detected:** ${wordsArray[j]}`
+                description: `‼️ **Blacklisted word detected:** \`${wordsArray[j]}\``
             }});
           }
         }
