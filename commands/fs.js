@@ -1035,8 +1035,8 @@ exports.run = (client, msg, args) => {
                   value: `View your species. Use \`${prefix}fairiesstory/${prefix}fs species change fairy|orc|elf|gnome|dragonborn|genasi|tiefling|human\` to change your species`
                 },
                 {
-                  name: "`money`",
-                  value: `View how much money you have. Give some money to another user by using \`${prefix}fairiesstory/fs money give [number] @[user]\``
+                  name: "`fp`",
+                  value: `View how much money you have. Give some money to another user by using \`${prefix}fairiesstory/fs fp give [number] @[user]\``
                 },
                 {
                   name: "`stats`",
