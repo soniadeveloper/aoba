@@ -26,8 +26,8 @@ exports.run = (client, msg, args) => {
                   value: `View your species. Use \`${prefix}fairiesstory/${prefix}fs species change fairy|orc|elf|gnome|dragonborn|genasi|tiefling|human\` to change your species`
                 },
                 {
-                  name: "`money`",
-                  value: `View how much money you have. Give some money to another user by using \`${prefix}fairiesstory/fs money give [number] @[user]\``
+                  name: "`fp`",
+                  value: `View how much money you have. Give some FP to another user by using \`${prefix}fairiesstory/fs fp give [number] @[user]\``
                 },
                 {
                   name: "`stats`",
@@ -43,7 +43,7 @@ exports.run = (client, msg, args) => {
                 },
                 {
                   name: "`gacha`",
-                  value: "Use the Fairy Gacha Machine for 1000FP"
+                  value: "Use the Fairy Gacha Machine for 500FP"
                 },
                 {
                   name: "`rep [user]`",
@@ -205,7 +205,7 @@ exports.run = (client, msg, args) => {
                 }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
             break;
-          case "money":
+          case "fp":
             //>money
             if (args[1] === undefined) {
             msg.channel.send({embed: {
@@ -526,10 +526,10 @@ exports.run = (client, msg, args) => {
             }
             break;
           case "gacha":
-            if (row.money < 1000) {
+            if (row.money < 500) {
               msg.channel.send({embed: {
               color: client.color,
-              description: "❗️You don't have enough money to use the Fairy Gacha! You need **1000 FP** in order to use the gacha machine."
+              description: "❗️You don't have enough money to use the Fairy Gacha! You need **500 FP** in order to use the gacha machine."
             }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
             else {
@@ -537,15 +537,15 @@ exports.run = (client, msg, args) => {
             var chance = Math.floor(Math.random() * choices.length);
             var result = choices[chance];
             if (row.items === "None") {
-              client.sql.run(`UPDATE fsd SET money = ${row.money - 1000}, items = '${result}' where userId = ${id}`);
+              client.sql.run(`UPDATE fsd SET money = ${row.money - 500}, items = '${result}' where userId = ${id}`);
             }
             else {
-              client.sql.run(`UPDATE fsd SET money = ${row.money - 1000}, items = '${row.items + "," + result}' where userId = ${id}`);
+              client.sql.run(`UPDATE fsd SET money = ${row.money - 500}, items = '${row.items + "," + result}' where userId = ${id}`);
             }
             msg.channel.send({embed: {
               color: client.color,
               title: `🎁 Fairy Gacha`,
-              description: `**${msg.author.username}**, you inserted 1000 FP into the Gacha Machine and obtained a **${result}**!`
+              description: `**${msg.author.username}**, you inserted 500 FP into the Gacha Machine and obtained a **${result}**!`
             }});
             }
             break;
@@ -1052,7 +1052,7 @@ exports.run = (client, msg, args) => {
                 },
                 {
                   name: "`gacha`",
-                  value: "Use the Fairy Gacha Machine for 1000FP"
+                  value: "Use the Fairy Gacha Machine for 500FP"
                 },
                 {
                   name: "`rep [user]`",

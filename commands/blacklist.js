@@ -119,7 +119,7 @@ exports.run = (client, msg, args) => {
             if (args[0] === wordArray[i]) {
               msg.channel.send({embed: {
                   color: client.color,
-                  description: `The word **${args[0]}** is already blacklisted!`
+                  description: `❗️The word **${args[0]}** is already blacklisted!`
               }}).then(msg => {msg.delete(5000)}).catch(console.error);
               inArray = true;
             }
@@ -129,7 +129,7 @@ exports.run = (client, msg, args) => {
             client.sql.run(`UPDATE blacklist SET words = '${newList}' WHERE guildId = '${msg.guild.id}'`);
             msg.channel.send({embed: {
               color: client.color,
-              description: `The word **${args[0]}** has been blacklisted!`
+              description: `✅ The word **${args[0]}** has been blacklisted!`
             }});
           }
           else return;

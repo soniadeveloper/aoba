@@ -1,5 +1,5 @@
 exports.run = (client, msg) => {
-      var name = msg.author.username;
+      //var name = msg.author.username;
       var options = ["**Sans** from **Undertale**", 
                      "**The Onceler** from **The Lorax**", 
                      "**Karamatsu Matsuno** from **Osomatsu-san**", 
@@ -82,12 +82,14 @@ exports.run = (client, msg) => {
                 "http://beta.ems.ladbiblegroup.com/s3/content/808x455/f23865b85b23431a6eae968cacbb8cf5.png",
                 "https://s3.envato.com/files/244789123/preview_image.jpg"];
 
-      var len = options.length;
+      /*var len = options.length;
       var val = 0;
       for (var i = 0; i < name.length; i++) {
         val += name.charCodeAt(i);
       }
-      var c = val % options.length;
+      var c = val % options.length;*/
+      var id = parseInt(msg.author.id);
+      var c = id % options.length;
       var kin = options[c];
       var url = imgUrls[c];
       var embed = new client.discord.RichEmbed().setColor(client.color).setDescription(`${msg.author.username}, Your Aoba-assigned Kin™ is ${kin}!`)
