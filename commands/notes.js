@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "notes", run(client, msg, args) {
   function makeList(notes) {
       var list = "";
       for (var i  = 0; i < notes.length; i++) {
@@ -79,4 +79,4 @@ exports.run = (client, msg, args) => {
       msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Invalid argument!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
-}
+},}

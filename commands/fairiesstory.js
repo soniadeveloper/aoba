@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "fairiesstory", run(client, msg, args) {
   var id = msg.author.id;
   if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
@@ -1097,4 +1097,4 @@ exports.run = (client, msg, args) => {
       }}).then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     });
   });
-}
+},}

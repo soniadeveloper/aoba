@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "emoji", run(client, msg, args) {
   if (!msg.member.hasPermission("MANAGE_EMOJIS")) {
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You don't have permission to create emojis!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
@@ -39,4 +39,4 @@ exports.run = (client, msg, args) => {
       });
     }
   }
-}
+},}

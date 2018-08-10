@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "autorole", run(client, msg, args) {
   if (!msg.guild.members.get(msg.author.id).hasPermission("MANAGE_ROLES")) {
     //if member doesn't have permission
     msg.channel.send({embed: {
@@ -95,4 +95,4 @@ exports.run = (client, msg, args) => {
         }}).then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
   }
-}
+},}

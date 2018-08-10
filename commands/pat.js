@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "pat", run(client, msg, args) {
   var list = msg.mentions.members;
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {
@@ -34,4 +34,4 @@ exports.run = (client, msg, args) => {
     console.log(sender, receiver);
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`🐱 <@${sender}> has given <@${receiver}> a pat!\n(^・ω・^ )`));
   }
-}
+},}

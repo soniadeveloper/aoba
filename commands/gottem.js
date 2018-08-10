@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "gottem", run(client, msg, args) {
   var embed = `${client.emojis.get("462385338673922048")}`;
   msg.delete().catch(console.error);
   if (msg.mentions.members.first() !== undefined) {
@@ -19,4 +19,4 @@ exports.run = (client, msg, args) => {
   else {
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(embed));
   }
-}
+},}

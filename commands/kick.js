@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "kick", run(client, msg, args) {
   if (args.length === 0) {
     return msg.channel.send({embed: {
           color: 0xffa3e7,
@@ -56,4 +56,4 @@ exports.run = (client, msg, args) => {
     }
   }
 }
-}
+},}

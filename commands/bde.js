@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "bde", run(client, msg, args) {
   if (args.length < 1) {
     var name = msg.author.username;
   }
@@ -22,4 +22,4 @@ exports.run = (client, msg, args) => {
       color: client.color,
       description: `**${name}'s** BDE is **${percent}**%!`
   }});
-}
+},}

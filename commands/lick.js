@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "lick", run(client, msg, args) {
   var list = msg.mentions.members;
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {
@@ -26,4 +26,4 @@ exports.run = (client, msg, args) => {
     var choice = Math.floor(Math.random() * urls.length);
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`👅 <@${sender}> has licked <@${receiver}>!\n(˘ڡ˘)`));
   }
-}
+},}

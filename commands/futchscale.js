@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "futchscale", run(client, msg, args) {
   if (args.length > 1) {
     msg.channel.send({embed: {
       color: client.color,
@@ -48,4 +48,4 @@ exports.run = (client, msg, args) => {
       description: `**${name}**, you are a **${result}**!`
     }});
   }
-}
+},}

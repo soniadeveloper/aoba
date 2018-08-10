@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "crytype", run(client, msg, args) {
   var arg = args.join(" ");
   var cry = client.splitter.splitGraphemes(arg);
   if (args.length === 0) {
@@ -117,4 +117,4 @@ exports.run = (client, msg, args) => {
   }
   var final = crying.text.join("");
   msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(final));
-}
+},}

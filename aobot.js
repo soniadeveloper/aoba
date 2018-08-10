@@ -14,19 +14,21 @@ if (process.env.NODE_ENV !== 'production'){
   require('longjohn');
 }
 const app = express();
+
 app.get("/", (request, response) => {
   console.log("sending request");
   response.sendStatus(200);
   response.end("OK");
 });
+
 app.listen(process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: true }));
-
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+
 // init sqlite db
 const fs = require('fs');
 const dbFile = './.data/aoba.sqlite';
@@ -92,8 +94,6 @@ const cdseconds = 5;
 client.cd = cooldown;
 client.sec = cdseconds;
 
-
-// if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 fs.readdir("events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
@@ -105,20 +105,13 @@ fs.readdir("events/", (err, files) => {
   });
 });
 
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
-fs.readdir("commands/", (err, files) => {
-  if (err) {
-    console.log("error reading directory");
-    return console.error(err);
-  }
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
-    let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
-    client.commands.set(commandName, props);
-  });
-});
+const commandFiles = fs.readdirSync('commands/').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
 
 client.login(process.env.SECRET);

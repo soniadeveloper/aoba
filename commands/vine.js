@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "vine", run(client, msg, args) {
   var options = ["https://www.youtube.com/watch?v=CqCCBohjaqA", "https://www.youtube.com/watch?v=rNEINbvGEro", 
   "https://www.youtube.com/watch?v=tjgaOPsbZdY", "https://www.youtube.com/watch?v=psBwRVd2Zfg", "https://www.youtube.com/watch?v=yVNtFUqXD-Q", 
   "https://www.youtube.com/watch?v=kZSfPPJ4Fk8", "https://www.youtube.com/watch?v=6AYv6rV3NXE", "https://www.youtube.com/watch?v=2bnnDTPCA94f", 
@@ -44,4 +44,5 @@ exports.run = (client, msg, args) => {
   var len = options.length;
   var choice = Math.floor(Math.random() * options.length);
   msg.channel.send(`LOL\n${options[choice]}`);
-  }
+  },
+}

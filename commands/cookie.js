@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "cookie", run(client, msg, args) {
   var list = msg.mentions.members;
   if (list.first() === undefined) {
     msg.channel.send({embed: {
@@ -14,4 +14,4 @@ exports.run = (client, msg, args) => {
             description: `🍪 <@${sender}> has given <@${receiver}> a cookie!\n(｡♡‿♡｡)`
     }});
   }
-}
+},}

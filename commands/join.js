@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "join", run(client, msg, args) {
   var vc = msg.member.voiceChannel;
   if (vc === undefined) {
     msg.channel.send({embed: {
@@ -34,4 +34,4 @@ exports.run = (client, msg, args) => {
       });
     }
   }
-}
+},}

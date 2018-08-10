@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "channel", run(client, msg, args) {
   var c = msg.channel;
   function listOverwrites(c) {
     var list = "";
@@ -59,4 +59,4 @@ exports.run = (client, msg, args) => {
       msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid command!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
-}
+},}

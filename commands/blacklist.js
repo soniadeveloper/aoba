@@ -1,7 +1,7 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "blacklist", run(client, msg, args) {
   // gives a warning if a certain word is used
   const guildId = msg.guild.id;
-  var canManage = msg.member.hasPermission("MANAGE_SERVER");
+  var canManage = msg.member.hasPermission("MANAGE_GUILD");
   if (canManage == false) {
     msg.channel.send({embed: {
             color: client.color,
@@ -11,7 +11,7 @@ exports.run = (client, msg, args) => {
   //if no arg is given
   else if (args.length == 0) {
     //view list of blacklisted words
-    var list = `**${msg.guild.name}'s blacklist:**`;
+    var list = `\`${msg.guild.name}'s blacklist:\``;
       client.sql.get(`SELECT * FROM blacklist WHERE guildId = "${msg.guild.id}"`).then(row => {
         //if row does not exist, create row
         if (!row) {
@@ -32,7 +32,7 @@ exports.run = (client, msg, args) => {
           else {
             var wordsArray = row.words.split(" ");
             for (var i = 0; i < wordsArray.length; i++) {
-              list += `\n❌  **${wordsArray[i]}**`;
+              list += `\n❌  \`${wordsArray[i]}\``;
             }
             msg.channel.send({embed: {
               color: client.color,
@@ -153,4 +153,4 @@ exports.run = (client, msg, args) => {
       });
     });
   }
-}
+},}

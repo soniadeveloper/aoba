@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "amigay", run(client, msg, args) {
   var name = msg.author.username;
   var val = 0;
   for (var i = 0; i < name.length; i++) {
@@ -17,4 +17,4 @@ exports.run = (client, msg, args) => {
         description: `No, ${name} is a hettie.`
     }});
   }
-}
+},}

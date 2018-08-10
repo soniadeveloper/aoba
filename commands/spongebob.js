@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "spongebob", run(client, msg, args) {
   const spongebob = client.emojis.get("474617622931963922");
   var quotes = ["**Patrick:** Is mayonnaise an instrument?",
   "**Spongebob:** I'm ugly and I'm proud.",
@@ -21,4 +21,4 @@ exports.run = (client, msg, args) => {
       color: client.color,
       description: `${spongebob} **Spongebob Quote Generator**\n\n${quotes[chance]}`
   }});
-}
+},}
