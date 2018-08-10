@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "reload", run(client, msg, args) {
   if (msg.author.id !== process.env.OWNER_ID) return;
   if(!args || args.size < 1) return msg.channel.send({embed: {color: client.color, description: "❗️Must provide a command name to reload."}}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   const commandName = args[0];
@@ -13,4 +13,4 @@ exports.run = (client, msg, args) => {
   const props = require(`./${commandName}.js`);
   client.commands.set(commandName, props);
   msg.channel.send({embed: {color: client.color, description: `✅ The command ${commandName} has been reloaded`}}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
-}
+},}

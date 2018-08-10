@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "blush", run(client, msg, args) {
   var user = msg.author.id;
   var imgs = ["https://78.media.tumblr.com/c4da4e14031896e06982b068f2630e20/tumblr_okbrmifEyA1voyry7o1_500.gif",
              "https://78.media.tumblr.com/5f0e91ed39e43de08a9dd2b95601b3b9/tumblr_nzhg6xxGH41umlhoro1_500.gif",
@@ -10,4 +10,4 @@ exports.run = (client, msg, args) => {
              "https://media1.tenor.com/images/f62cae32b30d364bf0a8a1e7432c2ddf/tenor.gif?itemid=10198325"];
   var choice = Math.floor(Math.random() * imgs.length);
   msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(imgs[choice]).setDescription(`<@${user}> has blushed!\n(*≧∀≦*)`));
-}
+},}

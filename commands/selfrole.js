@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "selfrole", run(client, msg, args) {
   var canRole = msg.guild.me.hasPermission("MANAGE_ROLES");
   var canUserRole = msg.member.hasPermission("MANAGE_ROLES");
   var serverRoles = msg.guild.roles.array();
@@ -177,4 +177,4 @@ exports.run = (client, msg, args) => {
     console.error(error);
     client.sql.run("CREATE TABLE IF NOT EXISTS selfrole (guildID TEXT UNIQUE, roles TEXT)");
   })
-}
+},}

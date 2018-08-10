@@ -1,4 +1,4 @@
-exports.run = (client, msg) => {
+module.exports = { name: "kinme", run(client, msg, args) {
       //var name = msg.author.username;
       var options = ["**Sans** from **Undertale**", 
                      "**The Onceler** from **The Lorax**", 
@@ -95,4 +95,4 @@ exports.run = (client, msg) => {
       var embed = new client.discord.RichEmbed().setColor(client.color).setDescription(`${msg.author.username}, Your Aoba-assigned Kin™ is ${kin}!`)
       .setImage(url);
       msg.channel.send(embed);
-}
+},}

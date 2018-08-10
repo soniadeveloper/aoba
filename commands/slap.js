@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "slap", run(client, msg, args) {
   var list = msg.mentions.members;
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {
@@ -35,4 +35,4 @@ exports.run = (client, msg, args) => {
     var receiver = list.firstKey(1);
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setImage(urls[choice]).setDescription(`💢 <@${sender}> has slapped <@${receiver}>!\n(*｀Ω´*)`));
   }
-}
+},}

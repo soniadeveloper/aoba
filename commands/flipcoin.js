@@ -1,4 +1,5 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "flipcoin", run(client, msg, args) {
+  var coin = client.emojis.get("476885638352863232");
   var side = Math.floor(Math.random() * 2);
   var result;
   if (side == 0) {
@@ -9,6 +10,6 @@ exports.run = (client, msg, args) => {
   }
   msg.channel.send({embed: {
       color: client.color,
-      description: `The coin landed on **${result}**!`
+      description: `${coin} The coin landed on **${result}**!`
   }});
-}
+},}

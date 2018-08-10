@@ -1,4 +1,4 @@
-exports.run = async (client, msg, args) => {
+module.exports = { name: "music", async run(client, msg, args) {
   var vc = msg.member.voiceChannel;
   const sq = client.q.get(msg.guild.id);
   var canSpeak = msg.guild.me.hasPermission("SPEAK");
@@ -239,4 +239,4 @@ exports.run = async (client, msg, args) => {
       }});
     }
   }
-}
+},}

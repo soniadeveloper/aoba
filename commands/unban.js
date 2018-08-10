@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "unban", run(client, msg, args) {
   if (args.length === 0) {
     return msg.channel.send({embed: {
           color: 0xffa3e7,
@@ -72,4 +72,4 @@ exports.run = (client, msg, args) => {
       }}).then(msg => {msg.delete(5000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
     }
   }
-}
+},}

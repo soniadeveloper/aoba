@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "love", run(client, msg, args) {
   if (args.length != 2) {
     msg.channel.send({embed: {
       color: client.color,
@@ -68,4 +68,4 @@ exports.run = (client, msg, args) => {
     }});
     }
   }
-}
+},}

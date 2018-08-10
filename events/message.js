@@ -160,21 +160,31 @@ module.exports = (client, msg) => {
     const cmd = client.commands.get(command);
     if (!cmd || cmd === null) return;
     else {
-    var time = Date.now();
-    if (client.cd.has(msg.author.id)) {
-      var wait = client.cd.get(msg.author.id);
-      if (time < wait) {
-        msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.ceil((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
+      var time = Date.now();
+      if (client.cd.has(msg.author.id)) {
+        var wait = client.cd.get(msg.author.id);
+        if (time < wait) {
+          msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`Please wait **${Math.ceil((wait - time)/1000)}** seconds before using another command!`)).then(msg => {msg.delete(2000).then(()=>{console.log("deleted")}).catch(error=> {console.error(error)})});
+        }
+        else {
+          client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
+          try {
+            cmd.run(client, msg, args);
+          }
+          catch (err) {
+            console.error(err);
+          }
+        }
       }
       else {
         client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
-        cmd.run(client, msg, args);
+        try {
+          cmd.run(client, msg, args);
+        }
+        catch (err) {
+          console.error(err);
+        }
       }
-    }
-    else {
-      client.cd.set(msg.author.id, Date.now() + (client.sec * 1000));
-      cmd.run(client, msg, args);
-    }
     }
   }
 }

@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "headcanon", run(client, msg, args) {
   if (args.length == 0) {
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Please provide a name!"))
     .then(msg => {msg.delete(2000).then(() => {console.log("send")})
@@ -37,4 +37,4 @@ exports.run = (client, msg, args) => {
       msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(`🤔 My headcanon for **${name}** is that ${list[rand]}`));
     }
   }
-}
+},}

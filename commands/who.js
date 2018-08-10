@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "who", run(client, msg, args) {
   var key = msg.guild.members.randomKey();
   while(msg.guild.members.get(key).user.bot) {
     key = msg.guild.members.randomKey();
@@ -8,4 +8,4 @@ exports.run = (client, msg, args) => {
       color: client.color,
       description: `⁉️\nThe answer is **${member.displayName}**.`
     }});
-}
+},}

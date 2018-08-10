@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "prune", run(client, msg, args) {
   var canManage = msg.member.hasPermission("MANAGE_MESSAGES");
   var channel = msg.channel;
   
@@ -79,5 +79,5 @@ exports.run = (client, msg, args) => {
       description: `✅ Deleted **${args[0]}** message(s) sent by ${name} from ${msg.channel.name}`
     }});
     }*/
-}
+},}
 

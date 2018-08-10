@@ -1,4 +1,4 @@
-exports.run = (client, msg, args) => {
+module.exports = { name: "homestuck", run(client, msg, args) {
   var stuff = args.join(" ");
   var stufff = (stuff.includes("\"")) ? stuff.split("\"") : stuff.split("“");
   var troll = stufff[0];
@@ -314,4 +314,4 @@ exports.run = (client, msg, args) => {
       return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Not a valid troll name!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       break;
   }
-}
+},}
