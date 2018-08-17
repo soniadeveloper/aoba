@@ -35,7 +35,7 @@ module.exports = { name: "help", run(client, msg, args) {
         },
         {
           name: "Fun",
-          value: "`8ball` `amigay` `aoba` `bde` `crytype` `f` `futchscale` `gottem` `hifumi` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `twunkscale` `vine` `weenie` `who`"
+          value: "`8ball` `alignment` `amigay` `aoba` `bde` `bitchscale` `crytype` `f` `futchscale` `gottem`  `headcanon` `hifumi` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `teentropes` `twunkscale` `vine` `weenie` `who`"
         },
         {
           name: "Action",
@@ -211,6 +211,18 @@ module.exports = { name: "help", run(client, msg, args) {
           break;
         case "birthday":
           genText("User mention", "Wish someone a happy birthday!");
+          break;
+        case "headcanon":
+          genText("User mention or any name", "Generates a random headcanon for the specified person");
+          break;
+        case "alignment":
+          genText("None", "Gives you your DnD alignment");
+          break;
+        case "bitchscale":
+          genText("None", "See where you land on the edgy/depressed/dumbass and bitch/thot/bastard scale");
+          break;
+        case "teentropes":
+          genText("None", "See where you land on the prep/goth/jock/nerd scale");
           break;
         default:
           break;
