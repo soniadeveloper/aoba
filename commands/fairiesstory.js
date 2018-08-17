@@ -524,6 +524,89 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
                 }
               }
             }
+            else if (args[1] === "use") {
+              if (args.length < 2) {
+                // if no item was provided
+                  msg.channel.send({embed: {
+                  color: client.color,
+                  description: "❗️Must provide an item to use!"
+                }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
+              }
+              else {
+                var name = args.slice(2).join(" ");
+                var use = name.toLowerCase();
+                var av = [];
+                for (var i = 0; i < client.items.length; i++) {
+                  av.push(client.items[i].substring(3, client.items[i].length).toLowerCase());
+                }
+                //check if item is valid
+                var isEqual = 0;
+                for (var i = 0; i < av.length; i++) {
+                    if (av[i] === use) {
+                      isEqual += 1;
+                    }
+                }
+                if (isEqual < 1) {
+                  msg.channel.send({embed: {
+                    color: client.color,
+                    description: "❗️ That is not a valid item!"
+                  }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
+                }
+                else {
+                  var has = 0;
+                    var index = -1;
+                    var list = row.items.split(",");
+                    for (var i = 0; i < list.length; i++) {
+                      list[i] = list[i].substring(3, list[i].length).toLowerCase();
+                    }
+                    for (var i = 0; i < list.length; i++) {
+                      if (list[i] === use) {
+                        has += 1;
+                        if (index < 0) {
+                          index = i;
+                        }
+                      }
+                    }
+                    if (has < 1 || index < 0) {
+                      msg.channel.send({embed: {
+                        color: client.color,
+                        description: "❗️ You don't have this item!"
+                      }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
+                    }
+                  else {
+                    var message;
+                    switch (use) {
+                      case "yummy food":
+                        message = `${msg.author.username}, you ate the 🍎 **Yummy Food**! It was very delicious!\n\`Happiness\` **+1**`;
+                        break;
+                      case "annoying dog":
+                        if (row.att >= 30) {
+                          message = `${msg.author.username}, you tried to play fetch with the 🐶 **Annoying Dog**, but you threw the stick too far, leaving the dog to run for the stick forever.`;
+                        }
+                        else {
+                          message = `${msg.author.username}, you tried to play fetch with the 🐶 **Annoying Dog**, but since your throws are not sufficient the dog got frustrated and ran away.`;
+                        }
+                        break;
+                      case "":
+                        break;
+                    }
+                    var items = row.items.split(",").sort();
+                    var newArray = items.splice(index, num);
+                    var newItems = items.join(",");
+                    client.sql.run(`UPDATE fsd SET items = ${newItems} WHERE userId = ${msg.author.id}`).then(() => {
+                      msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription(message));
+                    }).catch(console.error);
+                  }
+                }
+              }
+            }
+            else {
+              msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Invalid argument!")).then(msg => {
+                msg.delete(2000).then(() => {
+                  console.log("sent");
+                }).catch(console.error);
+              }).catch(console.error);
+            }
             break;
           case "gacha":
             if (row.money < 500) {

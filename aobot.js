@@ -10,6 +10,13 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const DBL = require("dblapi.js");
 const Grapheme = require("grapheme-splitter");
+const winston  = require("winston");
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
 if (process.env.NODE_ENV !== 'production'){
   require('longjohn');
 }
