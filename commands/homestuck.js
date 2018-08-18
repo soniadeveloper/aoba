@@ -155,23 +155,23 @@ module.exports = { name: "homestuck", run(client, msg, args) {
       txt = `${txt.charAt(0).toUpperCase()}${txt.slice(1,txt.length)}.`;
       var i = 0;
       while (i < txt.length) {
-        if (txt.slice(i,i+3) === "ate") {
+        if (txt.slice(i,i+3) === "ate") { //if "ate" is present in the string
           txt = `${txt.slice(0, i)}8${txt.slice(i+3,txt.length)}`;
           i -= 2;
         }
-        else if (txt.slice(i,i+5) === "eight") {
+        else if (txt.slice(i,i+5) === "eight") { //if "eight" is present in the string
           txt = `${txt.slice(0, i)}8${txt.slice(i+5,txt.length)}`;
           i -= 4;
         }
-        else if (txt.charAt(i).toLowerCase() === "b") {
+        else if (txt.charAt(i).toLowerCase() === "b") { //if the letter "b" is present in the string
           txt = `${txt.slice(0, i)}8${txt.slice(i+1,txt.length)}`;
         }
-        else if (i > 2 && txt.slice(i-2,i) === ". ") {
+        else if (i > 2 && txt.slice(i-2,i) === ". ") { //capitalizes the first word at the beginning of a sentence
           txt = `${txt.slice(0, i)}${txt.charAt(i).toUpperCase()}${txt.slice(i+1,txt.length)}`;
         }
         i += 1;
       }
-      return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[7]).setDescription(`${this.emojis[7]} ${txt}`));
+      return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[7]).setDescription(`${this.emojis[7]} ${txt} ::::)`));
     },
     equius: function () {
       var txt = this.text;
@@ -265,7 +265,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
         }
         i += 1;
       }
-      return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[11]).setDescription(`${this.emojis[11]} ${txt}`));
+      return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[11]).setDescription(`${this.emojis[11]} ${txt} 38D`));
     },
   }
   
