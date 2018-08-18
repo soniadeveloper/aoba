@@ -1,4 +1,5 @@
 module.exports = { name: "blush", run(client, msg, args) {
+  //action command
   var user = msg.author.id;
   var imgs = ["https://78.media.tumblr.com/c4da4e14031896e06982b068f2630e20/tumblr_okbrmifEyA1voyry7o1_500.gif",
              "https://78.media.tumblr.com/5f0e91ed39e43de08a9dd2b95601b3b9/tumblr_nzhg6xxGH41umlhoro1_500.gif",

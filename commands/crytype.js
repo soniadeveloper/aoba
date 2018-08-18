@@ -1,38 +1,39 @@
 module.exports = { name: "crytype", run(client, msg, args) {
+  //text altering command
   var arg = args.join(" ");
-  var cry = client.splitter.splitGraphemes(arg);
-  if (args.length === 0) {
+  var cry = client.splitter.splitGraphemes(arg); //one of my friends wanted me to fix it so that it doesn't break up emojis into unrecognized characters... so behold
+  if (args.length === 0) { //if no argument is given
     return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Plea;se giv,ee a pHrase!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
-  const AMT = 2;
+  const AMT = 2; //amount of times to repeat
   var crying = {
     text: cry,
-    comma: function (i) {
+    comma: function (i) { //inserts commas
       var txt = this.text;
       var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0,",".repeat(repeat));
       this.text = txt;
     },
-    semicolon: function (i) {
+    semicolon: function (i) { //inserts semicolons
       var txt = this.text;
       var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0,";".repeat(repeat));
       this.text = txt;
     },
-    space: function (i) {
+    space: function (i) { //inserts spaces
       var txt = this.text;
       var repeat = Math.ceil(Math.random() * AMT);
       txt.splice(i,0," ".repeat(repeat));
       this.text = txt;
     },
-    repeat: function (i) {
+    repeat: function (i) { //repeats letters
       var txt = this.text;
       if (i > 0) {
        txt.splice(i,0,txt[i-1]);
        this.text = txt;
       }
     },
-    symbol: function (i) {
+    symbol: function (i) { //inserts a random symbol
       var txt = this.text;
       var rand = Math.floor(Math.random() * 9);
       var symbol;
@@ -68,12 +69,12 @@ module.exports = { name: "crytype", run(client, msg, args) {
       txt.splice(i,0,symbol);
       this.text = txt;
     },
-    upper: function (i) {
+    upper: function (i) { //randomly capitalizes letters
       var txt = this.text;
       txt.splice(i,1,txt[i].toUpperCase());
       this.text = txt;
     },
-    random: function(i) {
+    random: function(i) { //just inserts a random letter
       var txt = this.text;
       var rand = Math.floor(Math.random() * 26) + 97;
       txt.splice(i,0,String.fromCharCode(rand));
@@ -81,9 +82,9 @@ module.exports = { name: "crytype", run(client, msg, args) {
     }
   };
   var i = 0;
-  while (i < crying.text.length) {
-    var chanceOf = Math.floor(Math.random() * 4);
-    var qChance = Math.floor(Math.random() * 7);
+  while (i < crying.text.length) { //as long as you don't reach the end of the string
+    var chanceOf = Math.floor(Math.random() * 4); //chance of messing with the text
+    var qChance = Math.floor(Math.random() * 7); //chooses which edit to do for the text
       if (chanceOf == 0) {
         switch (qChance) {
           case 0:

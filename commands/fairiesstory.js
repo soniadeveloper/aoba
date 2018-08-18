@@ -1,17 +1,17 @@
-module.exports = { name: "fairiesstory", run(client, msg, args) {
+  module.exports = { name: "fairiesstory", run(client, msg, args) {
   var id = msg.author.id;
   if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
-  let prefix = client.prefixes.get(msg.guild.id);
+  let prefix = client.prefixes.get(msg.guild.id); //server prefix
   client.sql.get(`SELECT * FROM fsd WHERE userId = '${id}'`).then(row => {
     if (!row) {
-      if (args[0] === "start") {
-        client.sql.run("INSERT INTO fsd (userId, species, level, points, money, rep, items, att, def, mag, spd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [id /*user id*/, "Human" /*species*/, 1 /*level*/, 0 /*points*/, 100 /*money*/, 0 /*rep*/, "None" /*items*/, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1 /*stats*/]);
+      if (args[0] === "start") { //creates a profile
+        client.sql.run("INSERT INTO fsd (userId, species, level, points, money, rep, items, att, def, mag, spd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [id /*user id*/, "Human" /*species*/, 1 /*level*/, 0 /*points*/, 1000 /*money*/, 0 /*rep*/, "None" /*items*/, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1, Math.ceil(Math.random()*5)+1 /*stats*/]);
         let embed = client.embed.setColor(client.color).setDescription(`✨ Welcome to Fairies Story 🧚‍, **${msg.author.username}**!\nYour profile has been created! Use command **>fairiesstory** to view it.\nUse command **>fairiesstory species change** to change your species.`);
         msg.channel.send(embed);
       }
-      else if (args[0] === "help") {
+      else if (args[0] === "help") { //opens the help menu
         msg.channel.send({embed: {
               color: client.color,
               title: "Help",
@@ -60,11 +60,11 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
               ]
             }});
       }
-      else {
+      else { //error
         msg.channel.send({embed: {
           color: client.color,
-          description: `⚠️ You don't have a Fairies Story profile! Use \`${prefix}fairiesstory start\` or \`${prefix}fs start\` in order to create a profile!`
-        }});
+          description: `❗️ You don't have a Fairies Story profile! Use \`${prefix}fairiesstory start\` or \`${prefix}fs start\` in order to create a profile!`
+        }}).then(msg => msg.delete(5000).then(() => console.log("sent")).catch(console.error)).catch(console.error);
       }
     }
     else {
@@ -102,7 +102,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
           }
         }
       
-      function stats(sp) {
+      function stats(sp) { //shows stats
           var stats;
           var mod = Math.ceil(row.level / 2);
           var subMod = Math.ceil(row.level / 4); 
@@ -163,7 +163,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
           case "species":
             //>species
             if (args[1] == "change") {
-              if (args[2] === undefined) {
+              if (args[2] === undefined) { //if no species is given
                 msg.channel.send({embed: {
                   color: client.color,
                   description: `❗️ Use \`${prefix}fairiesstory or ${prefix}fs species change [choice]\` to change species.\nChoose between fairy/elf/orc/gnome/dragonborn/tiefling/genasi/human`
@@ -171,7 +171,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
               }
               else if (args[2] === "fairy" || "orc" || "gnome" || "elf" || "human" || "tiefling" || "dragonborn" || "genasi") {
                 var old = row.species;
-                if (old === args[2]) {
+                if (old === args[2]) { //if the user is already that species
                   msg.channel.send({embed: {
                   color: client.color,
                   description: `❗️ You are already a ${args[2]}!`
@@ -185,14 +185,14 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
                   }});
                 }
               }
-              else {
+              else { //if the species name isn't valid
                 msg.channel.send({embed: {
                   color: client.color,
                   description: "❗️ That's not a valid species name!"
                 }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
             }
-            else if (args[1] === undefined) {
+            else if (args[1] === undefined) { //if no argument is given
               msg.channel.send({embed: {
               color: client.color,
               description: `${msg.author.username}, you are currently a **${row.species}**. Use \`${prefix}fairiesstory/${prefix}fs species change [choice]\` to change species.\nChoose between fairy/elf/orc/gnome/dragonborn/tiefling/genasi/human`
@@ -524,7 +524,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
                 }
               }
             }
-            else if (args[1] === "use") {
+            /*else if (args[1] === "use") { //prototype command shhhhh
               if (args.length < 2) {
                 // if no item was provided
                   msg.channel.send({embed: {
@@ -575,7 +575,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
                     }
                   else {
                     var message;
-                    switch (use) {
+                    switch (use) { 
                       case "yummy food":
                         message = `${msg.author.username}, you ate the 🍎 **Yummy Food**! It was very delicious!\n\`Happiness\` **+1**`;
                         break;
@@ -599,7 +599,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
                   }
                 }
               }
-            }
+            }*/
             else {
               msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Invalid argument!")).then(msg => {
                 msg.delete(2000).then(() => {
@@ -608,8 +608,8 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
               }).catch(console.error);
             }
             break;
-          case "gacha":
-            if (row.money < 500) {
+          case "gacha": //gacha!!
+            if (row.money < 500) { //if user doesn't have enough money
               msg.channel.send({embed: {
               color: client.color,
               description: "❗️You don't have enough money to use the Fairy Gacha! You need **500 FP** in order to use the gacha machine."
@@ -1030,7 +1030,7 @@ module.exports = { name: "fairiesstory", run(client, msg, args) {
               }
             }
             break;
-          /*case "encounter":
+          /*case "encounter": //prototype shhhh
             //encounter an enemy
             //enemies: lost businessman, forest rabbit, small tiger
             var stats = [row.att, row.def, row.mag, row.spd];

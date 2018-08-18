@@ -1,4 +1,5 @@
 module.exports = { name: "server", run(client, msg, args) {
+  //server info
   var guild = msg.guild;
   if (!guild.available) {
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️ The guild is not available right now")).catch(console.error);

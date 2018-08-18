@@ -1,4 +1,5 @@
 module.exports = { name: "prune", run(client, msg, args) {
+  //bulk deletes messages from a channel
   var canManage = msg.member.hasPermission("MANAGE_MESSAGES");
   var channel = msg.channel;
   

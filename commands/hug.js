@@ -1,4 +1,6 @@
-module.exports = { name: "hug", run(client, msg, args) {  var list = msg.mentions.members;
+module.exports = { name: "hug", run(client, msg, args) {  
+  //action command
+  var list = msg.mentions.members;
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {
             color: client.color,

@@ -1,4 +1,5 @@
 module.exports = { name: "owo", run(client, msg, args) {
+  //text altering command
   var owo = args.join(" ").toLowerCase();
   if (args.length === 0) {
     return msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️Pwease give a phwase! owo")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);

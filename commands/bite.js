@@ -1,4 +1,5 @@
 module.exports = { name: "bite", run(client, msg, args) {
+  //action command
   var list = msg.mentions.members;
   if (list.first() === null || list.first() === undefined) {
     msg.channel.send({embed: {

@@ -1,4 +1,4 @@
-module.exports = { name: "help", run(client, msg, args) {
+module.exports = { name: "help", run(client, msg, args) { //good ol help command
     if (client.prefixes.get(msg.guild.id) === null) {
       client.prefixes.set(msg.guild.id, process.env.PREFIX);
     }

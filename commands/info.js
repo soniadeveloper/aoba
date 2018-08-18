@@ -1,10 +1,11 @@
 module.exports = { name: "info", run(client, msg, args) {
+  //info about aoba
   var embed = new client.discord.RichEmbed()
   .setColor(client.color)
   .setTitle("About Aoba")
   .setThumbnail(msg.guild.me.user.avatarURL)
   .addField("Creator", client.users.get(process.env.OWNER_ID).tag, true)
-  .addField("Version", "1.3.3", true)
+  .addField("Version", "1.3.4", true)
   .addField("Currently in", `${client.guilds.array().length} servers`, true)
   .addField("Language", "Discord.js (Node.js) + SQLite", true)
   .addField("Website", "[Aoba's Official Site](https://aobadiscord.glitch.me/)", true)

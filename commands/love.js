@@ -1,4 +1,5 @@
 module.exports = { name: "love", run(client, msg, args) {
+  //love calculator
   if (args.length != 2) {
     msg.channel.send({embed: {
       color: client.color,
@@ -8,7 +9,7 @@ module.exports = { name: "love", run(client, msg, args) {
   else { 
   var first = args[0].toLowerCase();
   var second = args[1].toLowerCase();
-  if(first === second) {
+  if(first === second) { //if the two names given are equal
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Don't selfship :("

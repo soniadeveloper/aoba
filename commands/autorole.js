@@ -20,13 +20,13 @@ module.exports = { name: "autorole", run(client, msg, args) {
                 description: `❗️This server doesn't have autorole set!`
               }});
             }
-            else if (roleToGet === undefined) {
+            else if (roleToGet === undefined) { //role doesn't exist
               msg.channel.send({embed: {
                 color: client.color,
                 description: "❗️ This role doesn't exist"
               }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
             }
-            else {
+            else { //creates row
               client.sql.run("INSERT INTO auto (guildId, role, onoroff) VALUES (?, ?, ?)", [msg.guild.id, role, 1]);
               msg.channel.send({embed: {
                 color: client.color,
@@ -34,7 +34,7 @@ module.exports = { name: "autorole", run(client, msg, args) {
               }});
             }
           }
-          else{
+          else { //send status message
             if (args.length == 0 || role === undefined) {
               var status;
               if (row.onoroff == 1) {
@@ -63,7 +63,7 @@ module.exports = { name: "autorole", run(client, msg, args) {
                 description: `✅ Autorole has been turned **${role}**!`
               }});
             }
-            else if (roleToGet === undefined) {
+            else if (roleToGet === undefined) { //if role doesnt exist
               msg.channel.send({embed: {
                 color: client.color,
                 description: "❗️ This role doesn't exist"

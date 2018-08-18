@@ -1,4 +1,5 @@
 module.exports = { name: "join", run(client, msg, args) {
+  //join a voice channel
   var vc = msg.member.voiceChannel;
   if (vc === undefined) {
     msg.channel.send({embed: {
