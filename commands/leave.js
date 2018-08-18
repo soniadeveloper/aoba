@@ -1,4 +1,5 @@
 module.exports = { name: "leave", run(client, msg, args) {
+  //makes aoba leave the voice channel
   if (msg.guild.me.voiceChannel === undefined) {
     msg.channel.send({embed: {
       color: client.color,

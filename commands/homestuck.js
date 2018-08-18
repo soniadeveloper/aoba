@@ -1,4 +1,5 @@
 module.exports = { name: "homestuck", run(client, msg, args) {
+  //text altering command
   var stuff = args.join(" ");
   var stufff = (stuff.includes("\"")) ? stuff.split("\"") : stuff.split("“");
   var troll = stufff[0];
@@ -32,13 +33,15 @@ module.exports = { name: "homestuck", run(client, msg, args) {
     },
     tavros: function () {
       var i = 1;
-      var txt = this.text.toUpperCase();
+      var txt = this.text.toUpperCase(); //tavros types weirdly
       txt = `${txt.charAt(0).toLowerCase()}${txt.slice(1, txt.length)}`;
       while (i < txt.length) {
         if (txt.charAt(i) === '.') {
+          //replace periods with commas
           txt = `${txt.slice(0, i)},${txt.slice(i+1,txt.length)}`
         }
         else if (txt.slice(i-2,i) === ", ") {
+          //make the first letter of each sentence lowercase
           txt = `${txt.slice(0, i)}${txt.charAt(i).toLowerCase()}${txt.slice(i+1,txt.length)}`
         }
         i += 1;
@@ -59,10 +62,16 @@ module.exports = { name: "homestuck", run(client, msg, args) {
           txt = `${txt.slice(0, i)}2${txt.slice(i+1,txt.length)}`
         }
         else if (txt.indexOf("to") === i) {
+          //replace to with 2
           txt = `${txt.slice(0,i)}2${txt.slice(i+2, txt.length)}`
           i -= 1;
         }
         else if (txt.indexOf("too") === i) {
+          //replace too with 2
+          txt = `${txt.slice(0,i)}2${txt.slice(i+3, txt.length)}`
+          i -= 2;
+        }
+        else if (txt.indexOf("two") === i) {
           txt = `${txt.slice(0,i)}2${txt.slice(i+3, txt.length)}`
           i -= 2;
         }
@@ -82,6 +91,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
           txt = `${txt.slice(0,i)}33${txt.slice(i+2,txt.length)}`
           i += 1;
         }
+        //cat puns start here
         else if (txt.slice(i, i+3) === "per") {
           txt = `${txt.slice(0,i)}purr${txt.slice(i+3,txt.length)}`;
           i += 2;
@@ -115,6 +125,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
           i -= 1;
         }
         else if (txt.charAt(i) === " ") {
+          //first letter of every word is uppercase
           txt = `${txt.slice(0,i+1)}${txt.charAt(i+1).toUpperCase()}${txt.slice(i+2, txt.length)}`;
         }
         i += 1;
@@ -126,18 +137,23 @@ module.exports = { name: "homestuck", run(client, msg, args) {
       var i = 0;
       while (i < txt.length) {
         if (txt.charAt(i) === 'I') {
+          //replace i's with 1
           txt = `${txt.slice(0,i)}1${txt.slice(i+1,txt.length)}`;
         }
         else if (txt.charAt(i) === 'E') {
+          //replace e's with 3
           txt = `${txt.slice(0,i)}3${txt.slice(i+1,txt.length)}`;
         }
         else if (txt.charAt(i) === 'A') {
+          //replace a's with 4
           txt = `${txt.slice(0,i)}4${txt.slice(i+1,txt.length)}`;
         }
         else if (txt.charAt(i) === '.') {
+          //no punctuation
           txt = `${txt.slice(0,i)}${txt.slice(i+1,txt.length)}`;
           i -= 1;
         }
+        //interesting emoticons
         else if (txt.slice(i, i+2) === ":)") {
           txt = `${txt.slice(0,i)}>:]${txt.slice(i+2,txt.length)}`;
           i += 1;
@@ -150,7 +166,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
       }
       return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[6]).setDescription(`${this.emojis[6]} ${txt}`));
     },
-    vriska: function () {
+    vriska: function () { //not super correct
       var txt = this.text;
       txt = `${txt.charAt(0).toUpperCase()}${txt.slice(1,txt.length)}.`;
       var i = 0;
@@ -179,15 +195,19 @@ module.exports = { name: "homestuck", run(client, msg, args) {
       var i = 0;
       while (i < txt.length) {
         if (txt.charAt(i) === 'x') {
+          //replace x's with percentages
           txt = `${txt.slice(0, i)}%${txt.slice(i+1,txt.length)}`
         }
         else if (txt.slice(i, i+6) === "strong") {
+          //make all mentions of the word strong capitalized
           txt = `${txt.slice(0,i)}${txt.slice(i,i+6).toUpperCase()}${txt.slice(i+6,txt.length)}`;
         }
         else if (txt.slice(i, i+2) === "oo" || txt.slice(i, i+2) === "ew" || txt.slice(i, i+2) === "ue") {
+          //make any oo sound into 00
           txt = `${txt.slice(0, i)}00${txt.slice(i+2,txt.length)}`;
         }
         else if (txt.slice(i, i+3) === "nay") {
+          //mandatory horse puns
           txt = `${txt.slice(0, i)}neigh${txt.slice(i+3,txt.length)}`;
           i += 2;
         }
@@ -199,6 +219,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
      return msg.channel.send(new client.discord.RichEmbed().setColor(this.colors[8]).setDescription(`${this.emojis[8]} D--> ${txt}`)); 
     },
     gamzee: function () {
+      //alternating lettercase
       var txt = this.text;
       for (var i = 0; i < txt.length; i++) {
         if (i % 2 == 0) {
@@ -224,11 +245,13 @@ module.exports = { name: "homestuck", run(client, msg, args) {
             i -= 3;
           }
           else {
+            //repeat v's and w's
             txt = `${txt.slice(0,i)}${txt[i]}${txt[i]}${txt.slice(i+1,txt.length)}`;
             i += 1;
           }
         }
         else if (txt.slice(i,i+4) === "ing ") {
+          //he says words like "saying" as "sayin"
           txt = `${txt.slice(0,i)}in ${txt.slice(i+4,txt.length)}`;
           i -= 1;
         }
@@ -239,6 +262,7 @@ module.exports = { name: "homestuck", run(client, msg, args) {
             i -= 1;
           }
         }
+        //nicknames
         else if (txt.slice(i, i+6) === "kanaya") {
           txt = `${txt.slice(0,i)}kan${txt.slice(i+6,txt.length)}`;
             i -= 3;
@@ -256,10 +280,12 @@ module.exports = { name: "homestuck", run(client, msg, args) {
       var i = 0;
       while (i < txt.length) {
         if (txt[i].toLowerCase() === 'h') {
+          //replace h's with )(
           txt = `${txt.slice(0,i)})(${txt.slice(i+1,txt.length)}`;
           i += 1;
         }
         else if (txt[i] === 'E') {
+          //replace capital e's with -E
           txt = `${txt.slice(0,i)}-E${txt.slice(i+1,txt.length)}`;
           i += 1;
         }

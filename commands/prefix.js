@@ -1,5 +1,6 @@
 module.exports = { name: "prefix", run(client, msg, args) {
-  if (!msg.member.hasPermission("ADMINISTRATOR")) {
+  //change server prefix
+  if (!msg.member.hasPermission("ADMINISTRATOR")) { //if user is not an administrator
     msg.channel.send(new client.discord.RichEmbed().setColor(client.color)
                      .setDescription("❗️You don't have permission to use this command! Only the administrator can use this command.")).then(msg => {msg.delete(3000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }

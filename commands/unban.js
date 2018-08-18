@@ -1,4 +1,5 @@
 module.exports = { name: "unban", run(client, msg, args) {
+  //unban someone from the server
   if (args.length === 0) {
     return msg.channel.send({embed: {
           color: 0xffa3e7,

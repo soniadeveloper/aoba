@@ -56,7 +56,7 @@ module.exports = { name: "blacklist", run(client, msg, args) {
   else if (args.length > 1) {
     if (args.length == 2 && args[0] === "delete") {
       client.sql.get(`SELECT * FROM blacklist WHERE guildId = "${msg.guild.id}"`).then(row => {
-        if(!row) {
+        if(!row) { //if server does not any words
           msg.channel.send({embed: {
             color: client.color,
             description: "❗️ This server does not have any words to delete."

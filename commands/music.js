@@ -1,8 +1,9 @@
 module.exports = { name: "music", async run(client, msg, args) {
+  //built in music player
   var vc = msg.member.voiceChannel;
   const sq = client.q.get(msg.guild.id);
   var canSpeak = msg.guild.me.hasPermission("SPEAK");
-  if (args[0] === "help") {
+  if (args[0] === "help") { //help command
     var embed = new client.discord.RichEmbed().setColor(client.color).setTitle("Music Help")
         .addField("`play [url or search term]`", "Plays the given song")
         .addField("`queue`", "View the queue")
@@ -14,13 +15,13 @@ module.exports = { name: "music", async run(client, msg, args) {
         .addField("`stop`", "Stops the music player");
     msg.channel.send(embed);
   }
-  else if (vc === undefined) {
+  else if (vc === undefined) { //if user is not in a voice channel
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Please enter a voice channel first!"
     }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
   }
-  else if (!vc.speakable || !canSpeak) {
+  else if (!vc.speakable || !canSpeak) { //if aoba does not have permission to speak in the voice channel
     msg.channel.send({embed: {
       color: client.color,
       description: "❗️ Aoba does not have permission to speak in this voice channel!"
@@ -28,7 +29,7 @@ module.exports = { name: "music", async run(client, msg, args) {
   }
   else {
     switch (args[0]) {
-      case "play":
+      case "play": //play a song
         const arg = args;
         var url = arg[1].replace(/<(.+)>/g, "$1");
         args.shift();
@@ -94,7 +95,7 @@ module.exports = { name: "music", async run(client, msg, args) {
           }
         }
         break;
-      case "queue":
+      case "queue": //show queue
         function makeQueue() {
           var txt = "";
           var q = client.q.get(msg.guild.id).songs;

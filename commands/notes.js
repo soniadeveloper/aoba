@@ -28,14 +28,14 @@ module.exports = { name: "notes", run(client, msg, args) {
     }
   }
   else {
-    if (args[0] === "add") {
+    if (args[0] === "add") { //create note
       args.shift();
       var note = args.join(" ");
       if (notes === undefined || notes === null) {
         client.notes.set(id, [note]);
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Note has been added!"));
       }
-      else if (notes.length == 5) {
+      else if (notes.length == 5) { //if user has reached the max note capacity of 5
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️You have too many notes! Please delete some using `>notes delete` then continue.")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else {
@@ -44,7 +44,7 @@ module.exports = { name: "notes", run(client, msg, args) {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Note has been added!"));
       }
     }
-    else if (args[0] === "delete") {
+    else if (args[0] === "delete") { //delete note
       if (notes === undefined) {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️There is nothing to delete!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
@@ -58,7 +58,7 @@ module.exports = { name: "notes", run(client, msg, args) {
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("❗️That is not a valid number!")).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
       }
       else {
-        if (args[1] === "all") {
+        if (args[1] === "all") { //deletes every note
           client.notes.set(id, []);
           msg.channel.send(new client.discord.RichEmbed().setColor(client.color).setDescription("✅ Notes have been purged!"));
         }
