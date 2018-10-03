@@ -6,7 +6,7 @@ module.exports = (client, msg) => {
   
   let prefix;
   
-  if (msg.guild !== null && client.prefixes.get(msg.guild.id) === null) {
+  if (msg.guild !== null && (client.prefixes.get(msg.guild.id) === null || client.prefixes.get(msg.guild.id) === undefined)) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
   }
   
@@ -49,7 +49,7 @@ module.exports = (client, msg) => {
           if (msgWords[i] === wordsArray[j].toLowerCase()) {
             msg.channel.send({embed: {
                 color: client.color,
-                description: `‼️ **Blacklisted word detected:** \`${wordsArray[j]}\``
+                description: `‼️ **Blacklisted word detected:** \`${wordsArray[j]}\`\nSaid by: <@${msg.author.id}>`
             }});
           }
         }

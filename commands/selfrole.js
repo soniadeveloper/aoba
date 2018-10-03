@@ -14,21 +14,21 @@ module.exports = { name: "selfrole", run(client, msg, args) {
       else {
         //if the guild has used this command before
         console.log(row.roles);
-        var selfroles = row.roles.split(",");
+        var selfroles = row.roles.split("`");
         console.log(selfroles);
         var list = "";
         var guildroles = msg.guild.roles;
         for (var i = 0; i < selfroles.length; i++) {
-          if (guildroles.exists("name", selfroles[i])) {
+          if (guildroles.some(n => n.name === selfroles[i])) {
             list += `‣ ${guildroles.find("name", selfroles[i])}\n`;
           }
-          if (list === "") {
+        }
+        if (list === "") {
             list = "This server doesn't have any self-assignable roles available!";
           }
           else {
             list;
           }
-        }
         msg.channel.send(new client.discord.RichEmbed().setColor(client.color)
                          .setTitle(`➡️ ${msg.guild.name}'s Self-Assignable Roles`).
                          setDescription(list));
