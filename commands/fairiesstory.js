@@ -1,4 +1,4 @@
-  module.exports = { name: "fairiesstory", run(client, msg, args) {
+  module.exports = { name: "fs", run(client, msg, args) {
   var id = msg.author.id;
   if (client.prefixes.get(msg.guild.id) === null) {
     client.prefixes.set(msg.guild.id, process.env.PREFIX);
@@ -169,7 +169,7 @@
                   description: `❗️ Use \`${prefix}fairiesstory or ${prefix}fs species change [choice]\` to change species.\nChoose between fairy/elf/orc/gnome/dragonborn/tiefling/genasi/human`
                 }}).then(msg => {msg.delete(4000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
               }
-              else if (args[2] === "fairy" || "orc" || "gnome" || "elf" || "human" || "tiefling" || "dragonborn" || "genasi") {
+              else if (args[2] === "fairy" || args[2] === "orc" || args[2] === "gnome" || args[2] === "elf" || args[2] === "human" || args[2] === "tiefling" || args[2] === "dragonborn" || args[2] === "genasi") {
                 var old = row.species;
                 if (old === args[2]) { //if the user is already that species
                   msg.channel.send({embed: {
@@ -682,7 +682,7 @@
                           msg.channel.send({embed: {
                             color: client.color,
                             description: `❗️ You've already given a reputation point today! You must wait **${hours}** hours and **${minutes}** minutes.`
-                          }}).then(msg => {msg.delete(2000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
+                          }}).then(msg => {msg.delete(5000).then(()=>{console.log("sent")}).catch(err => {console.error(err)})}).catch(console.error);
                         }
                       else {
                         time = Date.now();

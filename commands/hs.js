@@ -1,4 +1,4 @@
-module.exports = { name: "homestuck", run(client, msg, args) {
+module.exports = { name: "hs", run(client, msg, args) {
   //text altering command
   var stuff = args.join(" ");
   var stufff = (stuff.includes("\"")) ? stuff.split("\"") : stuff.split("“");

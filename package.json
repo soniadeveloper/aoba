@@ -1,0 +1,40 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "hello-sqlite",
+  "description": "A simple Node app with SQLite as a database management system, instantly up and running.",
+  "main": "aobot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node aobot.js"
+  },
+  "dependencies": {
+    "npm": "^6.4.1",
+    "discord.js": "^11.4.2",
+    "sodium": "^2.0.3",
+    "enmap": "^4.3.1",
+    "enmap-level": "^2.1.0",
+    "node-opus": "^0.3.0",
+    "sqlite": "^3.0.0",
+    "kaori": "^1.2.0",
+    "body-parser": "^1.18.3",
+    "grapheme-splitter": "^1.0.4",
+    "express": "^4.16.3",
+    "ytdl-core": "^0.26.0",
+    "simple-youtube-api": "^5.0.2",
+    "dblapi.js": "^2.2.0"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-sqlite"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

@@ -35,15 +35,11 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
         },
         {
           name: "Fun",
-          value: "`8ball` `alignment` `amigay` `aoba` `bde` `bitchscale` `crytype` `f` `futchscale` `gottem`  `headcanon` `hifumi` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `teentropes` `twunkscale` `vine` `weenie` `who`"
+          value: "`8ball` `alignment` `aoba` `bde` `bitchscale` `crytype` `f` `futchscale` `gottem`  `headcanon` `hifumi` `homestuck` `kinme` `kmk` `love` `lenny` `owo` `seragaki` `spongebob` `teentropes` `twunkscale` `vine` `weenie` `who`"
         },
         {
           name: "Action",
           value:"`birthday` `bite` `blush` `cookie` `glomp` `hug` `kiss` `lick` `pat` `slap`"
-        },
-        {
-          name: "NSFW",
-          value: "`fmk` `position` `rule34`"
         }
     ],
     footer: {
@@ -77,9 +73,6 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
         case "aoba":
           genText("None", "Sends a GIF of yours truly uwu");
           break;
-        case "amigay":
-          genText("None", "Are you gay?");
-          break;
         case "bde":
           genText("name (optional)", "Calculates your BDE");
           break;
@@ -91,9 +84,6 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
           break;
         case "flipcoin":
           genText("None", "Self-explanatory: flip a coin!");
-          break;
-        case "fmk":
-          genText("name, name, name", `Play FMK with the bot!\n**Note:** This command can only be used in NSFW channels\n\nExample: \`${prefix}fmk evans pratt hemsworth\``);
           break;
         case "futchscale":
           genText("name (optional)", "See where you land on the Futch Scale™");
@@ -119,9 +109,6 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
         case "parrotd":
           genText("phrase", "Copies and deletes the given message");
           break;
-        case "position":
-          genText("None", "Sees if you're a top, bottom, or verse.\n**Note:** This command can only be used in NSFW channels.");
-          break;
         case "prune":
           genText("number", "Deletes a given amount of messages from the channel.\nThis command requires the **Manage messages** permission.");
           break;
@@ -140,9 +127,6 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
         case "vine":
           genText("None", "Randomly generates a Vine.");
           break;
-        case "weenie":
-          genText("none", "Calculates the size of your weenie ;)");
-          break;
         case "who":
           genText("prompt", `Ask a question starting with 'who' and Aoba will answer with a member in your guild\n\nExample: \`${prefix}who is the most attractive\``);
           break;
@@ -156,13 +140,10 @@ module.exports = { name: "help", run(client, msg, args) { //good ol help command
           genText("add \"[note]\" (optional), delete [number or \"all\"] (optional)", `Allows you to view, create, and delete notes.\nExamples: \`${prefix}notes add "buy groceries"\`\n\`${prefix}notes delete 1\``);
           break;
         case "selfrole":
-          genText("add [role] (optional), delte [role], role name", `Lets you view a list of self-assignable roles as well as assign yourself a role.\nUse \`${prefix}selfrole [role name]\` to assign yourself a listed role.\nUse \`${prefix}selfrole add\\delete [role name]\` to add or delete a role from the selfrole list. (Requires the **Manage roles** permission)\nExamples: \`${prefix}selfrole add User\`\n\`${prefix}selfrole User\``);
+          genText("add [role] (optional), delete [role], role name", `Lets you view a list of self-assignable roles as well as assign yourself a role.\nUse \`${prefix}selfrole [role name]\` to assign yourself a listed role.\nUse \`${prefix}selfrole add\\delete [role name]\` to add or delete a role from the selfrole list. (Requires the **Manage roles** permission)\nExamples: \`${prefix}selfrole add User\`\n\`${prefix}selfrole User\``);
           break;
         case "lenny":
           genText("None", "( ͡° ͜ʖ ͡°)");
-          break;
-        case "rule34":
-          genText("search term", "Alias: r34\nSee if there is p*rn of anything by searching images on Rule34.xxx. This command can only be used in channels marked as NSFW.");
           break;
         case "prefix":
           genText("desired prefix", `Change Aoba's prefix in your server.\nThis command requires **Administrator** privileges.\nExample: \`${prefix}prefix a!\``);

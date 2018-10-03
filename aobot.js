@@ -8,27 +8,18 @@ const client = new Discord.Client();
 const http = require('http');
 const express = require('express');
 var bodyParser = require('body-parser');
-const DBL = require("dblapi.js");
 const Grapheme = require("grapheme-splitter");
-const winston  = require("winston");
-const logger = winston.createLogger({
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'combined.log' })
-  ]
-});
-if (process.env.NODE_ENV !== 'production'){
-  require('longjohn');
-}
 const app = express();
+
+var listener = app.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
 
 app.get("/", (request, response) => {
   console.log("sending request");
-  response.sendStatus(200);
-  response.end("OK");
+  response.sendFile(__dirname + "/index.html");
 });
 
-app.listen(process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: true }));
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -46,12 +37,11 @@ const EnmapLevel = require("enmap-level");
 const ytdl = require("ytdl-core");
 const Youtube = require("simple-youtube-api");
 const Kaori = require("kaori");
-const jimp = require("jimp");
+const dbl = require("dblapi.js");
 const kaori = new Kaori();
 const YT = new Youtube(process.env.GOOGLE_API_KEY);
 const color = 0xffa3e7;
 const q = new Map();
-const dbl = new DBL(process.env.DBL_TOKEN, client);
 const splitter = new Grapheme();
 const tableSource = new EnmapLevel({name: "notes"});
 const notes = new Enmap({provider: tableSource});
@@ -70,7 +60,6 @@ client.color = color;
 client.yt = ytdl;
 client.y = YT;
 client.dbl = dbl;
-client.jimp = jimp;
 const embed = new client.discord.RichEmbed().setColor(client.color);
 client.embed = embed;
 const items = ["🐶 Annoying Dog",

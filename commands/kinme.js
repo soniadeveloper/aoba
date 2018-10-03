@@ -39,7 +39,7 @@ module.exports = { name: "kinme", run(client, msg, args) {
                     "**707** from **Mystic Messenger**",
                     "**Sebastian Michaelis** from **Black Butler**",
                     "**Darkiplier**",
-                    "**Pewdiepie**", "God"];
+                    "**Pewdiepie**", "**God**"];
   var imgUrls = ["https://vignette.wikia.nocookie.net/scratchpad/images/6/6a/Sans.jpg/revision/latest?cb=20160720231031",
                 "https://vignette.wikia.nocookie.net/villains/images/9/9b/Lorax-disneyscreencaps.com-6671.jpg/revision/latest?cb=20160129050546",
                 "https://i.ytimg.com/vi/mgOlWHMbduw/maxresdefault.jpg",
